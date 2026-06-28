@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+    <style>
+        /* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Body */
+body{
+    background:#f4f4f4;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+/* Form */
+form{
+    background:#fff;
+    width:100%;
+    max-width:500px;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Form Heading (Optional) */
+form::before{
+    content:"Registration Form";
+    display:block;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:25px;
+    color:#333;
+}
+
+/* Form Groups */
+form div{
+    margin-bottom:18px;
+}
+
+/* Labels */
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+    color:#444;
+}
+
+/* Inputs, Select & Textarea */
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    outline:none;
+    transition:0.3s;
+}
+
+/* Focus Effect */
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#007bff;
+    box-shadow:0 0 8px rgba(0,123,255,0.3);
+}
+
+/* Radio & Checkbox */
+input[type="radio"],
+input[type="checkbox"]{
+    width:auto;
+    margin-right:6px;
+}
+
+input[type="radio"] + label,
+input[type="checkbox"] + label{
+    display:inline;
+    font-weight:normal;
+    margin-right:18px;
+}
+
+/* Textarea */
+textarea{
+    resize:vertical;
+}
+
+/* Button */
+button{
+    width:100%;
+    padding:14px;
+    background:#007bff;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+/* Responsive */
+@media(max-width:600px){
+
+    form{
+        padding:20px;
+    }
+
+    form::before{
+        font-size:22px;
+    }
+
+}
+    </style>
+</head>
+<body>
+    <form action="/submit.php">
+    <div>
+    <label for="name">Enter you name</label>
+    <input type="text" name="Enter your name" id="name" placeholder="Enter name" required>
+        </div>
+        <div>
+            <label for="ph">Enter Phone number</label>
+            <input type="tel" name="info" id="ph" placeholder="Phone number" required>
+        </div>
+        <div>
+        <label for="email">Email</label>
+        <input type="email" placeholder="Email" name="info" id="email">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" placeholder="Password" id="password" required>
+        </div>
+        <div>
+            <label for="dob">Birthday</label>
+            <input type="date" name="dob" id="dob" placeholder="Date of birth">
+        </div>
+        <div>
+            <label for="gender">Gender</label>
+            <select name="gender" id="gender" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">
+                    Male
+                </option>
+                <option value="Female">
+                    Female
+                </option>
+                <option value="other">
+                    Other
+                </option>
+            </select>
+        </div>
+        <div>
+            <input type="radio" name="subscription" id="basic">
+            <label for="basic">Basic</label>
+            <input type="radio" name="subscription" id="premuim">
+            <label for="premuim">Premuim</label>
+            <input type="radio" name="subscription" id="vip">
+            <label for="vip">VIP</label>
+        </div>
+        <div>
+            <input type="checkbox" name="" id="terms">
+            <label for="terms">I agree to it</label>
+        </div>
+        <div>
+            <label for="comments">Enter you comments</label>
+            <textarea name="" id="comments" placeholder="Comments" rows="4">
+            </textarea>
+        </div>
+        <div>
+            <button type="submit">submit</button>
+        </div>
+        </form>
+</body>
+</html>

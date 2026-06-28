@@ -439,3 +439,8 @@ FodyWeavers.xsd
 #executable files
 *.exe
 *.msi
+#videos
+*.mp4
+
+*vlc-log.txt
+*.gitignore

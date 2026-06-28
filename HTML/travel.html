@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lets go to Lahore</title>
+    <style>
+        /* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Body */
+body{
+    background:linear-gradient(135deg,#74ebd5,#9face6);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+/* Form */
+form{
+    background:#fff;
+    width:100%;
+    max-width:450px;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Heading */
+form::before{
+    content:"Lahore Trip Registration";
+    display:block;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    color:#333;
+    margin-bottom:25px;
+}
+
+/* Form Groups */
+form div{
+    margin-bottom:20px;
+}
+
+/* Labels */
+label{
+    display:block;
+    font-weight:bold;
+    color:#444;
+    margin-bottom:8px;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="number"],
+input[type="tel"],
+input[type="email"]{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    outline:none;
+    transition:0.3s;
+}
+
+/* Focus Effect */
+input:focus{
+    border-color:#007bff;
+    box-shadow:0 0 8px rgba(0,123,255,0.3);
+}
+
+/* Radio Buttons */
+input[type="radio"]{
+    width: auto;;
+    margin-right:5px;
+    margin-left:15px;
+}
+
+input[type="radio"]:first-of-type{
+    margin-left:0;
+}
+
+/* Radio Labels */
+input[type="radio"] + label{
+    display:inline;
+}
+
+/* Submit Button */
+button{
+    width:100%;
+    padding:12px;
+    background:#007bff;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+/* Responsive */
+@media(max-width:500px){
+
+    form{
+        padding:20px;
+    }
+
+    form::before{
+        font-size:22px;
+    }
+
+}
+    </style>
+</head>
+<body>
+    <form action="">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" placeholder="Enter your name" required>
+            
+        </div>
+        <div>
+        <label for="age">Age</label>
+        <input type="number" placeholder="Enter your age" required>
+        </div>
+        <div>
+            <label for="male" name="gender">Male</label>
+            <input type="radio" name="gender" id="male" required>
+            <label for="Female">Female</label>
+            <input type="radio" id="Female" name="gender" required>
+            <label for="other">Other</label>
+            <input type="radio" name="gender" id="other" required>
+        </div>
+        <div>
+            <label for="tel">Phone no</label>
+            <input type="tel" name="contact" placeholder="Enter Phone number" required>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" name="contact" id="email" placeholder="Optional">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
