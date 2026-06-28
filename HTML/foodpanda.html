@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Restaurants</title>
+    <style>
+        /* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Body */
+body{
+    background:#f4f4f4;
+    color:#333;
+    line-height:1.7;
+}
+
+/* Navigation */
+nav{
+    background:#222;
+    padding:18px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 20px;
+    font-size:18px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:orange;
+}
+
+/* Horizontal Line */
+hr{
+    border:none;
+    height:2px;
+    background:orange;
+}
+
+/* Heading Under Navbar */
+div{
+    text-align:center;
+    font-size:32px;
+    font-weight:bold;
+    color:#222;
+    margin:30px 0;
+}
+
+/* Main Section */
+main{
+    width:80%;
+    margin:auto;
+}
+
+/* Restaurant Cards */
+main h1{
+    background:white;
+    padding:18px;
+    border-radius:10px 10px 0 0;
+    margin-top:35px;
+    border-left:6px solid orange;
+}
+
+main h1 a{
+    color:#d35400;
+    text-decoration:none;
+}
+
+main h1 a:hover{
+    color:#ff6600;
+}
+
+main p{
+    background:white;
+    padding:20px;
+    border-radius:0 0 10px 10px;
+    margin-bottom:25px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    font-size:17px;
+    text-align:justify;
+}
+
+/* Footer */
+footer{
+    margin-top:40px;
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:20px;
+    font-size:17px;
+}
+
+/* Responsive */
+@media(max-width:768px){
+
+    main{
+        width:95%;
+    }
+
+    nav{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav a{
+        margin:0;
+    }
+
+    div{
+        font-size:24px;
+    }
+
+    main h1{
+        font-size:24px;
+    }
+
+    main p{
+        font-size:16px;
+    }
+
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="https://www.google.com/search?q=Namkeen+Broast%F0%9F%8D%97%0D%0A&sca_esv=aa8e577da903c93c&rlz=1C1GCEB_enPK1190PK1190&sxsrf=APpeQntVfFx7Y-WJdii8c9xyw7OQ-r4w0Q%3A1782611040263&ei=YHxAauzeD_qfkdUPnsLAmAw&biw=1600&bih=739&ved=0ahUKEwjsjs_O56iVAxX6T6QEHR4hEMMQ4dUDCBA&uact=5&oq=Namkeen+Broast%F0%9F%8D%97%0D%0A&gs_lp=Egxnd3Mtd2l6LXNlcnAiE05hbWtlZW4gQnJvYXN08J-NlwoyBxAjGOoCGCcyBxAjGOoCGCcyChAjGPAFGOoCGCcyBxAjGOoCGCcyBxAjGOoCGCcyBxAjGOoCGCcyBxAjGOoCGCcyBxAjGOoCGCcyBxAjGOoCGCcyBxAjGOoCGCcyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAuGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQFI5gpQoQRYoQRwAXgBkAEAmAEAoAEAqgEAuAEDyAEA-AEB-AECmAIBoAIuqAIUmAMu8QXG4cjnHXxnwroGBggBEAEYAZIHATGgBwCyBwC4BwDCBwM0LTHIBySACAE&sclient=gws-wiz-serp#:~:text=See%20photos-,Namkeen%20Broast%F0%9F%8D%97,-4.3" target="_blank">Fast Food</a>
+            <a href="https://www.google.com/search?q=%0D%0AMultan+Desi+food&sca_esv=aa8e577da903c93c&rlz=1C1GCEB_enPK1190PK1190&aep=1&biw=1600&bih=739&sxsrf=APpeQnvcqRMos_ujA1YI0YHBKW-IPhyUJA%3A1782612149314&ei=tYBAarfyEu_V7M8P38jWoQQ&ved=0ahUKEwj3oLrf66iVAxXvKvsDHV-kNUQQ4dUDCBA&uact=5&oq=%0D%0AMultan+Desi+food&gs_lp=Egxnd3Mtd2l6LXNlcnAiEQpNdWx0YW4gRGVzaSBmb29kMgcQIxjqAhgnMg0QIxieBhjwBRjqAhgnMgcQIxjqAhgnMgcQIxjqAhgnMgcQIxjqAhgnMgoQIxjwBRjqAhgnMgcQIxjqAhgnMgcQIxjqAhgnMgcQIxjqAhgnMgcQIxjqAhgnMhYQABiABBiKBRhDGOcGGOoCGLQC2AEBMhYQABiABBiKBRhDGOcGGOoCGLQC2AEBMhYQABiABBiKBRhDGOcGGOoCGLQC2AEBMhYQABiABBiKBRhDGOcGGOoCGLQC2AEBMhYQABiABBiKBRhDGOcGGOoCGLQC2AEBMh8QLhiABBiKBRhDGOcGGMcBGK8BGMgDGOoCGLQC2AEBMhkQLhiABBiKBRhDGOcGGMgDGOoCGLQC2AEBSK0QUMAIWMAIcAF4AZABAJgBAKABAKoBALgBA8gBAPgBAfgBApgCAaACJqgCEZgDJvEFh2JML15OeL66BgYIARABGAGSBwExoAcAsgcAuAcAwgcDNC0xyAchgAgB&sclient=gws-wiz-serp#:~:text=unique%20in%20taste%22-,Multan%20Desi%20food,-4.8" target="_blank">Desi Food</a>         
+             <a href="https://www.google.com/search?q=Zia+Family+Food+industries+Private+Limited&sca_esv=aa8e577da903c93c&rlz=1C1GCEB_enPK1190PK1190&sxsrf=APpeQnsdRykV3vgyzik5_fZ5NSliHcfIlQ%3A1782612403563&ei=s4FAaoX9IfT4kdUPjOuRqQw&biw=1600&bih=739&ved=0ahUKEwjFotjY7KiVAxV0fKQEHYx1JMUQ4dUDCBA&uact=5&oq=Zia+Family+Food+industries+Private+Limited&gs_lp=Egxnd3Mtd2l6LXNlcnAiKlppYSBGYW1pbHkgRm9vZCBpbmR1c3RyaWVzIFByaXZhdGUgTGltaXRlZDICECYyCBAAGIAEGKIEMgUQABjvBTIFEAAY7wUyBRAAGO8FSO8KULUIWLUIcAF4AZABAJgB8AGgAfABqgEDMi0xuAEDyAEA-AEB-AECmAICoAKiAqgCD8ICDRAuGK8BGMcBGOoCGCfCAgcQIxjqAhgnwgINECMYngYY8AUY6gIYJ8ICChAjGPAFGOoCGCfCAhcQABiABBiKBRiRAhjnBhjqAhi0AtgBAcICIBAuGIAEGIoFGJECGOcGGMcBGK8BGMgDGOoCGLQC2AEBmAMm8QWeQ2d8uw34TroGBggBEAEYAZIHBTEuMC4xoAfSArIHAzItMbgH-wHCBwUzLTEuMcgHKYAIAQ&sclient=gws-wiz-serp#:~:text=See%20photos-,Zia%20Family%20Food%20industries%20Private%20Limited,-4.7">Family Restaurant</a>
+        </nav>
+        <hr>
+        <div>Best Food Restaurants in Multan</div>
+    </header>
+    <main>
+        <h1>
+            <a href="https://www.google.com/search?q=Namkeen+Broast%F0%9F%8D%97%0D%0A&sca_esv=aa8e577da903c93c&rlz=1C1GCEB_enPK1190PK1190&sxsrf=APpeQntVfFx7Y-WJdii8c9xyw7OQ-r4w0Q%3A1782611040263&ei=YHxAauzeD_qfkdUPnsLAmAw&biw=1600&bih=739&ved=0ahUKEwjsjs_O56iVAxX6T6QEHR4hEMMQ4dUDCBA&uact=5&oq=Namkeen+Broast%F0%9F%8D%97%0D%0A&gs_lp=Egxnd3Mtd2l6LXNlcnAiE05hbWtlZW4gQnJvYXN08J-NlwoyBxAjGOoCGCcyBxAjGOoCGCcyChAjGPAFGOoCGCcyBxAjGOoCGCcyBxAjGOoCGCcyBxAjGOoCGCcyBxAjGOoCGCcyBxAjGOoCGCcyBxAjGOoCGCcyBxAjGOoCGCcyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAuGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQEyFhAAGIAEGIoFGEMY5wYY6gIYtALYAQFI5gpQoQRYoQRwAXgBkAEAmAEAoAEAqgEAuAEDyAEA-AEB-AECmAIBoAIuqAIUmAMu8QXG4cjnHXxnwroGBggBEAEYAZIHATGgBwCyBwC4BwDCBwM0LTHIBySACAE&sclient=gws-wiz-serp#:~:text=See%20photos-,Namkeen%20Broast%F0%9F%8D%97,-4.3" target="_blank">Namkeen Broast🍗</a>
+        </h1>
+        <p>
+            Namkeen Broast is a lighter, savory variation of traditional fried chicken that highlights the natural flavors of the meat with minimal, non-spicy seasoning. Unlike heavily spiced zinger options, it relies primarily on salt, black pepper, garlic, and vinegar or lemon.
+        </p>
+        <h1>
+            <a href="https://www.google.com/search?q=%0D%0AMultan+Desi+food&sca_esv=aa8e577da903c93c&rlz=1C1GCEB_enPK1190PK1190&aep=1&biw=1600&bih=739&sxsrf=APpeQnvcqRMos_ujA1YI0YHBKW-IPhyUJA%3A1782612149314&ei=tYBAarfyEu_V7M8P38jWoQQ&ved=0ahUKEwj3oLrf66iVAxXvKvsDHV-kNUQQ4dUDCBA&uact=5&oq=%0D%0AMultan+Desi+food&gs_lp=Egxnd3Mtd2l6LXNlcnAiEQpNdWx0YW4gRGVzaSBmb29kMgcQIxjqAhgnMg0QIxieBhjwBRjqAhgnMgcQIxjqAhgnMgcQIxjqAhgnMgcQIxjqAhgnMgoQIxjwBRjqAhgnMgcQIxjqAhgnMgcQIxjqAhgnMgcQIxjqAhgnMgcQIxjqAhgnMhYQABiABBiKBRhDGOcGGOoCGLQC2AEBMhYQABiABBiKBRhDGOcGGOoCGLQC2AEBMhYQABiABBiKBRhDGOcGGOoCGLQC2AEBMhYQABiABBiKBRhDGOcGGOoCGLQC2AEBMhYQABiABBiKBRhDGOcGGOoCGLQC2AEBMh8QLhiABBiKBRhDGOcGGMcBGK8BGMgDGOoCGLQC2AEBMhkQLhiABBiKBRhDGOcGGMgDGOoCGLQC2AEBSK0QUMAIWMAIcAF4AZABAJgBAKABAKoBALgBA8gBAPgBAfgBApgCAaACJqgCEZgDJvEFh2JML15OeL66BgYIARABGAGSBwExoAcAsgcAuAcAwgcDNC0xyAchgAgB&sclient=gws-wiz-serp#:~:text=unique%20in%20taste%22-,Multan%20Desi%20food,-4.8" target="_blank">
+            Multan Desi food</a>
+        </h1>
+        <p>
+            Multan Desi foodMultan features an incredibly rich and distinct food culture deeply rooted in the traditions of South Asia. From slow-cooked, rich gravies to succulent charcoal street barbecue and its globally famous crystalline sweets, the City of Saints serves some of the most authentic flavors in Pakistan.
+        </p>
+        <h1>
+            <a href="https://www.google.com/search?q=Zia+Family+Food+industries+Private+Limited&sca_esv=aa8e577da903c93c&rlz=1C1GCEB_enPK1190PK1190&sxsrf=APpeQnsdRykV3vgyzik5_fZ5NSliHcfIlQ%3A1782612403563&ei=s4FAaoX9IfT4kdUPjOuRqQw&biw=1600&bih=739&ved=0ahUKEwjFotjY7KiVAxV0fKQEHYx1JMUQ4dUDCBA&uact=5&oq=Zia+Family+Food+industries+Private+Limited&gs_lp=Egxnd3Mtd2l6LXNlcnAiKlppYSBGYW1pbHkgRm9vZCBpbmR1c3RyaWVzIFByaXZhdGUgTGltaXRlZDICECYyCBAAGIAEGKIEMgUQABjvBTIFEAAY7wUyBRAAGO8FSO8KULUIWLUIcAF4AZABAJgB8AGgAfABqgEDMi0xuAEDyAEA-AEB-AECmAICoAKiAqgCD8ICDRAuGK8BGMcBGOoCGCfCAgcQIxjqAhgnwgINECMYngYY8AUY6gIYJ8ICChAjGPAFGOoCGCfCAhcQABiABBiKBRiRAhjnBhjqAhi0AtgBAcICIBAuGIAEGIoFGJECGOcGGMcBGK8BGMgDGOoCGLQC2AEBmAMm8QWeQ2d8uw34TroGBggBEAEYAZIHBTEuMC4xoAfSArIHAzItMbgH-wHCBwUzLTEuMcgHKYAIAQ&sclient=gws-wiz-serp#:~:text=See%20photos-,Zia%20Family%20Food%20industries%20Private%20Limited,-4.7 " target="_blank">Zia Family Food industries Private Limited</a>
+        </h1>
+        <p>
+            Zia Family Food Industries Private Limited (operating widely as Family Food Products or Zia Foods) is a prominent Pakistani food manufacturing and exporting company based in Multan, Punjab. Established originally in 1981 by Haji Abu Bakar, the company has grown from a local Southern Punjab enterprise into an international manufacturer specializing in halal-certified snacks, confectionery, and everyday pantry items.
+        </p>
+    </main>
+    <footer>
+        &copy All rights reserved
+    </footer>
+</body>
+</html>
