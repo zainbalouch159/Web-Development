@@ -104,23 +104,7 @@ button:hover{
     background:#1d4ed8;
 }
     </style>
-    <script>
-        console.log("Welcome to Zain Portfolio");
-
-const nameHeading = document.querySelector("h1");
-
-nameHeading.addEventListener("mouseover",function(){
-
-    nameHeading.style.color="yellow";
-
-});
-
-nameHeading.addEventListener("mouseout",function(){
-
-    nameHeading.style.color="white";
-
-});
-    </script>
+    
 </head>
 <body>
     <header>
@@ -131,7 +115,16 @@ nameHeading.addEventListener("mouseout",function(){
             <a href="https://github.com/zainbalouch159" target="_blank">Github</a>
             </center>
         </nav>
-        <div>
+        <nav>
+            <a href="#youtube">YouTube</a>
+            <a href="#coding">Coding</a>
+            <a href="#c++">C++</a>
+            <a href="#dsa">DSA
+            <a href="#others">Others</a>
+            <a href="#contact">Contact</a>
+            </a>
+        </nav>
+        <div >
             <b>
                 <i>
                     <big>
@@ -148,7 +141,7 @@ nameHeading.addEventListener("mouseout",function(){
         </div>
     </header>
     <main>
-        <div>
+        <div id="youtube">
             <br>
             <h2>
                 <center>
@@ -165,14 +158,14 @@ nameHeading.addEventListener("mouseout",function(){
                 clipchamp.
             </pre>
         </div>
-         <div>
+         <div id="coding">
             <br>
             <h2>
                 <center>
                 Coding
                 </center>
             </h2>
-            <h3>
+            <h3 id="c++">
                 <a href="https://github.com/zainbalouch159/CPP" >C++</a>
             </h3>
             <pre>
@@ -191,7 +184,7 @@ nameHeading.addEventListener("mouseout",function(){
                    programming langugages easy to learn then.
                 </pre>
                 
-                 <h3>
+                 <h3 id="dsa">
                         <a href="https://github.com/zainbalouch159/CPP" >DSA</a>
                     </h3>
                     <pre>
@@ -212,7 +205,7 @@ nameHeading.addEventListener("mouseout",function(){
                 </pre>
             
                 <div>
-                <h2>
+                <h2 id="others">
                     <center>
                         Others
                     </center>
@@ -230,10 +223,30 @@ nameHeading.addEventListener("mouseout",function(){
                 </pre>
             </div>
     </main>
-    <footer>
+    <footer id="contact">
         &phone; 03297699439     zainkhan77656@gmail.com
         <br> 
         &phone; 03116664164
     </footer>
+    <body>
+
+    ...
+
+<script>
+    console.log("Welcome");
+
+    const nameHeading=document.querySelector("h1");
+
+    nameHeading.addEventListener("mouseover",function(){
+        nameHeading.style.color="yellow";
+    });
+
+    nameHeading.addEventListener("mouseout",function(){
+        nameHeading.style.color="white";
+    });
+
+</script>
+
+</body>
 </body>
 </html>
