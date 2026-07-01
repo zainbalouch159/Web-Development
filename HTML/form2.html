@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+</head>
+<body>
+    <form action="">
+        <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Enter your name" name="name"required>
+        </div>
+        <div>
+            <label for="Password">Password</label>
+            <input type="password" placeholder="Enter password" name="Password"required>
+        </div>
+        <div>
+        <label for="phone">Phone no</label>
+        <input type="tel" name="phone" id="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Enter your email">
+            </div>
+            <div>
+                <label for="dob">Enter your day of birth</label>
+                <input type="date" name="dob" id="dob"required>
+            </div>
+            <div>
+               <select name="" id="gender" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value=male"">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Others</option>
+               </select>
+            </div>
+            <div>
+                Enter State <br>
+                <input type="radio" id="punjab" name="State" >
+                <label for="punjab">Punjab</label>
+                <input type="radio" name="State" id="sindh">
+                <label for="sindh">Sindh</label>
+            <input type="radio" name="State" id="kpk">
+            <label for="kpk">KPK</label>
+            <input type="radio" name="State" id="balouchistan">
+            <label for="balouchistan">Balouchistan</label>
+            </div>
+            <div>
+                <input type="checkbox" name="checkbox" id="agree"required>
+                <label for="agree">I agree to all statements</label>
+            </div>
+            <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
