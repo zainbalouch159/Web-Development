@@ -1,0 +1,108 @@
+/* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* Body */
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f5f5f5;
+    color:#333;
+    line-height:1.6;
+}
+
+/* Header */
+header{
+    background:#ff5722;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+/* Main */
+main{
+    width:90%;
+    max-width:1000px;
+    margin:30px auto;
+}
+
+/* Sections */
+section{
+    background:white;
+    padding:20px;
+    margin-bottom:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Headings */
+h2{
+    margin-bottom:15px;
+}
+
+h3{
+    text-align:center;
+    margin-bottom:15px;
+    color:#ff5722;
+}
+
+/* List */
+ul{
+    margin-left:20px;
+}
+
+li{
+    margin:10px 0;
+}
+
+/* Links */
+a{
+    text-decoration:none;
+    color:#ff5722;
+    font-weight:bold;
+}
+
+a:hover{
+    color:#d84315;
+    text-decoration:underline;
+}
+
+/* Images */
+img{
+    display:block;
+    width:300px;
+    max-width:100%;
+    margin:15px auto;
+    border-radius:10px;
+}
+
+/* Figure */
+figure{
+    text-align:center;
+}
+
+figcaption{
+    font-style:italic;
+    margin-top:10px;
+}
+
+/* Horizontal Line */
+hr{
+    margin:20px 0;
+}
+
+/* Footer */
+footer{
+    background:#333;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:30px;
+}
+
+/* Smooth Scroll */
+html{
+    scroll-behavior:smooth;
+}
