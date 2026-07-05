@@ -1,0 +1,36 @@
+body{
+    background: linear-gradient(to right, red, purple );
+}
+h1{
+    text-align: center; color: rgb(156, 156, 41); 
+    font-family:"Playfair Display", Georgia,  Times, serif;
+    padding: 100px;
+    text-decoration: dashed underline;
+    font-size: 200px;
+
+}
+h2{
+    font-family:"Playfair Display",serif;
+    font-weight: 500;
+    color: rgb(97, 12, 97);
+    padding: 10px;
+    font-size: 150px;
+    margin-left: 50px;
+}
+.web{
+    font-size: 100px;
+    padding: 100px;
+    margin-left: -50px;
+}
+p{
+    margin-top: -100px;
+    margin-left: 400px;
+    margin-right: 50px;
+    font-size: 50px;
+    font-family:"Lora" ,serif;
+    color: rgb(255, 154, 118)
+
+}
+.webp{
+    margin-bottom: 300px;
+}

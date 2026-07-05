@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Vertical Fraction</title>
+  <style>
+    /* 1. Parent Box ki setting */
+    .fraction {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 50px;
+      font-family: Arial, sans-serif;
+      margin: 10px;
+    }
+
+    /* 2. Upar wale number (Shumar-kuninda) ki setting */
+    .numerator {
+      border-bottom: 3px solid black; /* Center dividing line */
+      padding-bottom: 2px;
+    }
+
+    /* 3. Niche wale number (Nasab-numa) ki setting */
+    .denominator {
+      padding-top: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <p style="font-size: 40px;">
+    Anwer is: 
+    <div class="fraction">
+      <span class="numerator">2</span>
+      <span class="denominator">5</span>
+    </div>
+    magar yeh sahi kaam kar raha hai!
+  </p>
+<div style="display: inline-flex; flex-direction: column; background-color: rgba(235, 235, 235, 0);">
+  <span>2</span>
+  <span>5</span>
+</div>
+</body>
+</html>
