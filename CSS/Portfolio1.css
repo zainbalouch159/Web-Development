@@ -10,12 +10,12 @@ h1{
 
 }
 h2{
-    font-family:"Playfair Display",serif;
-    font-weight: 500;
+    font-weight: 100px;
     color: rgb(97, 12, 97);
     padding: 10px;
     font-size: 150px;
     margin-left: 50px;
+    font-family:"Smythe Static" ,serif;
 }
 .web{
     font-size: 100px;
@@ -23,14 +23,15 @@ h2{
     margin-left: -50px;
 }
 p{
+    font-family:"Old Standard TT",serif;
     margin-top: -100px;
     margin-left: 400px;
     margin-right: 50px;
     font-size: 50px;
-    font-family:"Lora" ,serif;
     color: rgb(255, 154, 118)
 
 }
 .webp{
-    margin-bottom: 300px;
+    margin-bottom: 200px;
+    /* font-family:"Lora", serif; */
 }

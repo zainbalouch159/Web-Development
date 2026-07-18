@@ -1,0 +1,733 @@
+/* ===================================================
+   PREMIUM DARK THEME PACK — Personal Portfolio Page
+   FINAL 19 Themes | body / h1 / h2
+   Sorted: 3-hash (top pick) -> 2-hash -> 1-hash
+=================================================== */
+
+
+/* =====### THEME 1 , BLACK & GOLD CLASSIC ###===== */
+:root{
+
+    /* ===================================================
+       1. NEUTRALS / BLACK / GRAY / WHITE
+    =================================================== */
+
+    --black-1: #071614;
+    --black-2: #081512;
+    --black-3: #0a0a0a;
+    --black-4: #0a0f1c;
+    --black-5: #0a0f1e;
+    --black-6: #0b1512;
+    --black-7: #0c0e1c;
+    --black-8: #0c1620;
+    --black-9: #0d0d0d;
+    --black-10: #0e0e0f;
+    --black-11: #12081a;
+    --black-12: #120d0d;
+    --black-13: #120f0d;
+    --black-14: #140a0c;
+    --black-15: #14101c;
+    --black-16: #150a0d;
+    --black-17: #150c0a;
+    --black-18: #150f0c;
+    --black-19: #17181a;
+    --black-20: #1a1c1e;
+
+    --charcoal-1: #1a1a1a;
+    --charcoal-2: #1a1a1c;
+    --charcoal-3: #1c0f28;
+    --charcoal-4: #1e1414;
+    --charcoal-5: #1e1729;
+    --charcoal-6: #1e1813;
+    --charcoal-7: #201014;
+    --charcoal-8: #202224;
+    --charcoal-9: #211712;
+    --charcoal-10: #22111a;
+    --charcoal-11: #221410;
+    --charcoal-12: #232527;
+
+    --slate-1: #2e3236;
+    --slate-2: #3c4147;
+    --slate-3: #454b51;
+    --slate-4: #5b6167;
+
+    --gray-1: #8f949b;
+    --gray-2: #b8bdc5;
+    --gray-3: #bcc1c6;
+    --gray-4: #c5c9cf;
+    --gray-5: #c9cccf;
+    --gray-6: #cacccf;
+    --gray-7: #cfcfcf;
+    --gray-8: #d2d5da;
+    --gray-9: #d4d4d6;
+    --gray-10: #eef1f4;
+    --gray-11: #f2f3f4;
+    --gray-12: #f3f4f5;
+    --gray-13: #f5f5f5;
+
+    --platinum-1: #b9bcc2;
+    --platinum-2: #e6e8eb;
+
+    --white-soft-1: #dbeafe;
+    --white-soft-2: #eaf6ff;
+    --white-soft-3: #eadcff;
+    --white-soft-4: #eef2fb;
+    --white-soft-5: #eefaf3;
+    --white-soft-6: #eefcf3;
+    --white-soft-7: #f4eefc;
+    --white-soft-8: #f8eefc;
+    --white-soft-9: #fbf1e6;
+    --white-soft-10: #fbeaea;
+    --white-soft-11: #fceef0;
+    --white-soft-12: #fdeee6;
+    --white-soft-13: #fdeef0;
+    --white-soft-14: #fdf0e6;
+
+    --border-soft: rgba(255,255,255,0.08);
+    --border-medium: rgba(255,255,255,0.14);
+    --glass-dark: rgba(255,255,255,0.04);
+    --glass-light: rgba(255,255,255,0.08);
+    --shadow-soft: rgba(0,0,0,0.18);
+    --shadow-dark: rgba(0,0,0,0.35);
+
+
+    /* ===================================================
+       2. GOLD / AMBER / BRONZE / COPPER
+    =================================================== */
+
+    --gold-1: #8b6b1f;
+    --gold-2: #c9a227;
+    --gold-3: #d4af37;
+    --gold-4: #e6c877;
+    --gold-5: #f1d67a;
+    --gold-6: #f4e2a1;
+
+    --amber-1: #e3a94f;
+    --amber-2: #e3c07f;
+
+    --bronze-1: #5c3d21;
+    --bronze-2: #8a5e34;
+    --bronze-3: #c17a3f;
+    --bronze-4: #e0b384;
+    --bronze-5: #e89b6f;
+
+    --copper-1: #6b3a24;
+    --copper-2: #a15a37;
+    --copper-3: #e8a578;
+
+
+    /* ===================================================
+       3. BLUE / NAVY / SAPPHIRE / ICE
+    =================================================== */
+
+    --navy-1: #0f172a;
+    --navy-2: #10182c;
+    --navy-3: #101a30;
+    --navy-4: #12142a;
+    --navy-5: #13212e;
+
+    --blue-1: #1b2a4a;
+    --blue-2: #1d3f57;
+    --blue-3: #1f3d8f;
+    --blue-4: #2c4370;
+    --blue-5: #2e2f8a;
+    --blue-6: #2f6d8f;
+    --blue-7: #315efb;
+
+    --blue-soft-1: #9dd0ec;
+    --blue-soft-2: #a9c0e8;
+    --blue-soft-3: #c1d3e0;
+    --blue-soft-4: #c6cede;
+    --blue-soft-5: #c9cbe0;
+    --blue-soft-6: #cdd3e6;
+
+
+    /* ===================================================
+       4. GREEN / EMERALD / JADE / TEAL
+    =================================================== */
+
+    --green-dark-1: #0d211a;
+    --green-dark-2: #0d211f;
+    --green-dark-3: #10201a;
+
+    --green-1: #0f6b45;
+    --green-2: #114a3a;
+    --green-3: #1c6e54;
+    --green-4: #1f7a5c;
+    --green-5: #34a66e;
+
+    --green-soft-1: #7fe0ac;
+    --green-soft-2: #8fd4ac;
+    --green-soft-3: #9ef0c8;
+    --green-soft-4: #c3d3cc;
+    --green-soft-5: #c3decf;
+    --green-soft-6: #c3ded9;
+
+    --teal-1: #0f6b64;
+    --teal-2: #7fe0c9;
+
+
+    /* ===================================================
+       5. PURPLE / AMETHYST / INDIGO
+    =================================================== */
+
+    --purple-dark-1: #1c0f28;
+    --purple-dark-2: #1e1729;
+
+    --purple-1: #3a2159;
+    --purple-2: #5a1e8a;
+    --purple-3: #5b3a8a;
+    --purple-4: #8a3fc0;
+    --purple-5: #a970ff;
+
+    --purple-soft-1: #c3a4f0;
+    --purple-soft-2: #cdc3dc;
+    --purple-soft-3: #d4a3f0;
+    --purple-soft-4: #d4c3e0;
+
+
+    /* ===================================================
+       6. RED / WINE / RUBY / GARNET / ROSE
+    =================================================== */
+
+    --red-dark-1: #1e1414;
+    --red-dark-2: #201014;
+    --red-dark-3: #22111a;
+    --red-dark-4: #221410;
+
+    --red-1: #5a1c24;
+    --red-2: #6d1024;
+    --red-3: #6e1b30;
+    --red-4: #7a1f30;
+    --red-5: #1b1011;
+    --red-6: #8a1f2b;
+    --red-7: #9c2b45;
+    --red-8: #b0304a;
+
+    --red-soft-1: #d8a39d;
+    --red-soft-2: #e0949c;
+    --red-soft-3: #e8a3b2;
+    --red-soft-4: #ec9baa;
+    --red-soft-5: #d2c3c3;
+    --red-soft-6: #d9c3c8;
+    --red-soft-7: #dcc4c8;
+    --red-soft-8: #dcc7bb;
+}
+body{
+    background: #0d0d0d;
+    color: #cfcfcf;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #0d0d0d;
+    border-radius: 12px;
+    background: linear-gradient(to right, #d4af37, #f1d67a);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #d4af37;
+    background: #1a1a1a;
+}
+
+
+/* =====### THEME 2 , ROYAL PURPLE ###===== */
+
+body{
+    background: #14101c;
+    color: #cdc3dc;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #f4eefc;
+    border-radius: 12px;
+    background: linear-gradient(to right, #3a2159, #5b3a8a);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #c3a4f0;
+    background: #1e1729;
+}
+
+
+/* =====### THEME 3 , DEEP EMERALD ###===== */
+
+body{
+    background: #0b1512;
+    color: #c3d3cc;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #eefaf3;
+    border-radius: 12px;
+    background: linear-gradient(to right, #114a3a, #1c6e54);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #8fd4ac;
+    background: #10201a;
+}
+
+
+/* =====### THEME 4 , BRONZE BLACK ###===== */
+
+body{
+    background: #120f0d;
+    color: #d0c6bb;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #fbf1e6;
+    border-radius: 12px;
+    background: linear-gradient(to right, #5c3d21, #8a5e34);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #e0b384;
+    background: #1e1813;
+}
+
+
+/* =====### THEME 5 , ONYX PLATINUM ###===== */
+
+body{
+    background: #0e0e0f;
+    color: #d4d4d6;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #101012;
+    border-radius: 12px;
+    background: linear-gradient(to right, #b9bcc2, #e6e8eb);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #d2d5da;
+    background: #1a1a1c;
+}
+
+
+/* =====### THEME 6 , SAPPHIRE GOLD ###===== */
+
+body{
+    background: #0a0f1c;
+    color: #cdd3e6;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #0a0f1c;
+    border-radius: 12px;
+    background: linear-gradient(to right, #1f3d8f, #d4af37);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #e6c877;
+    background: #10182c;
+}
+
+
+/* =====### THEME 7 , WINE NOIR ###===== */
+
+body{
+    background: #150a0d;
+    color: #d9c3c8;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #fdeef0;
+    border-radius: 12px;
+    background: linear-gradient(to right, #6e1b30, #9c2b45);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #e8a3b2;
+    background: #22111a;
+}
+
+
+/* =====### THEME 8 , AMETHYST BLACK ###===== */
+
+body{
+    background: #12081a;
+    color: #d4c3e0;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #f8eefc;
+    border-radius: 12px;
+    background: linear-gradient(to right, #5a1e8a, #8a3fc0);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #d4a3f0;
+    background: #1c0f28;
+}
+
+
+/* =====### THEME 9 , TEAL GOLD ###===== */
+
+body{
+    background: #071614;
+    color: #c3ded9;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #071614;
+    border-radius: 12px;
+    background: linear-gradient(to right, #0f6b64, #d4af37);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #7fe0c9;
+    background: #0d211f;
+}
+
+
+/* =====### THEME 10 , CRIMSON BRONZE ###===== */
+
+body{
+    background: #150c0a;
+    color: #dcc7bb;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #fdeee6;
+    border-radius: 12px;
+    background: linear-gradient(to right, #8a1f2b, #c17a3f);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #e89b6f;
+    background: #221410;
+}
+
+
+/* =====### THEME 11 , JADE NOIR ###===== */
+
+body{
+    background: #081512;
+    color: #c3decf;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #eefcf3;
+    border-radius: 12px;
+    background: linear-gradient(to right, #0f6b45, #34a66e);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #7fe0ac;
+    background: #0d211a;
+}
+
+
+/* =====### THEME 12 , INDIGO AMBER ###===== */
+
+body{
+    background: #0c0e1c;
+    color: #c9cbe0;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #0c0e1c;
+    border-radius: 12px;
+    background: linear-gradient(to right, #2e2f8a, #e3a94f);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #e3c07f;
+    background: #12142a;
+}
+
+
+/* =====### THEME 13 , GARNET BLACK ###===== */
+
+body{
+    background: #140a0c;
+    color: #dcc4c8;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #fceef0;
+    border-radius: 12px;
+    background: linear-gradient(to right, #7a1f30, #b0304a);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #ec9baa;
+    background: #201014;
+}
+
+
+/* =====## THEME 14 , RUBY BLACK ##===== */
+
+body{
+    background: #120d0d;
+    color: #d2c3c3;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #fbeaea;
+    border-radius: 12px;
+    background: linear-gradient(to right, #5a1c24, #83202c);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #e0949c;
+    background: #1e1414;
+}
+
+
+/* =====## THEME 15 , STEEL GRAY ##===== */
+
+body{
+    background: #17181a;
+    color: #cacccf;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #f3f4f5;
+    border-radius: 12px;
+    background: linear-gradient(to right, #3c4147, #5b6167);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #bcc1c6;
+    background: #202224;
+}
+
+
+/* =====## THEME 16 , ESPRESSO COPPER ##===== */
+
+body{
+    background: #150f0c;
+    color: #d3c4b8;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #fdf0e6;
+    border-radius: 12px;
+    background: linear-gradient(to right, #6b3a24, #a15a37);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #e8a578;
+    background: #211712;
+}
+
+
+/* =====# THEME 17 , MIDNIGHT BLUE #===== */
+
+body{
+    background: #0a0f1e;
+    color: #c6cede;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #eef2fb;
+    border-radius: 12px;
+    background: linear-gradient(to right, #1b2a4a, #2c4370);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #a9c0e8;
+    background: #101a30;
+}
+
+
+/* =====# THEME 18 , CHARCOAL SLATE #===== */
+
+body{
+    background: #1a1c1e;
+    color: #c9cccf;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #f2f3f4;
+    border-radius: 12px;
+    background: linear-gradient(to right, #2e3236, #454b51);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #c5c9cf;
+    background: #232527;
+}
+
+
+/* =====# THEME 19 , FROZEN BLUE #===== */
+
+body{
+    background: #0c1620;
+    color: #c1d3e0;
+    font-family: Georgia, serif;
+}
+
+h1{
+    width: fit-content;
+    margin: 20px auto;
+    padding: 12px 28px;
+    color: #eaf6ff;
+    border-radius: 12px;
+    background: linear-gradient(to right, #1d3f57, #2f6d8f);
+}
+
+h2{
+    width: fit-content;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #9dd0ec;
+    background: #13212e;
+}
+
+
+/* ===================================================
+   CURATED PICKS (from final 19)
+=================================================== */
+
+/*
+TOP 5 MOST PROFESSIONAL
+1. Theme 18 - Charcoal Slate
+2. Theme 15 - Steel Gray
+3. Theme 17 - Midnight Blue
+4. Theme 5  - Onyx Platinum
+5. Theme 19 - Frozen Blue
+
+TOP 5 MOST LUXURIOUS
+1. Theme 1  - Black & Gold Classic
+2. Theme 4  - Bronze Black
+3. Theme 6  - Sapphire Gold
+4. Theme 8  - Amethyst Black
+5. Theme 13 - Garnet Black
+
+TOP 5 CLEANEST MINIMAL
+1. Theme 5  - Onyx Platinum
+2. Theme 18 - Charcoal Slate
+3. Theme 15 - Steel Gray
+4. Theme 19 - Frozen Blue
+5. Theme 17 - Midnight Blue
+*/

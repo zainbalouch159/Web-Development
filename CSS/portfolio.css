@@ -15,7 +15,7 @@ h1{
     background-clip: text;
     -webkit-text-fill-color: transparent;
     font-display: swap;
-    font-variant-numeric: ;
+    /* font-variant-numeric: ; */
 }
 
 /* ligatures OFF */
