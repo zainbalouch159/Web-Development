@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laoyout 4</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            background-color: aquamarine;
+            height: 20dvh;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            border: 3px solid;
+        }
+
+        nav {
+            display: flex;
+            gap: 5dvw;
+            list-style: none;
+            font-size: 4dvw;
+            margin: 0 3dvw;
+        }
+
+        li a {
+            color: black;
+            text-decoration: none;
+        }
+
+        form {
+            margin-left: auto;
+            display: flex;
+            width: 100%;
+        }
+
+        input {
+            height: 5dvh;
+            width: 60%;
+            text-align: center;
+            border-radius: 1dvw;
+            flex-shrink: 0;
+            flex: 1;
+        }
+
+        button {
+            margin: 0 1dvw;
+            width: 20%;
+            border-radius: 1dvw;
+            flex-shrink: 0;
+            /* flex: 1; */
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <li><a href="https://dotmond.com/hollywood-movies/" target="_blank">Hollywood</a></li>
+            <li><a href="https://dotmond.com/bollywood-movies/" target="_blank">Bollywood</a></li>
+            <li><a href="https://dotmond.com/pakistani-movies/" target="_blank">Pakistan</a></li>
+        </nav>
+        <form action="https://www.watch-movies.com.pk/">
+            <input type="search" placeholder="Seach Movies" name="s" >
+            <button type="submit">Search</button>
+        </form>
+    </header>
+</body>
+
+</html>

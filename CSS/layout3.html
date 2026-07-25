@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            display: flex;
+            justify-content: space-between;
+            padding:1dvh 0 1dvh 0 ;
+            align-items: center;
+            border: 1dvh solid;
+            margin-bottom: 1dvh;
+        }
+        header img{
+            width: 10%;
+            padding-left: 1dvw;
+        }
+        ul{
+            list-style: none;
+            display: flex;
+            gap: 3dvw;
+            align-items: center;
+            margin-right: 3dvw;
+        }
+        li{
+            border: 1px solid;
+            padding: 1dvw;
+            background-color: grey;
+        }
+    .container2{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .container2 img{
+        width: 30%;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKyMDXzj3Vvl21XTQv0EA1GgWqQ8YYqfDCAXc6IN0AJg&s=10" alt="clock">
+            <nav>
+                <ul>
+                    <li>Home</li>
+                    <li>About</li>
+                    <li>Contact</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj3WElVlm0St0386i0z80iLQILnyb2cq61BvMaIUVMMg&s=10" alt="background image">
+    <div class="container2">
+        <img src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-user-profile-avatar-png-image_10211471.png" alt="person 1">
+        <img src="https://png.pngtree.com/png-vector/20230831/ourmid/pngtree-man-avatar-image-for-profile-png-image_9197908.png" alt="person 2">
+        <img src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-user-profile-avatar-png-image_10211467.png" alt="person 3">
+    </div>
+</body>
+</html>

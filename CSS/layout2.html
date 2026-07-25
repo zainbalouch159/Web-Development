@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            background-color: black;
+        }
+
+        img {
+            width: 10%;
+        }
+
+        nav {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 20dvh;
+        }
+        
+        ul {
+            color: aliceblue;
+            font-size: 5dvw;
+            gap: 3dvw;
+            display: flex;
+            list-style: none;
+        }
+
+        li {
+            display: flex;
+            align-self: flex-start;
+
+        }
+        .container2{
+            display: flex;
+            justify-content:space-between;
+            margin-top: 10dvh;
+        }
+            .box1{
+            width: 10%;
+            height: 10dvh;
+            background-color: red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box2{
+            align-self: flex-end;
+            width: 10%;
+            height: 10dvh;
+            background-color: blue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSjclprhXsTGdHu0IqdNAThHWfbQD0596l8VhikhbMKQ&s=10"
+                alt="Profile">
+            <nav>
+                <ul>
+                    <li>Home</li>
+                    <li>Contact</li>
+                    <li>About</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container2">
+            <div class="box1">Box 1</div>
+            <div class="box2">Box 2</div>
+        </div>
+    </main>
+</body>
+
+</html>

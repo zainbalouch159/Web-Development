@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex</title>
+    <style>
+        .container{
+            display: flex;
+            flex-direction: row;
+            /* flex-wrap: wrap; */
+            justify-content:safe;
+            align-items:start;
+            background-color: aqua;
+            height: 50dvh;
+            width: 50%;
+        }
+         .box1{
+            flex-shrink: 10;
+            /* order: 1; */
+            padding: 20px;
+            width: 20%;
+            height: 20dvh;
+            background-color: red;
+        }
+        .box2{
+            /* order: -2; */
+            height: 20dvh;
+           padding: 20px;
+            width: 20%;
+            background-color: green;
+        }
+        .box3{
+            height: 20dvh;
+           padding: 20px;
+            width: 20%;
+            background-color: blue;
+            /* display: flex; */
+            align-self:flex-end;
+            flex-grow: 3;
+        }
+        .box4{
+            /* order: -3; */
+            height: 20dvh;
+
+           padding: 20px;
+            width: 20%;
+            background-color: yellow;
+            /* flex-shrink: 3; */
+        }
+        .hello{
+            font-size: 20px;
+        }
+        .zain{
+            font-size: 50px;
+        }
+        .container3{
+            display: flex;
+            align-items: baseline;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi recusandae illum quisquam eius molestiae in. Eum quisquam accusantium est voluptates sed neque quam id rem et placeat eius ea eos quasi laborum porro, alias natus deserunt nam amet culpa modi! Placeat, nostrum laudantium unde quod quasi amet sunt obcaecati perspiciatis illo quae ut? Aliquam placeat eveniet, repellendus nemo quas quod blanditiis! Veniam soluta molestiae eum perspiciatis? Minus consequuntur, rerum itaque dignissimos, pariatur, perferendis odit inventore alias fuga modi quam doloribus dolor necessitatibus labore ab cumque dolorum fugiat culpa illum dolorem nobis omnis molestias quas animi? Eligendi omnis delectus totam cupiditate?
+    </p>
+    <div class="container">
+    <div class="box1">Box 1</div>
+    <div class="box2">Box 2</div>
+    <div class="box3">Box 3</div>
+    <div class="box4">Box 4</div>
+    </div>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam omnis asperiores quaerat rem id perferendis distinctio a necessitatibus blanditiis est dicta odit labore veniam, velit aspernatur deserunt dolorum hic qui ullam in ratione sequi consequatur! Exercitationem, quidem rem sed nihil suscipit fugit obcaecati nobis odit aliquid, ipsum tempora! Distinctio temporibus mollitia porro necessitatibus dolorem totam dolorum ea. Ipsum assumenda maxime, reiciendis maiores, quas velit quidem at similique animi provident facilis dolor vero nam nisi, deserunt obcaecati ex facere voluptatem error atque pariatur esse. Voluptates sapiente minima quasi officiis deserunt maxime, assumenda commodi laboriosam aperiam nostrum mollitia ullam molestias consequatur blanditiis!
+    </p>
+    <div class="container3">
+    <div class="hello">Hello</div>
+    <div class="zain">Zain</div>
+    </div>
+</body>
+</html>
