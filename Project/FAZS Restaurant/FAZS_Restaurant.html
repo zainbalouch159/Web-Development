@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAZS Restaurant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alice&family=Alike&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Buenard:wght@400..700&family=Fenix&family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Luxurious+Roman&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Petrona:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Rufina:wght@400;700&family=Smythe&family=Young+Serif&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #7a1f30;
+        }
+        header{
+            font-weight: bolder;
+            font-family: 'Playfair Display';
+            background-color: #6d1024;
+            width: 100%;
+            height: 10dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1dvw solid #4b151c;
+        }
+        h2{
+            font-family: 'Smythe';
+            padding: 1dvw;
+        }
+        .container{
+            display: grid;
+            grid-template-columns:  repeat(auto-fit, minmax(200px, 1fr));
+            margin: 1dvw;
+            align-items: center;
+            justify-items: center;
+            justify-content: center;
+            align-content: center;
+            gap: 5dvw;
+        }
+        .items{
+            border: 1dvw solid #3b0d13;
+            background-color: #6d1024;
+            height: 100%;
+            border-radius: 1dvw;
+            margin: 1dvw;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            padding: 1dvw;
+        }
+
+        img{
+            width: 100%;
+        }
+        img:hover{
+           transform: scale(1.2); 
+            transition: 1s;
+        }
+        .info{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h3{
+            font-family: 'Libre Baskerville';
+        }
+        p{
+            font-family: 'Old Standard TT';
+        }
+        button{
+            font-family: 'Bodoni Moda';
+            background-color: #3b0d13;
+            border: 0;
+            padding: 1dvw;
+        }
+        button:active {
+            transform: scale(0.90);
+        }
+        span{
+            font-family: 'Fenix';
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FAZS</h1>
+    </header>
+    <div class="product">
+        <h2>Hot Products</h2>
+        <div class="container">
+            <div class="items">
+                <img src="burger.png" alt="Burger">
+                <div class="info">
+            <h3>Zinger Burger</h3>
+            <p>Amazing burger with amazing taste.</p>
+            <span>Rs 399</span>
+            <a href="https://i.pinimg.com/originals/14/2f/a7/142fa7f209297073e4648f11ed842a6a.jpg">
+            <button >Buy it</button>
+            </a>
+            </div>
+        </div>
+        <div class="items">
+            <img src="pizza.png" alt="pizza">
+            <div class="info">
+            <h3>Hot Cheez Pizza</h3>
+            <p>Amazing pizza for amazign peoples</p>
+            <span>Rs 1599</span>
+            <a href="https://i.pinimg.com/originals/14/2f/a7/142fa7f209297073e4648f11ed842a6a.jpg">
+            <button >Buy it</button>
+            </a>
+            </div>
+        </div>
+        <div class="items">
+            <img src="chicken.png" alt="chicken">
+            <div class="info">
+            <h3>Hot chickens</h3>
+            <p>Hot chicken for hot peoples</p>
+            <span>Rs 599</span>
+            <a href="https://i.pinimg.com/originals/14/2f/a7/142fa7f209297073e4648f11ed842a6a.jpg">
+            <button >Buy it</button>
+            </a>
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

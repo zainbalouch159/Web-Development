@@ -41,10 +41,21 @@
      font-family: 'Playfair Display';
      margin: auto;
      height: 70dvw;
-     /* display: flex;// */
      padding: 30dvw 0 0 0;
  }
-
+@media screen and (max-width: 900px) {
+    h1{
+        height: 0;
+        padding: 0 0 0 0;
+        margin: 10dvw 0;
+    }
+    h2{
+        margin: 0;
+    }
+    div{
+        margin: 0;
+    }
+}
  main {
      width: 90%;
      margin: auto;
@@ -56,7 +67,6 @@
 
  h2 {
      font-family: 'Alike', sans-serif;
-     margin-bottom: 10px;
      width: fit-content;
      padding: 10px 14px;
      border-radius: 8px;

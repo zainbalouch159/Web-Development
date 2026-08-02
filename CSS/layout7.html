@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        background-color: black;
+    }
+
+    img {
+        width: 60px;
+        height: 60px;
+        border: solid;
+    }
+
+    nav {
+
+        justify-self: start;
+        background-color: darkgrey;
+        margin: 0 2dvw;
+    }
+
+    ul {
+        display: flex;
+        gap: 3dvw;
+        list-style: none;
+    }
+
+    li {
+        font-size: 4dvw;
+    }
+    form{
+        margin: 0 2dvw;
+    }
+</style>
+
+<body>
+    <header>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4ylv4D3fimeFUlK25WdrQl35RYHgDdrK60NaQOj755w&s=10"
+            alt="">
+        <nav>
+            <ul>
+                <li>Home</li>
+                <li>About</li>
+                <li>Contact</li>
+            </ul>
+        </nav>
+        <form role="search" action="https://www.google.com/search">
+            <input type="search" placeholder="Search..." name="q">
+            <button type="submit">Search</button>
+        </form>
+    </header>
+</body>
+
+</html>

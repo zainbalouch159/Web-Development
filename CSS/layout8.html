@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laoyout 8</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        header{
+            display: grid;
+            grid-template-columns: auto 1fr;
+            margin: 0 0 1dvw 0;
+            background-color: brown;
+        }
+        header img{
+            margin: 1dvw;
+            width: 10dvw;
+        }
+        nav{
+            align-content: center;
+        }
+        ul{
+            list-style: none;
+            display: grid;
+            grid-template-columns:auto auto auto;
+            justify-items: center;
+        }
+        li{
+            background-color: blueviolet;
+            padding: 1dvw;
+            border: 0.5dvw solid;
+            font-size: 5dvw;
+        }
+        img{
+            width: 100%;
+        }
+        .profiles{
+        display: grid;
+        grid-template-columns: 30dvw 30dvw 30dvw;
+        overflow: hidden;
+        }
+        .profiles img{
+            overflow: hidden;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKyMDXzj3Vvl21XTQv0EA1GgWqQ8YYqfDCAXc6IN0AJg&s=10" alt="clock">
+        <nav>
+            <ul>
+                <li>Home</li>
+                <li>About</li>
+                <li>Contact</li>
+            </ul>
+        </nav>
+    </header>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj3WElVlm0St0386i0z80iLQILnyb2cq61BvMaIUVMMg&s=10" alt="mountain">
+    <div class="profiles">
+        <img src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-user-profile-avatar-png-image_10211471.png" alt="person 1">
+        <img src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-user-profile-avatar-png-image_10211467.png" alt="2">
+        <img src="https://png.pngtree.com/png-vector/20230831/ourmid/pngtree-man-avatar-image-for-profile-png-image_9197908.png" alt="Person 3">
+    </div>
+</body>
+</html>
