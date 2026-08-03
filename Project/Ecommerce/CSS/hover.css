@@ -1,0 +1,23 @@
+.img-rotate:hover{
+    transform: rotate(-5deg) scale(1.1);
+}
+.link:hover{
+    opacity: 0.5;
+}
+header input:focus{
+    border: none;
+    outline: 5px solid #1d3f57;
+    box-shadow: none;
+}
+header button:active{
+    transform: scale(0.95);
+}
+.slide img:hover{
+    transform: scale(1.1);
+}
+.items img:hover{
+     transform: scale(1.1);
+}
+.items button:active{
+    transform: scale(0.95);
+}
