@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input</title>
+    <style>
+        /* .username{
+            text-transform:uppercase;
+        } */
+    </style>
+</head>
+<body>
+    <div id="login">
+   <form id="input-name" onsubmit="getdata()">
+    <input type="text" id="name" placeholder="Enter your name">
+    <button type="submit" >Save</button>
+</form>
+</div>
+<div id="website" style="display: none;">
+<h1 id="h">Hello <span class="username"></span></h1>
+<p id="par">
+    Hello kaise ho <span class="username"></span>. Tumhara naam <span class="username"></span> bhot acha hai. Tumhe iska matlab hai <span class="username"></span>?
+</p>
+<button id="logout" onclick="remov()">
+    Logout
+</button>
+</div>
+</body>
+<script>
+    
+    
+
+function getdata() {
+    // document.getElementById("name").style.textTransform = "capitalize";
+    let input = document.getElementById("name").value;
+    input = input
+    .toLowerCase()
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+    localStorage.setItem("user", input);
+
+    show();
+}
+
+
+function show() {
+    let data = localStorage.getItem("user");
+
+    if (data) {
+        // Form hide
+        document.getElementById("login").style.display = "none";
+
+        // Paragraph show
+        document.getElementById("website").style.display = "block";
+
+        // Naam show
+        usernames=document.querySelectorAll(".username");
+        usernames.forEach(element => {
+            element.textContent=`${data}`
+        });
+    }
+}
+// Page load hote hi check kare
+show();
+
+// For lougout
+function remov(){
+    localStorage.removeItem("user");
+    location.reload();
+}
+</script>
+</html>

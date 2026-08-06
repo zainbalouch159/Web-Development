@@ -13,7 +13,6 @@ header {
     height: 20dvh;
     background-color: #1f3d8f;
     display: flex;
-    justify-items: start;
     align-items: center;
     flex-wrap: wrap;
     border-bottom: 1dvw solid #1d3f57;
@@ -67,9 +66,13 @@ header button {
     margin: auto;
     height: 50dvh;
     width: 50%;
+    gap: 30px;
     overflow-y: hidden;
+    overflow-x: auto;
     border-radius: 10px;
     margin-top: 5dvh;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
 }
 
 .slide {
@@ -79,6 +82,8 @@ header button {
     justify-content: center;
     background-color: orange;
     border-radius: 10px;
+        scroll-snap-align: start;
+
 }
 
 .slide img {
@@ -96,8 +101,8 @@ main img {
     gap: 10px;
     width: 100%;
     height: 400px;
-    /* background-color: orange; */
     overflow-y: hidden;
+    overflow-x: auto;
 }
 
 .items {
@@ -111,6 +116,7 @@ main img {
     flex-direction: column;
     align-items: center;
     overflow: hidden;
+
 }
 .items img{
     margin-bottom: auto;

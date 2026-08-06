@@ -1,0 +1,445 @@
+:root{
+
+    /* ===================================================
+       1. NEUTRALS / BLACK / GRAY / WHITE
+    =================================================== */
+
+    --black-1: #071614;
+    --black-2: #081512;
+    --black-3: #0a0a0a;
+    --black-4: #0a0f1c;
+    --black-5: #0a0f1e;
+    --black-6: #0b1512;
+    --black-7: #0c0e1c;
+    --black-8: #0c1620;
+    --black-9: #0d0d0d;
+    --black-10: #0e0e0f;
+    --black-11: #12081a;
+    --black-12: #120d0d;
+    --black-13: #120f0d;
+    --black-14: #140a0c;
+    --black-15: #14101c;
+    --black-16: #150a0d;
+    --black-17: #150c0a;
+    --black-18: #150f0c;
+    --black-19: #17181a;
+    --black-20: #1a1c1e;
+
+    --charcoal-1: #1a1a1a;
+    --charcoal-2: #1a1a1c;
+    --charcoal-3: #1c0f28;
+    --charcoal-4: #1e1414;
+    --charcoal-5: #1e1729;
+    --charcoal-6: #1e1813;
+    --charcoal-7: #201014;
+    --charcoal-8: #202224;
+    --charcoal-9: #211712;
+    --charcoal-10: #22111a;
+    --charcoal-11: #221410;
+    --charcoal-12: #232527;
+
+    --slate-1: #2e3236;
+    --slate-2: #3c4147;
+    --slate-3: #454b51;
+    --slate-4: #5b6167;
+
+    --gray-1: #8f949b;
+    --gray-2: #b8bdc5;
+    --gray-3: #bcc1c6;
+    --gray-4: #c5c9cf;
+    --gray-5: #c9cccf;
+    --gray-6: #cacccf;
+    --gray-7: #cfcfcf;
+    --gray-8: #d2d5da;
+    --gray-9: #d4d4d6;
+    --gray-10: #eef1f4;
+    --gray-11: #f2f3f4;
+    --gray-12: #f3f4f5;
+    --gray-13: #f5f5f5;
+
+    --platinum-1: #b9bcc2;
+    --platinum-2: #e6e8eb;
+
+    --white-soft-1: #dbeafe;
+    --white-soft-2: #eaf6ff;
+    --white-soft-3: #eadcff;
+    --white-soft-4: #eef2fb;
+    --white-soft-5: #eefaf3;
+    --white-soft-6: #eefcf3;
+    --white-soft-7: #f4eefc;
+    --white-soft-8: #f8eefc;
+    --white-soft-9: #fbf1e6;
+    --white-soft-10: #fbeaea;
+    --white-soft-11: #fceef0;
+    --white-soft-12: #fdeee6;
+    --white-soft-13: #fdeef0;
+    --white-soft-14: #fdf0e6;
+
+    --border-soft: rgba(255,255,255,0.08);
+    --border-medium: rgba(255,255,255,0.14);
+    --glass-dark: rgba(255,255,255,0.04);
+    --glass-light: rgba(255,255,255,0.08);
+    --shadow-soft: rgba(0,0,0,0.18);
+    --shadow-dark: rgba(0,0,0,0.35);
+
+
+    /* ===================================================
+       2. GOLD / AMBER / BRONZE / COPPER
+    =================================================== */
+
+    --gold-1: #8b6b1f;
+    --gold-2: #c9a227;
+    --gold-3: #d4af37;
+    --gold-4: #e6c877;
+    --gold-5: #f1d67a;
+    --gold-6: #f4e2a1;
+
+    --amber-1: #e3a94f;
+    --amber-2: #e3c07f;
+
+    --bronze-1: #5c3d21;
+    --bronze-2: #8a5e34;
+    --bronze-3: #c17a3f;
+    --bronze-4: #e0b384;
+    --bronze-5: #e89b6f;
+
+    --copper-1: #6b3a24;
+    --copper-2: #a15a37;
+    --copper-3: #e8a578;
+
+
+    /* ===================================================
+       3. BLUE / NAVY / SAPPHIRE / ICE
+    =================================================== */
+
+    --navy-1: #0f172a;
+    --navy-2: #10182c;
+    --navy-3: #101a30;
+    --navy-4: #12142a;
+    --navy-5: #13212e;
+
+    --blue-1: #1b2a4a;
+    --blue-2: #1d3f57;
+    --blue-3: #1f3d8f;
+    --blue-4: #2c4370;
+    --blue-5: #2e2f8a;
+    --blue-6: #2f6d8f;
+    --blue-7: #315efb;
+
+    --blue-soft-1: #9dd0ec;
+    --blue-soft-2: #a9c0e8;
+    --blue-soft-3: #c1d3e0;
+    --blue-soft-4: #c6cede;
+    --blue-soft-5: #c9cbe0;
+    --blue-soft-6: #cdd3e6;
+
+
+    /* ===================================================
+       4. GREEN / EMERALD / JADE / TEAL
+    =================================================== */
+
+    --green-dark-1: #0d211a;
+    --green-dark-2: #0d211f;
+    --green-dark-3: #10201a;
+
+    --green-1: #0f6b45;
+    --green-2: #114a3a;
+    --green-3: #1c6e54;
+    --green-4: #1f7a5c;
+    --green-5: #34a66e;
+
+    --green-soft-1: #7fe0ac;
+    --green-soft-2: #8fd4ac;
+    --green-soft-3: #9ef0c8;
+    --green-soft-4: #c3d3cc;
+    --green-soft-5: #c3decf;
+    --green-soft-6: #c3ded9;
+
+    --teal-1: #0f6b64;
+    --teal-2: #7fe0c9;
+
+
+    /* ===================================================
+       5. PURPLE / AMETHYST / INDIGO
+    =================================================== */
+
+    --purple-dark-1: #1c0f28;
+    --purple-dark-2: #1e1729;
+
+    --purple-1: #3a2159;
+    --purple-2: #5a1e8a;
+    --purple-3: #5b3a8a;
+    --purple-4: #8a3fc0;
+    --purple-5: #a970ff;
+
+    --purple-soft-1: #c3a4f0;
+    --purple-soft-2: #cdc3dc;
+    --purple-soft-3: #d4a3f0;
+    --purple-soft-4: #d4c3e0;
+
+
+    /* ===================================================
+       6. RED / WINE / RUBY / GARNET / ROSE
+    =================================================== */
+
+    --red-dark-1: #1e1414;
+    --red-dark-2: #201014;
+    --red-dark-3: #22111a;
+    --red-dark-4: #221410;
+
+    --red-1: #5a1c24;
+    --red-2: #6d1024;
+    --red-3: #6e1b30;
+    --red-4: #7a1f30;
+    --red-5: #1b1011;
+    --red-6: #8a1f2b;
+    --red-7: #9c2b45;
+    --red-8: #b0304a;
+
+    --red-soft-1: #d8a39d;
+    --red-soft-2: #e0949c;
+    --red-soft-3: #e8a3b2;
+    --red-soft-4: #ec9baa;
+    --red-soft-5: #d2c3c3;
+    --red-soft-6: #d9c3c8;
+    --red-soft-7: #dcc4c8;
+    --red-soft-8: #dcc7bb;
+}
+:root{
+    --background: #0f0f0f;
+    --button-background: #8a6d10;
+    --color: #f5f5f5;
+    --text-input-hover-focus: #8b6b1f;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: var(--background);
+    color: var(--color);
+}
+/* // Login */
+
+#login-section{
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+}
+.login-input{
+    display: grid;
+    gap: 10px;
+    
+
+}
+
+form#login-info{
+    align-items: end;
+    justify-content: center;
+    gap: 30px;
+    background-color: var(--background);
+    color: var(--color);
+}
+form#login-info label{
+    transition: 1s;
+
+}
+form#login-info label:hover{
+    color: var(--text-input-hover-focus);
+
+}
+form#login-info input:focus{
+    border: 3px solid var(--text-input-hover-focus);
+}
+form#login-info button, #newlog, #log-warn-content button, #logout button, #newlog-button{
+    background-color: var(--button-background);
+}
+.login-input input, form#login-info button, #log-warn-content button,#logout button,#logout button, #newlog-button{
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    height: 20px;
+    padding: 0 10px;
+}
+#log-button{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+#newlog-button{
+    margin-top: 5px;
+    width: 200px;
+}
+#wrong-name, #wrong-password, #wrongnamepassword{
+    position: absolute;
+    background-color: red;
+    top: -60px;
+    padding: 5px;
+    border-radius: 10px;
+    display: none;
+}
+
+#log-warn-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* background-color: red; */
+    height: 100%;
+    margin: auto;
+    /* flex: auto; */
+    flex: 1;
+    gap: 10px;
+}
+
+/* Top Section */
+
+#Top-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px;
+    gap: 5px;
+    background: var(--button-background);
+    border-bottom: 3px solid var(--text-input-hover-focus);
+}
+
+.progress{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.progress-item{
+    display: flex;
+    flex-direction: column;
+}
+
+.progress-text{
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.progress-bar{
+    width: 100%;
+    height: 7px;
+
+    background: rgba(255,255,255,.2);
+
+    border-radius: 50px;
+
+    overflow: hidden;
+}
+
+.fill{
+    width: 0%;
+
+    height: 100%;
+
+    background: var(--green-1);
+
+    border-radius: 50px;
+
+    transition: width .5s ease;
+}
+
+#date-time{
+    /* margin: 5px 0; */
+    width: 45%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: end;
+    gap: 4px;
+    flex: 1;
+}
+
+#date-time h3{
+
+    font-size: 11px;
+    font-weight: 500;
+}
+.card-header{
+    display: flex;
+    gap: 5px;
+    padding: 5px 0 0 5px;
+}
+#add-task{
+    width: 20px;
+    height: 20px;
+    align-self: center;
+    background-color: var(--gold-3);
+    border: none;
+    outline: none;
+}
+
+/* Overlay */
+#overlay{
+     display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.5);
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 9;
+
+}
+
+/* Task Add pop up */
+#task-add-pop, #save-log-warn-pop{
+    display: none;
+    width: 50dvw;
+    height: 50dvh;
+     position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: red;
+     background: rgba(255,255,255,.1);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 100;
+}
+#task-add-pop form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+     position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+}
+#task-add-pop form input, #task-add-pop form button{
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+#task-add-pop form button{
+    background-color: var(--gold-1);
+}
+
+/* Logout button */
+#logout button{
+    position: fixed;
+    right: 5px;
+    top: 80px;
+}

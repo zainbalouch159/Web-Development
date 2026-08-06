@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track yourself</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="login-section">
+        <form id="login-info">
+                <div class="login-input">
+            <label for="login_name">Enter Name</label>
+            <input type="text" placeholder="Enter your name" id="login_name" required>
+                <label for="login_password">Enter Password</label>
+                <input type="password" id="login_password" placeholder="Enter password" required>
+                </div>
+                <div id="log-button">
+            <button id="login-button">Log In</button>
+        </div>
+    </form>
+    <button id="newlog-button" >Sign Up</button>
+         <div id="wrong-name">
+        Your enter name is wrong
+    </div>
+    <div id="wrong-password">
+        Your enter password is wrong
+    </div>
+    <div id="wrongnamepassword">
+        Your enter name and password is wrong
+    </div>
+</div>
+<div id="save-log-warn-pop" class="popup">
+    <div id="log-warn-content">
+    <p id="log-warn-message">
+    Ye password aur name yaad ya screenshot le lo kyuka agar ye name ya password bhol gia tu phir tum login nhi kr sakhoga
+    </p>
+    <p>
+        Name = <span id="showname"></span> <br>
+        Password = <span id="showpassword"></span>
+    </p>
+    <button id="log-confirm">OK</button>
+    </div>
+</div>
+    <div id="dashboard" style="display: none;">
+        <div id="home-page">
+            <div id="Top-section">
+
+    <div class="progress">
+
+        <div class="progress-item">
+            <div class="progress-text">
+                <span>Year</span>
+                <span id="year-percent">0%</span>
+            </div>
+
+            <div class="progress-bar">
+                <div id="year-fill" class="fill"></div>
+            </div>
+        </div>
+
+        <div class="progress-item">
+            <div class="progress-text">
+                <span>Month</span>
+                <span id="month-percent">0%</span>
+            </div>
+
+            <div class="progress-bar">
+                <div id="month-fill" class="fill"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="date-time">
+        <h3 id="date"></h3>
+        <h3 id="time"></h3>
+    </div>
+</div>
+<div id="tasks-section">
+    <div class="card">
+
+    <div class="card-header">
+        <h2>Today's Tasks</h2>
+
+        <button id="add-task">+</button>
+    </div>
+
+    <div id="task-list">
+
+    </div>
+
+</div>
+</div>
+            </div>
+            <footer id="bottom-navigation">
+
+            </footer>
+            <div id="logout">
+                <button id="logout-button">Log Out</button>
+            </div>
+        </div>
+    </div>
+   
+    <div id="task-add-pop" class="popup">
+        <form >
+                <input type="text" id="task-name" placeholder="Task name enter kro" required>
+                <input type="text" id="task-description" placeholder="Uski details">
+                <label for="task-date">Deadline</label>
+                <input type="date">
+                <button type="submit">Save</button>
+                </form>
+    </div>
+    <div id="overlay"></div>
+</body>
+<script src="dashboard.js"></script>
+</html>
