@@ -27,7 +27,15 @@ btn.addEventListener("click", () => {
     if (i >= data.data.length) {
         i = 0
     }
-   let paraold = document.getElementById("des")
+    if(i>0){
+        prev.style.display="block"
+    } 
+    
+  display()
+
+})
+function display(){
+     let paraold = document.getElementById("des")
    let containerold = document.getElementById("container")
     if(containerold){
         containerold.remove()
@@ -44,13 +52,14 @@ btn.addEventListener("click", () => {
         Region: ${data.data[i].attributes.origin.region} <br>
         Country: ${data.data[i].attributes.origin.country} <br><br>
         Other names: ${data.data[i].attributes.other_names.join(", ")}<br><br>
-        Recognized by: ${data.data[i].attributes.recognized_by.join(", ")}<br><br>
+        Recognized by: ${data.data[i].attributes.recognized_by.join(", ")}<br><br> Images <br>
         `
     document.body.append(par)
-    let container = document.createElement("div")
-    container.id= "container"
+   
     let images = data.data[i].attributes.images;
     if(images){
+         let container = document.createElement("div")
+    container.id= "container"
     images.forEach(image => {
        let img = document.createElement("img")
         img.src= image.thumb
@@ -58,13 +67,16 @@ btn.addEventListener("click", () => {
     });
     document.body.append(container)
 }
-
-})
-if(i>0){
+}
 let prev = document.createElement("button")
 prev.style.margin="5px"
+prev.style.display="none"
 prev.innerHTML=`Previous`
 document.body.append(prev)
 prev.addEventListener("click",()=>{
 i--;
-})}
+if(i<=0){
+    prev.style.display="none"
+}
+display()
+})
