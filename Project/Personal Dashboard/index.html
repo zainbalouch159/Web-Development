@@ -10,16 +10,16 @@
     <div id="login-section">
         <form id="login-info">
                 <div class="login-input">
-            <label for="login_name">Enter Name</label>
+            <label for="login_name"><center>Enter Name</center></label>
             <input type="text" placeholder="Enter your name" id="login_name" required>
-                <label for="login_password">Enter Password</label>
+                <label for="login_password"><center> Enter Password</center></label>
                 <input type="password" id="login_password" placeholder="Enter password" required>
                 </div>
                 <div id="log-button">
-            <button id="login-button">Log In</button>
+            <button id="login-button" type="submit">Log In</button>
         </div>
+        <button id="newlog-button" type="button">Sign Up</button>
     </form>
-    <button id="newlog-button" >Sign Up</button>
          <div id="wrong-name">
         Your enter name is wrong
     </div>
@@ -29,9 +29,9 @@
     <div id="wrongnamepassword">
         Your enter name and password is wrong
     </div>
+    <div id="newlogmessage">For first time press Sign Up</div>
 </div>
 <div id="save-log-warn-pop" class="popup">
-    <div id="log-warn-content">
     <p id="log-warn-message">
     Ye password aur name yaad ya screenshot le lo kyuka agar ye name ya password bhol gia tu phir tum login nhi kr sakhoga
     </p>
@@ -40,7 +40,12 @@
         Password = <span id="showpassword"></span>
     </p>
     <button id="log-confirm">OK</button>
-    </div>
+</div>
+<div id="warn-del-data" class="popup">
+        <div id="data-data-message">
+            New Sign UP sa apka store data clear hojaiga
+        </div>
+        <button id="confirm-del-data">Clear All Data</button>
 </div>
     <div id="dashboard" style="display: none;">
         <div id="home-page">
@@ -81,13 +86,12 @@
     <div class="card">
 
     <div class="card-header">
-        <h2>Today's Tasks</h2>
-
+        <h2>Tasks</h2>
         <button id="add-task">+</button>
     </div>
 
     <div id="task-list">
-
+        
     </div>
 
 </div>
@@ -102,14 +106,16 @@
         </div>
     </div>
    
-    <div id="task-add-pop" class="popup">
-        <form >
+    <div  class="popup" id="task-pop">
+        <form id="task-add-pop">
                 <input type="text" id="task-name" placeholder="Task name enter kro" required>
                 <input type="text" id="task-description" placeholder="Uski details">
                 <label for="task-date">Deadline</label>
-                <input type="date">
+                <input type="date" id="task-date">
                 <button type="submit">Save</button>
                 </form>
+    </div>
+    <div id="task-detail-pop" class="popup">
     </div>
     <div id="overlay"></div>
 </body>

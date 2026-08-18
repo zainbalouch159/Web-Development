@@ -254,10 +254,10 @@ form#login-info label:hover{
 form#login-info input:focus{
     border: 3px solid var(--text-input-hover-focus);
 }
-form#login-info button, #newlog, #log-warn-content button, #logout button, #newlog-button{
+form#login-info button, #newlog, #log-warn-content button, #logout button, #log-confirm{
     background-color: var(--button-background);
 }
-.login-input input, form#login-info button, #log-warn-content button,#logout button,#logout button, #newlog-button{
+.login-input input, form#login-info button, #log-warn-content button,#logout button,#logout button, #log-confirm{
     border-radius: 10px;
     outline: none;
     border: none;
@@ -270,11 +270,11 @@ form#login-info button, #newlog, #log-warn-content button, #logout button, #newl
     gap: 10px;
     margin-top: 10px;
 }
-#newlog-button{
+#log-confirm,#newlog-button{
     margin-top: 5px;
-    width: 200px;
+    width: 100px;
 }
-#wrong-name, #wrong-password, #wrongnamepassword{
+#wrong-name, #wrong-password, #wrongnamepassword,#newlogmessage{
     position: absolute;
     background-color: red;
     top: -60px;
@@ -282,27 +282,23 @@ form#login-info button, #newlog, #log-warn-content button, #logout button, #newl
     border-radius: 10px;
     display: none;
 }
-
-#log-warn-content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    /* background-color: red; */
-    height: 100%;
-    margin: auto;
-    /* flex: auto; */
-    flex: 1;
-    gap: 10px;
+#newlogmessage{
+    background-color: var(--green-1);
 }
 
+#newlog-button{
+    width: 100%;
+}
+#confirm-del-data{
+    background-color: red;
+}
 /* Top Section */
 
 #Top-section{
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    color: var(--background);
     padding: 10px;
     gap: 5px;
     background: var(--button-background);
@@ -374,6 +370,7 @@ form#login-info button, #newlog, #log-warn-content button, #logout button, #newl
     padding: 5px 0 0 5px;
 }
 #add-task{
+    border-radius: 50%;
     width: 20px;
     height: 20px;
     align-self: center;
@@ -394,12 +391,12 @@ form#login-info button, #newlog, #log-warn-content button, #logout button, #newl
 
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    z-index: 9;
+z-index: 12;
 
 }
 
 /* Task Add pop up */
-#task-add-pop, #save-log-warn-pop{
+ .popup{
     display: none;
     width: 50dvw;
     height: 50dvh;
@@ -407,34 +404,34 @@ form#login-info button, #newlog, #log-warn-content button, #logout button, #newl
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: red;
      background: rgba(255,255,255,.1);
     padding: 20px;
     border-radius: 10px;
     z-index: 100;
-}
-#task-add-pop form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
-     position: fixed;
-
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
+    justify-content: center;
+    flex-direction: column;
+    gap: 100px;
 }
-#task-add-pop form input, #task-add-pop form button{
+
+#task-pop form input, #task-pop form button, #confirm-del-data{
     outline: none;
     border: none;
     border-radius: 5px;
-    padding: 0 10px;
+    padding: 0 5px;
 }
-#task-add-pop form button{
+#task-pop form button{
     background-color: var(--gold-1);
+}
+#task-add-pop{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex: 1;
+    height: 100%;
+    width: 100%;
 }
 
 /* Logout button */
@@ -442,4 +439,42 @@ form#login-info button, #newlog, #log-warn-content button, #logout button, #newl
     position: fixed;
     right: 5px;
     top: 80px;
+}
+
+.task-card{
+    display: grid;
+    grid-template-columns: 15px 1fr;
+    justify-content: start;
+    gap: 5px;
+    overflow: auto;
+    margin: 5px;
+    padding: 5px;
+    border: 2px solid var(--gold-2);
+    border-radius: 5px;
+    color: var(--gold-3);
+}
+.taskdeadlinetext{
+    grid-column: 1 / -1;
+}
+
+.task-card{
+    z-index: 10;
+}
+.task-checkbox{
+    z-index: 11;
+}
+
+.task-details-pop{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    height: 100%;
+    /* overflow: hidden;
+    flex-wrap: wrap; */
+}
+.edit-detail{
+    position: absolute;
+    left: 150px;
+    top: -51px;
 }
