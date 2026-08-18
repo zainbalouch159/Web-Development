@@ -1,4 +1,4 @@
-:root{
+:root {
 
     /* ===================================================
        1. NEUTRALS / BLACK / GRAY / WHITE
@@ -75,12 +75,12 @@
     --white-soft-13: #fdeef0;
     --white-soft-14: #fdf0e6;
 
-    --border-soft: rgba(255,255,255,0.08);
-    --border-medium: rgba(255,255,255,0.14);
-    --glass-dark: rgba(255,255,255,0.04);
-    --glass-light: rgba(255,255,255,0.08);
-    --shadow-soft: rgba(0,0,0,0.18);
-    --shadow-dark: rgba(0,0,0,0.35);
+    --border-soft: rgba(255, 255, 255, 0.08);
+    --border-medium: rgba(255, 255, 255, 0.14);
+    --glass-dark: rgba(255, 255, 255, 0.04);
+    --glass-light: rgba(255, 255, 255, 0.08);
+    --shadow-soft: rgba(0, 0, 0, 0.18);
+    --shadow-dark: rgba(0, 0, 0, 0.35);
 
 
     /* ===================================================
@@ -205,23 +205,27 @@
     --red-soft-7: #dcc4c8;
     --red-soft-8: #dcc7bb;
 }
-:root{
+
+:root {
     --background: #0f0f0f;
     --button-background: #8a6d10;
     --color: #f5f5f5;
     --text-input-hover-focus: #8b6b1f;
 }
-*{
+
+* {
     margin: 0;
     padding: 0;
 }
-body{
+
+body {
     background: var(--background);
     color: var(--color);
 }
+
 /* // Login */
 
-#login-section{
+#login-section {
     position: fixed;
 
     top: 50%;
@@ -229,52 +233,74 @@ body{
 
     transform: translate(-50%, -50%);
 }
-.login-input{
+
+.login-input {
     display: grid;
     gap: 10px;
-    
+
 
 }
 
-form#login-info{
+form#login-info {
     align-items: end;
     justify-content: center;
     gap: 30px;
     background-color: var(--background);
     color: var(--color);
 }
-form#login-info label{
+
+form#login-info label {
     transition: 1s;
 
 }
-form#login-info label:hover{
+
+form#login-info label:hover {
     color: var(--text-input-hover-focus);
 
 }
-form#login-info input:focus{
+
+form#login-info input:focus {
     border: 3px solid var(--text-input-hover-focus);
 }
-form#login-info button, #newlog, #log-warn-content button, #logout button, #log-confirm{
+
+form#login-info button,
+#newlog,
+#log-warn-content button,
+#logout button,
+#log-confirm {
     background-color: var(--button-background);
 }
-.login-input input, form#login-info button, #log-warn-content button,#logout button,#logout button, #log-confirm{
+
+.login-input input,
+form#login-info button,
+#log-warn-content button,
+#logout button,
+#logout button,
+#log-confirm {
     border-radius: 10px;
     outline: none;
     border: none;
     height: 20px;
     padding: 0 10px;
 }
-#log-button{
+
+#log-button {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-top: 10px;
 }
-#log-confirm,#newlog-button{
+
+#log-confirm,
+#newlog-button {
     margin-top: 5px;
     width: 100px;
 }
-#wrong-name, #wrong-password, #wrongnamepassword,#newlogmessage{
+
+#wrong-name,
+#wrong-password,
+#wrongnamepassword,
+#newlogmessage {
     position: absolute;
     background-color: red;
     top: -60px;
@@ -282,19 +308,22 @@ form#login-info button, #newlog, #log-warn-content button, #logout button, #log-
     border-radius: 10px;
     display: none;
 }
-#newlogmessage{
+
+#newlogmessage {
     background-color: var(--green-1);
 }
 
-#newlog-button{
+#newlog-button {
     width: 100%;
 }
-#confirm-del-data{
+
+#confirm-del-data {
     background-color: red;
 }
+
 /* Top Section */
 
-#Top-section{
+#Top-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -305,36 +334,36 @@ form#login-info button, #newlog, #log-warn-content button, #logout button, #log-
     border-bottom: 3px solid var(--text-input-hover-focus);
 }
 
-.progress{
+.progress {
     width: 45%;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.progress-item{
+.progress-item {
     display: flex;
     flex-direction: column;
 }
 
-.progress-text{
+.progress-text {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
 }
 
-.progress-bar{
+.progress-bar {
     width: 100%;
     height: 7px;
 
-    background: rgba(255,255,255,.2);
+    background: rgba(255, 255, 255, .2);
 
     border-radius: 50px;
 
     overflow: hidden;
 }
 
-.fill{
+.fill {
     width: 0%;
 
     height: 100%;
@@ -346,7 +375,7 @@ form#login-info button, #newlog, #log-warn-content button, #logout button, #log-
     transition: width .5s ease;
 }
 
-#date-time{
+#date-time {
     /* margin: 5px 0; */
     width: 45%;
 
@@ -359,17 +388,19 @@ form#login-info button, #newlog, #log-warn-content button, #logout button, #log-
     flex: 1;
 }
 
-#date-time h3{
+#date-time h3 {
 
     font-size: 11px;
     font-weight: 500;
 }
-.card-header{
+
+.card-header {
     display: flex;
     gap: 5px;
     padding: 5px 0 0 5px;
 }
-#add-task{
+
+#add-task {
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -380,31 +411,31 @@ form#login-info button, #newlog, #log-warn-content button, #logout button, #log-
 }
 
 /* Overlay */
-#overlay{
-     display: none;
+#overlay {
+    display: none;
 
     position: fixed;
 
     inset: 0;
 
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, .5);
 
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-z-index: 12;
+    z-index: 12;
 
 }
 
 /* Task Add pop up */
- .popup{
+.popup {
     display: none;
     width: 50dvw;
     height: 50dvh;
-     position: fixed;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-     background: rgba(255,255,255,.1);
+    background: rgba(255, 255, 255, .1);
     padding: 20px;
     border-radius: 10px;
     z-index: 100;
@@ -414,16 +445,20 @@ z-index: 12;
     gap: 100px;
 }
 
-#task-pop form input, #task-pop form button, #confirm-del-data{
+#task-pop form input,
+#task-pop form button,
+#confirm-del-data {
     outline: none;
     border: none;
     border-radius: 5px;
     padding: 0 5px;
 }
-#task-pop form button{
+
+#task-pop form button {
     background-color: var(--gold-1);
 }
-#task-add-pop{
+
+#task-add-pop {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -435,46 +470,66 @@ z-index: 12;
 }
 
 /* Logout button */
-#logout button{
-    position: fixed;
+#logout button {
+    position: absolute;
     right: 5px;
     top: 80px;
 }
 
-.task-card{
+.task-card {
     display: grid;
-    grid-template-columns: 15px 1fr;
-    justify-content: start;
+    grid-template-columns: 15px 250px;
     gap: 5px;
-    overflow: auto;
     margin: 5px;
     padding: 5px;
     border: 2px solid var(--gold-2);
     border-radius: 5px;
     color: var(--gold-3);
+    width: 90%;
+    z-index: 10;
 }
-.taskdeadlinetext{
+
+#task-list {
+    overflow-wrap: anywhere;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.taskdeadlinetext {
     grid-column: 1 / -1;
 }
 
-.task-card{
-    z-index: 10;
-}
-.task-checkbox{
+.task-checkbox {
     z-index: 11;
 }
 
-.task-details-pop{
+.task-details-pop {
+    overflow-wrap: anywhere;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 10px;
     height: 100%;
-    /* overflow: hidden;
-    flex-wrap: wrap; */
+
 }
-.edit-detail{
+.Detail-Sections{
+    border: 2px solid var(--gold-1);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.edit-detail {
     position: absolute;
     left: 150px;
     top: -51px;
+}
+
+/* Delete Task */
+.del-task-button {
+    position: absolute;
+    right: 20px;
+    color: var(--red-2);
+    /* border: 2px solid ; */
+    /* border-radius: 5px; */
 }

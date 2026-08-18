@@ -1,0 +1,7 @@
+.error{
+    background-color: rgb(255, 232, 230);
+    border: 1px solid rgb(190, 127, 122);
+    outline:1px solid rgb(190, 127, 122);
+    color: rgb(229, 158, 154);
+    font-weight: bold;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/src/output.css">
+    <title>Document</title>
+</head>
+
+<body class="bg-[rgb(55,56,78)] flex items-center justify-center h-dvh">
+    <div
+        class=" h-[500px] w-[700px] bg-white rounded-xl p-5 pr-0 grid grid-cols-2 gap-1 items-start    grid-rows-1  min-w-0 min-h-0 ">
+        <div class="flex flex-col items-center justify-center gap-3 text-[1rem]">
+            <h1 class="font-bold text-[rgb(35,38,64)] text-[2.5rem]">Stay Updated!</h1>
+            <p class=""> Join 60,000+ product managers receiving monthly updates on:
+            </p>
+            <div class="pt-5 pb-5">
+
+                <div class="gap-2 items-center    flex"><span
+                        class=" text-[0.5rem] bg-[rgb(206,50,50)] rounded-full  h-3 w-3  text-center text-white">✓</span><span
+                        class="">Product discovery and building what matters</span></div>
+                <div class="gap-2 items-center    flex"><span
+                        class="text-[0.5rem] bg-[rgb(206,50,50)] rounded-full  h-3 w-3  text-center text-white">✓</span><span
+                        class="">Measuring to ensure updates are a success</span></div>
+                <div class="gap-2 items-center    flex "><span
+                        class="text-[0.5rem] bg-[rgb(206,50,50)] rounded-full  h-3 w-3  text-center text-white">✓</span><span
+                        class="">And much more!</span></div>
+            </div>
+            <form action="success.html" id="newsletter-form">
+                <div class="flex justify-between ">
+                    <p class="font-bold text-[0.8rem] mb-2">Email address</p>
+                    <div id="email-error" class="font-bold text-[rgb(215,140,134)]" style="display: none;">Vaild email required</div>
+                </div>
+                <input type="email" placeholder="email@company.com" id="newsletter-input"
+                    class=" border border-[rgb(204,204,204)] rounded-md w-full h-[5dvh] pl-5 mb-5 "
+                    required><button class="bg-[rgb(30,32,55)] text-white p-3 rounded-md w-full font-bold"
+                    type="submit">Subsribe to
+                    monthly newsletter</button>
+            </form>
+        </div>
+
+        <img class="w-full max-h-full object-fill " src="/img/illustration-sign-up-desktop.svg" alt=";as">
+    </div>
+    </div>
+</body>
+<script>
+    document.getElementById("newsletter-input").addEventListener("invalid", function(){
+        let error = document.getElementById("email-error")
+        error.style.display='block'
+        let input = document.getElementById("newsletter-input")
+        input.classList.add("error")
+    })
+    document.getElementById("newsletter-input").addEventListener("submit", function(){
+        let email = document.getElementById("newsletter-input")
+
+    })
+    document.getElementById("newsletter-form").addEventListener("submit", function(){
+        let email = document.getElementById("newsletter-input").value
+        sessionStorage.setItem("email",email)
+
+    })
+</script>
+</html>

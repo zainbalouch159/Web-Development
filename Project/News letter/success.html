@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>success</title>
+    <link rel="stylesheet" href="/src/output.css">
+
+</head>
+
+<body class="bg-[rgb(55,56,78)] flex items-center justify-center h-dvh">
+    <div
+        class=" h-[400px] w-[400px] bg-white rounded-xl p-4  min-w-0 min-h-0 ">
+        <div class="flex flex-col gap-3 p-3  h-full">
+
+            <span
+                class="text-[3rem] bg-[rgb(206,50,50)] rounded-full  h-15 w-15  text-center text-white shrink-0 leading-none">✓</span>
+
+            <h1 class="flex font-bold text-[rgb(35,38,64)] text-[2.5rem]  ">Thanks for subscribing!</h1>
+            <p class="text-[rgb(35,38,64)]">
+                A confirmation email has been sent to <span class="font-bold" id="user-email"></span>. Please open it and click the button inside to confirm subscription.
+            </p>
+            <button class="bg-[rgb(35,39,66)] w-full h-full rounded-sm text-white h-full flex-1" id="Dismiss">Dismiss message</button>
+        </div>
+    </div>
+</body>
+<script>
+    let email = sessionStorage.getItem("email")
+    let user =document.getElementById("user-email")
+    user.textContent=email
+    document.getElementById("Dismiss").addEventListener("click",function(){
+        window.location.href="News-Letter.html"
+        sessionStorage.clear();
+    })
+</script>
+</html>
