@@ -1,2 +1,2 @@
-let hello = require("./modules");
-hello()
+import hello from "./modules.js";
+hello.name("zainf")
