@@ -1,2 +1,5 @@
 import hello from "./modules.js";
-hello.name("zainf")
+import {zain} from "./modules.js"
+hello()
+    zain.hello("zain")
+    zain.greeting()
