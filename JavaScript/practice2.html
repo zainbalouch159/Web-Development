@@ -1,14 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #eef2ff;
+    }
+
+    .chatbot {
+      width: min(420px, 92%);
+      height: 600px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .chat-header {
+      padding: 18px;
+      color: white;
+      background: #4f46e5;
+    }
+
+    .chat-header h2 {
+      margin: 0 0 5px;
+    }
+
+    .chat-header p {
+      margin: 0;
+      opacity: 0.8;
+      font-size: 13px;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 18px;
+      overflow-y: auto;
+      background: #f8fafc;
+    }
+
+    .message {
+      max-width: 80%;
+      margin-bottom: 12px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      line-height: 1.4;
+    }
+
+    .bot {
+      background: #e0e7ff;
+      color: #1e1b4b;
+    }
+
+    .user {
+      margin-left: auto;
+      color: white;
+      background: #4f46e5;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 8px;
+      padding: 14px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    #user-input {
+      flex: 1;
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    #send-btn {
+      border: 0;
+      padding: 0 18px;
+      color: white;
+      background: #4f46e5;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    #send-btn:hover {
+      background: #4338ca;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="chatbot">
+    <header class="chat-header">
+      <h2>AI Assistant</h2>
+      <p>Online and ready to help</p>
+    </header>
+
+    <section id="messages" class="messages">
+      <div class="message bot">Hello! How can I help you?</div>
+    </section>
+
+    <form id="chat-form" class="input-area">
+      <input id="user-input" type="text" placeholder="Type your message..." autocomplete="off">
+      <button id="send-btn" type="submit">Send</button>
+    </form>
+  </main>
+
+  <script>
+    const form = document.querySelector("#chat-form");
+    const input = document.querySelector("#user-input");
+    const messages = document.querySelector("#messages");
+
+    function addMessage(text, type) {
+      const message = document.createElement("div");
+      message.className = `message ${type}`;
+      message.textContent = text;
+      messages.appendChild(message);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const text = input.value.trim();
+
+      if (!text) {
+        return;
+      }
+
+      addMessage(text, "user");
+      input.value = "";
+
+      setTimeout(function () {
+        addMessage("Thanks for your message! I am processing it.", "bot");
+      }, 600);
+    });
+  </script>
 </body>
-<!-- <script src="practice2.js"></script> -->
-<!-- <script src="api.js"></script> -->
 </html>

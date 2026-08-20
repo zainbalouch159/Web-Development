@@ -21,7 +21,7 @@ let prev = document.createElement("button")
 prev.style.margin = "5px"
 prev.style.display = "none"
 prev.innerHTML = `Previous`
-document.body.append(prev)
+document.body.append(prev);
 
     (async () => {
         try {
@@ -31,9 +31,8 @@ document.body.append(prev)
                 data = await response.json()
                 load.style.display = "none"
                 btn.style.display = "block"
-                console.log(data)
             } else {
-                error1.innerText = `Server error: ${response.status}`
+                error1.innerText = `Server error: ${response.status}`;
                 error1.style.display = "block"
                 load.style.display = "none"
             }
@@ -43,7 +42,7 @@ document.body.append(prev)
             error1.style.display = "block"
             load.style.display = "none"
         }
-    })()
+    })();
 
 
 btn.addEventListener("click", () => {
