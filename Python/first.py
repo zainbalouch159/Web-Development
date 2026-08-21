@@ -137,7 +137,29 @@
 
 # Dictionary key => value , mutable
 
-marks = {"Math": 98, "Chemistry": 89, "Physics": 90, "Math": 88 }
-print(type(marks), marks)
-marks["Chemistry"]= 70
-print(marks["Chemistry"])
+# marks = {"Math": 98, "Chemistry": 89, "Physics": 90, "Math": 88 }
+# print(type(marks), marks)
+# marks["Chemistry"]= 70
+# print(marks["Chemistry"])
+
+# Functions
+
+# def add(a,b):
+#     print(a+b)
+# add(23,67)
+
+def fictorial(num):
+    if num>0:
+        return num*fictorial(num-1)
+    return 1
+
+
+print(fictorial(5))
+
+# num = int(input("Kis number ka fictoril chia? "))
+# fictorial = 1
+
+# for rezutl in range(num,0,-1):
+#     fictorial *= rezutl
+
+# print(fictorial)
