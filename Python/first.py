@@ -164,8 +164,8 @@
 
 # print(fictorial)
 
-def fun(num):
-    if num>0:
-        return num+fun(num-1)
-    return 1
-print(fun(5))
+# def fun(num):
+#     if num>0:
+#         return num+fun(num-1)
+#     return 1
+# print(fun(5))
