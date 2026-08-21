@@ -148,13 +148,13 @@
 #     print(a+b)
 # add(23,67)
 
-def fictorial(num):
-    if num>0:
-        return num*fictorial(num-1)
-    return 1
+# def fictorial(num):
+#     if num>0:
+#         return num*fictorial(num-1)
+#     return 1
 
 
-print(fictorial(5))
+# print(fictorial(5))
 
 # num = int(input("Kis number ka fictoril chia? "))
 # fictorial = 1
@@ -163,3 +163,9 @@ print(fictorial(5))
 #     fictorial *= rezutl
 
 # print(fictorial)
+
+def fun(num):
+    if num>0:
+        return num+fun(num-1)
+    return 1
+print(fun(5))
