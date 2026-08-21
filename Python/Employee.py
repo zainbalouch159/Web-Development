@@ -1,7 +1,12 @@
-totdata = int(input("How many employee data you want to store "))
+totdata = int(input("How many employees data you want to store "))
 keys = int(input("How many data in one employee profile "))
-marks= [totdata]
+marks = []
 for data in range(totdata):
-    marks[data] = input(f"Enter data:  {data} ")
-    for key in range(keys):
-        print(f"<<{data}>>")
+    employee = {}
+    for keycount in range(keys):
+        print(f"<<{data+1}.{keycount+1}>>")
+        key = input("Enter data name ")
+        value= input("Enter acutal data ")
+        employee[key]=value
+    marks.append(employee)
+print(marks)
