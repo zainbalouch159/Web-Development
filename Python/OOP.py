@@ -90,7 +90,4 @@ num1.show()
 num2 = complex(24,9)
 num2.show()
 num3 = num1+num2
-num3.show()
-
-        
-        
+num3.show()    
