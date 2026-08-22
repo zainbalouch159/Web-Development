@@ -1,21 +1,22 @@
-while True:
-    print("===== Student Management =====")
-    print("1. Add Student")
-    print("2. Show Student")
-    print("3. Edit")
-    choice=int(input("0. Exit\n"))
-    if choice == 0:
-        break
-
 class Student:
-    def __init__(self,Name,rollno,marks,cgpa):
-        self.Name=Name
-        self.rollno = rollno
-        self.marks = marks
-        self.cgpa = cgpa
+    
+    def add_student(self):
+        self.name = input("Enter student name: ")
+        self.rollno = int(input("Enter roll no: "))
+        total_subject = int(input("How many subject in last semester: "))
+        
+        self.marks = {}
+        for i in range(total_subject):
+            print("\t<<(",i+1,")>>")
+            subject_name=input("Enter subject name of last semester: ")
+            subject_marks= int(input(f"How many marks you got in {subject_name}: "))
+            self.marks[subject_name]=subject_marks
+            
+        self.cgpa= float(input("What your cgpa: "))
+        
     def show(self):
-        if isinstance(self.Name,(str)):
-            print("Your name is",self.Name)
+        if isinstance(self.name,(str)):
+            print("Your name is",self.name)
         else:
             print("Invalid data")
         if isinstance(self.rollno,(int)) and self.rollno>0:
@@ -32,6 +33,27 @@ class Student:
         else:
             print("Invalid data")
 
+total_student = []
 
-s1 = Student("Zain",81,{"Math":89,"Chem":49,"Comp":24},3.40)
-s1.show()
+while True:
+    print("===== Student Management =====")
+    print("1. Add Student")
+    print("2. Show Student")
+    print("3. Edit")
+    choice=int(input("0. Exit\n"))
+    
+    match choice:
+        case 1:
+            new_student= Student()
+            new_student.add_student()
+            total_student.append(new_student)
+        
+        case 2:
+            if total_student:
+                for student in total_student:
+                    student.show()
+
+    if choice == 0:
+        break
+
+print(total_student)
