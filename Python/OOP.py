@@ -74,20 +74,34 @@
 # print(s2.full_name)
 # # s1.display()
 
-class complex:
-    def __init__(self, real, img):
-        self.real= real
-        self.img= img
-    def __add__(self,obj2):
-        real = self.real + obj2.real
-        img = self.img + obj2.img
-        return complex(real,img)
-    def show(self):
-        print(self.real,"i + ",self.img,"j")
+# class complex:
+#     def __init__(self, real, img):
+#         self.real= real
+#         self.img= img
+#     def __add__(self,obj2):
+#         real = self.real + obj2.real
+#         img = self.img + obj2.img
+#         return complex(real,img)
+#     def show(self):
+#         print(self.real,"i + ",self.img,"j")
         
-num1 = complex(23,2)
-num1.show()
-num2 = complex(24,9)
-num2.show()
-num3 = num1+num2
-num3.show()    
+# num1 = complex(23,2)
+# num1.show()
+# num2 = complex(24,9)
+# num2.show()
+# num3 = num1+num2
+# num3.show()    
+
+class marks:
+    def __init__(self, Math, Comp,Chem):
+        self.Math= Math
+        self.Comp=Comp
+        self.Chem= Chem
+    @property
+    def percentage(self):
+        return (self.Math+self.Comp+self.Chem)/3
+
+s1 = marks(89,98,48)
+print(s1.percentage)
+        
+    
