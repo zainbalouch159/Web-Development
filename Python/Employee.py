@@ -9,4 +9,4 @@ for data in range(totdata):
         value= input("Enter acutal data ")
         employee[key]=value
     marks.append(employee)
-print(marks)
+print(marks)    
