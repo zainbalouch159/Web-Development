@@ -446,3 +446,23 @@ FodyWeavers.xsd
 
 .vscode/
 .vscode/settings.json
+
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Django local database
+db.sqlite3
+
+# Environment variables / secrets
+.env
+
+# VS Code settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
