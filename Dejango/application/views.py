@@ -28,6 +28,6 @@ def detail_save(req):
         
     return redirect("/")
 
-def deleteview(req):
+def deleteview(req,id):
         return HttpResponse("Delete successfully")
     
