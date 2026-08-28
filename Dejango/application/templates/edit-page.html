@@ -25,31 +25,4 @@
         </div>
     </form>
 </div>
-
-<div class="container">
-    {% if notes %}
-    <h1>Notes ({{notes| length}})</h1>
-    {% for note in notes %}
-    <div class="row">
-        <div class="p-2 col-sm-2 col-md-3 col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <h4>{{note.Title}}
-                    </h4>
-                    <p>{{note.Description}}</p>
-
-                </div>
-                <div class="card-footer">
-                    <a href="{% url 'edit page' id=note.id%}" class="btn btn btn-btn-sm btn-info">Edit</a>
-                    <!-- <a href="/delete-view/{{note.id}}" class="btn btn-sm btn-danger">Delete</a> -->
-                    <a href="{% url 'deleteview' id=note.id%}" class="btn btn-sm btn-danger">Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-    {% else %}
-    <h1>No any any notes</h1>
-    {% endif %}
-</div>
-{% endblock %}
+{%endblock%}

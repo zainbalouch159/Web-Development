@@ -29,5 +29,11 @@ def detail_save(req):
     return redirect("/")
 
 def deleteview(req,id):
-        return HttpResponse("Delete successfully")
+        note = Note.objects.get(id=id)
+        note.delete()
+        messages.success(req, "Detail deleted successfully")
+        return redirect("/")
+    
+def edit_page(req,id):
+    return render(req,'edit-page.html')
     

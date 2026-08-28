@@ -1,7 +1,7 @@
 {% for message in messages %}
                 {% if message.tags == 'error' %}
-                    <div class="mb-3 alert  alert-danger">Detail not saved</div>
+                    <div class="mb-3 alert  alert-danger">{{message}}</div>
                 {% else %}
-                    <div class="mb-3 alert alert-success">Detail saved</div>
+                    <div class="mb-3 alert alert-success">{{message}}</div>
                 {% endif %}
             {% endfor %}
