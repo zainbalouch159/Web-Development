@@ -14,7 +14,6 @@ def aboutview(req):
     return render(req,"about.html")
 
 def detail_save(req):
-    print(req.POST)
     title = req.POST.get("Title","")
     description = req.POST.get("Description","")
     
@@ -35,5 +34,23 @@ def deleteview(req,id):
         return redirect("/")
     
 def edit_page(req,id):
-    return render(req,'edit-page.html')
+    note = Note.objects.get(id=id)
+    if req.method=='POST':    
+        title = req.POST.get("Title","")
+        description = req.POST.get("Description","")
+        publish = req.POST.get("Publish")
+        if publish:
+            publish=True
+        else:
+            publish=False
+        print(publish)
+        if not title or not description:
+            messages.error(req,"Fill all detils")
+        else:
+            messages.success(req, "Detail saved successfully")
+            note.Title=title
+            note.Description=description
+            note.isPublish=publish
+            note.save()
+    return render(req,'edit-page.html',context={'note':note})
     
