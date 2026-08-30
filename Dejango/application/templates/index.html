@@ -35,7 +35,7 @@
         <div class="p-2 col-sm-2 col-md-3 col-lg-4">
             <div class="card">
                 <div class="card-body">
-                    <h4>{{note.Title}}
+                    <h4 {% if note.isPublish %} class="text-decoration-line-through"{% endif %}>{{note.Title}}
                     </h4>
                     <p>{{note.Description}}</p>
 
