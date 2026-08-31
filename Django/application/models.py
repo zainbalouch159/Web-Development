@@ -7,5 +7,5 @@ class Note(models.Model):
     Created_AT = models.DateField(auto_now=True)
     isPublish = models.BooleanField(default=True)
     
-def __str__(self):
-    return self.Title
+    def __str__(self):
+        return self.Title
