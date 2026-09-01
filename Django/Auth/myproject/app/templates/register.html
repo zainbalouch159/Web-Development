@@ -1,4 +1,33 @@
 {% extends 'app.html' %}
 {% block content %}
-<div class="text-blue p9">Hello</div>
+<div class="h-screen w-full bg-blue-300 flex  items-center justify-center">
+    <div class="container  h-1/2 p-5 flex flex-col justify-center items-center bg-blue-400 rounded mx-auto my-5">
+        <form action="{% url 'register' %}" class="  flex flex-col  items-center gap-5 " method="post">
+            {% csrf_token %}
+            <h1 class="font-bold text-4xl">Register</h1>
+            <div class="flex justify-between w-full">
+                <label for="username" class=" font-bold">Enter Username</label>
+                <input type="text" name="username" id="username" class="outline-none rounded mx-2 ">
+            </div>
+            {% form.username.error %}
+
+            <div class="flex justify-between w-full">
+                <label for="password1" class=" font-bold">Enter password</label>
+                <input type="text" name="password1" id="password1" class=" rounded mx-2 outline-none">
+            </div>
+            {% form.password1.error %}
+
+            <div class="flex justify-between w-full">
+                <label for="password2" class=" font-bold">Confirm password</label>
+                <input type="text" name="password2" id="password2" class=" rounded mx-2 outline-none">
+            </div>
+            {% form.password2.error %}
+
+            <div class="button">
+            <button class="p-2 bg-blue-500 m-5 rounded hover:bg-blue-300" type="submit">Register</button>
+            <a href="{% url 'Login'%}" class="text-blue-700">Login</a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
