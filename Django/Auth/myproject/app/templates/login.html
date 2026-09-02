@@ -1,0 +1,79 @@
+
+{% extends 'app.html' %}
+
+{% block content %}
+
+<div class="h-screen w-full bg-blue-500 flex items-center justify-center">
+
+    <div class="container h-1/2 p-5 flex flex-col items-center bg-blue-400 rounded mx-auto my-5">
+
+        <h1 class="font-bold text-4xl">Login</h1>
+
+        <form
+            action="{% url 'login' %}"
+            method="post"
+            class="m-10 flex flex-col items-center w-90"
+        >
+
+            {% csrf_token %}
+
+            <!-- Username -->
+            <div class="flex justify-between w-full">
+                <label for="username" class="font-bold">
+                    Enter Username
+                </label>
+
+                <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    value="{{ form.username.value|default:'' }}"
+                    class="outline-none border-2 border-blue-500 rounded mx-2"
+                >
+            </div>
+
+            <!-- Password -->
+            <div class="flex justify-between w-full">
+                <label for="password1" class="font-bold">
+                    Enter password
+                </label>
+
+                <input
+                    type="password"
+                    name="password1"
+                    id="password1"
+                    class="outline-none border-2 border-blue-500 rounded mx-2"
+                >
+            </div>
+
+            <!-- General Form Errors -->
+            <div class="text-red-500 h-5 w-full text-center">
+                {{ error }}
+            </div>
+
+            <!-- Buttons -->
+            <div class="button mt-2">
+
+                <button
+                    class="p-2 bg-blue-500 rounded hover:bg-yellow-600"
+                    type="submit"
+                >
+                    Login
+                </button>
+
+                <a
+                    href="{% url 'register' %}"
+                    class="text-blue-700 ml-2"
+                >
+                    Resgister
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

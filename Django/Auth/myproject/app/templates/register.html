@@ -1,33 +1,109 @@
+
 {% extends 'app.html' %}
+
 {% block content %}
-<div class="h-screen w-full bg-blue-300 flex  items-center justify-center">
-    <div class="container  h-1/2 p-5 flex flex-col justify-center items-center bg-blue-400 rounded mx-auto my-5">
-        <form action="{% url 'register' %}" class="  flex flex-col  items-center gap-5 " method="post">
+
+<div class="h-screen w-full bg-blue-500 flex items-center justify-center">
+
+    <div class="container h-1/2 p-5 flex flex-col items-center bg-blue-400 rounded mx-auto my-5">
+
+        <h1 class="font-bold text-4xl">Register</h1>
+
+        <form
+            action="{% url 'register' %}"
+            method="post"
+            class="m-10 flex flex-col items-center w-90"
+        >
+
             {% csrf_token %}
-            <h1 class="font-bold text-4xl">Register</h1>
-            <div class="flex justify-between w-full">
-                <label for="username" class=" font-bold">Enter Username</label>
-                <input type="text" name="username" id="username" class="outline-none rounded mx-2 ">
-            </div>
-            {% form.username.error %}
 
+            <!-- Username -->
             <div class="flex justify-between w-full">
-                <label for="password1" class=" font-bold">Enter password</label>
-                <input type="text" name="password1" id="password1" class=" rounded mx-2 outline-none">
-            </div>
-            {% form.password1.error %}
+                <label for="username" class="font-bold">
+                    Enter Username
+                </label>
 
+                <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    value="{{ form.username.value|default:'' }}"
+                    class="outline-none border-2 border-blue-500 rounded mx-2"
+                >
+            </div>
+
+            <div class="text-red-500 h-5 w-full text-center">
+                {{ form.username.errors }}
+            </div>
+
+
+            <!-- Password -->
             <div class="flex justify-between w-full">
-                <label for="password2" class=" font-bold">Confirm password</label>
-                <input type="text" name="password2" id="password2" class=" rounded mx-2 outline-none">
-            </div>
-            {% form.password2.error %}
+                <label for="password1" class="font-bold">
+                    Enter password
+                </label>
 
-            <div class="button">
-            <button class="p-2 bg-blue-500 m-5 rounded hover:bg-blue-300" type="submit">Register</button>
-            <a href="{% url 'Login'%}" class="text-blue-700">Login</a>
+                <input
+                    type="password"
+                    name="password1"
+                    id="password1"
+                    class="outline-none border-2 border-blue-500 rounded mx-2"
+                >
             </div>
+
+            <div class="text-red-500 h-5 w-full text-center">
+                {{ form.password1.errors }}
+            </div>
+
+
+            <!-- Confirm Password -->
+            <div class="flex justify-between w-full">
+                <label for="password2" class="font-bold">
+                    Confirm password
+                </label>
+
+                <input
+                    type="password"
+                    name="password2"
+                    id="password2"
+                    class="outline-none border-2 border-blue-500 rounded mx-2"
+                >
+            </div>
+
+            <div class="text-red-500 h-5 w-full text-center">
+                {{ form.password2.errors }}
+            </div>
+
+
+            <!-- General Form Errors -->
+            <div class="text-red-500 h-5 w-full text-center">
+                {{ form.non_field_errors }}
+            </div>
+
+
+            <!-- Buttons -->
+            <div class="button mt-2">
+
+                <button
+                    class="p-2 bg-blue-500 rounded hover:bg-yellow-600"
+                    type="submit"
+                >
+                    Register
+                </button>
+
+                <a
+                    href="{% url 'login' %}"
+                    class="text-blue-700 ml-2"
+                >
+                    Login
+                </a>
+
+            </div>
+
         </form>
+
     </div>
+
 </div>
+
 {% endblock %}
