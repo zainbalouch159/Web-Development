@@ -40,14 +40,14 @@
 
                 <input
                     type="password"
-                    name="password1"
-                    id="password1"
+                    name="password"
+                    id="password"
                     class="outline-none border-2 border-blue-500 rounded mx-2 "
                 >
             </div>
 
             <!-- General Form Errors -->
-            <div class="text-red-500 h-5 w-full text-center">
+            <div class="translate-x-20 -translate-y-1 text-red-500 h-5 w-full text-center">
                 {{ error }}
             </div>
 
@@ -55,7 +55,7 @@
             <div class="button mt-2">
 
                 <button
-                    class="p-2 bg-blue-500 rounded hover:bg-yellow-600"
+                    class="transition duration-300 p-2 bg-blue-500 rounded active:scale-95 active:bg-blue-300 hover:bg-blue-700"
                     type="submit"
                 >
                     Login
