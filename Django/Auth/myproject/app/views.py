@@ -29,5 +29,6 @@ def Login(req):
                 error= "Invalid password or username "
                 return render(req,"login.html",{"error":error})
     return render(req,"login.html")
+
 def dashboard(req):
     return render(req,"dashboard.html")
