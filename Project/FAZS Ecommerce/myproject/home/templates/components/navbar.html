@@ -13,24 +13,30 @@
     <div class="navigations flex gap-3.5"><a href="{% url 'home' %}">Home</a><a href="{% url 'product' %}">Product</a><a
             href="{% url 'contact' %}">Contact</a></div>
 
-    <div class="righ">
+    <div class="right ml-auto">
+
 
         <!-- Search -->
-        <div class="overflow-hidden">
+        <div class="bg-yellow-500">
 
-            <form action="{% url 'search' %}" method="get" class="flex overflow-hidden">
+            <form action="{% url 'search' %}" method="get" class="flex overflow-hidden w-full">
 
                 <input type="text" name="q" id="search_input"
-                    class="w-50 rounded border-2 border-black-300 px-1 translate-x-full opacity-0 pointer-events-none transition-all duration-500">
+                    class="w-full rounded border-2 border-black-300 px-1 translate-x-full opacity-0 pointer-events-none transition-all duration-500">
 
                 <div class=""><span><button id="search" type="button" class="fa-brands fa-sistrix"></button></span>
-                </div>
 
             </form>
         </div>
-    </div>
 
+        <div class="bg-red-500 h-full w-full overflow-hidden">
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <a href="" class="p-2 bg-orange-500 rounded m-2">Login</a>
+        </div>
+    </div>
 </div>
+
 
 {% endblock %}
 {% block script %}
