@@ -427,13 +427,6 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-#images etc
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.webp
-*.svg
 
 #executable files
 *.exe
