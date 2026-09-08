@@ -15,4 +15,4 @@ def product(req):
      return HttpResponse("product ")
 
 def contact(req):
-     return HttpResponse("contact ")
+     return render(req,'contact.html')

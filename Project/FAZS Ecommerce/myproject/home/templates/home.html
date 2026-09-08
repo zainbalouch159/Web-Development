@@ -1,6 +1,6 @@
 {% extends 'main.html' %}
 {% block content %}
-{% include "./components/navbar.html" %}
+{% include "components/navbar.html" %}
 
 <!-- Hero Section  -->
  <div class="m-3 h-[50dvh] rounded p-2 bg-orange-300 flex gap-5 justify-center items-center">
@@ -27,11 +27,13 @@
     <img src="https://png.pngtree.com/png-clipart/20250628/original/pngtree-energy-drink-can-with-splash-effect-isolated-on-transparent-background-png-image_21216010.png" class="object-contain  max-h-[60%]  rounded" alt="drink">
 
 <h1 class="text-orange-500 font-extrabold" >Energy Drink</h1>
-        <span class="text-orange-400 ">400 ml</span>
+        <span class="text-orange-400 text-[12px]">400 ml</span>
         
         <div class="p-2 rounded bg-orange-500 m-5 font-extrabold text-white flex flex-col justify-center items-center">
             <span>Add to cart</span>
             <span>Rs 499</span>
         </div>
         </div>
+        {% include 'components/footer.html' %}
+        
 {% endblock %}

@@ -1,11 +1,11 @@
-{% extends 'main.html'%}
+{% extends 'main.html'%}p-2 
 {% block content %}
 <div class="flex h-[100dvh] bg-orange-300 items-center justify-center">
 
     <div class="h-[60dvh] w-[60dvw] bg-orange-400 rounded flex flex-col justify-center items-center">
 
 
-        <div class="text-orange-500 font-extrabold text-4xl">register</div>
+        <div class="text-orange-500 font-extrabold text-4xl">Register</div>
 
         <form action="{% url 'register' %}"
       class="flex flex-col items-center justify-center gap-2 text-orange-500"
@@ -30,7 +30,7 @@
         name="username"
         id="username"
         value="{{ form.username.value|default:'' }}"
-        class="outline-orange-500 border border-orange-500 focus:outline-orange-500"
+        class="px-1 rounded outline-orange-500 border border-orange-500 focus:outline-orange-500"
     >
 
     <!-- Password -->
@@ -44,7 +44,7 @@
         type="password"
         name="password1"
         id="password1"
-        class="outline-orange-500 border border-orange-500 focus:outline-orange-500"
+        class="px-1 rounded outline-orange-500 border border-orange-500 focus:outline-orange-500"
     >
 
     <!-- Confirm Password -->
@@ -58,7 +58,7 @@
         type="password"
         name="password2"
         id="password2"
-        class="outline-orange-500 border border-orange-500 focus:outline-orange-500"
+        class="px-1 rounded outline-orange-500 border border-orange-500 focus:outline-orange-500"
     >
 
     <div>

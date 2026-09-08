@@ -1,4 +1,4 @@
-searchicon = document.getElementById("search");
+searchicon = document.getElementById("search")
 
 searchicon.addEventListener("click", () => {
     search_input = document.getElementById("search_input");

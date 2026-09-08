@@ -11,16 +11,6 @@
         >
     </a>
 
-    <!-- Navigations -->
-    <div class="navigations flex gap-3.5 ml-50 text-orange-500 font-bold"
-         style="font-family: 'Montserrat';">
-
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'product' %}">Product</a>
-        <a href="{% url 'contact' %}">Contact</a>
-
-    </div>
-
     <div class="right flex h-full items-center gap-2">
 
         <!-- Search -->
@@ -52,12 +42,22 @@
 
             <i class="fa-solid fa-cart-shopping"></i>
 
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}"
+               class="p-2 mx-2 inline-block rounded bg-orange-500 text-white font-bold">
+                Logout 
+            </a>
+            {% else %}
             <a href="{% url 'login' %}"
                class="p-2 mx-2 inline-block rounded bg-orange-500 text-white font-bold">
-                Login
+                Login 
             </a>
-
+            {% endif %}
         </div>
 
     </div>
 </div>
+
+{% block script %}
+<script src="{% static 'js/search_animation.js' %}"></script>
+{% endblock %}
