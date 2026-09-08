@@ -1,0 +1,79 @@
+{% extends 'main.html'%}
+{% block content %}
+<div class="flex h-[100dvh] bg-orange-300 items-center justify-center">
+
+    <div class="h-[60dvh] w-[60dvw] bg-orange-400 rounded flex flex-col justify-center items-center">
+
+
+        <div class="text-orange-500 font-extrabold text-4xl">register</div>
+
+        <form action="{% url 'register' %}"
+      class="flex flex-col items-center justify-center gap-2 text-orange-500"
+      method="post">
+
+    {% csrf_token %}
+
+    <!-- General errors -->
+    <div class="text-red-500 font-bold">
+        {{ form.non_field_errors }}
+    </div>
+
+    <!-- Username -->
+    <div class="text-center text-red-500 font-bold">
+        {{ form.username.errors }}
+    </div>
+    <label for="username" class="font-bold">Username</label>
+
+
+    <input
+        type="text"
+        name="username"
+        id="username"
+        value="{{ form.username.value|default:'' }}"
+        class="outline-orange-500 border border-orange-500 focus:outline-orange-500"
+    >
+
+    <!-- Password -->
+    <div class="text-center text-red-500 font-bold">
+        {{ form.password1.errors }}
+    </div>
+    <label for="password1" class="font-bold">Password</label>
+
+
+    <input
+        type="password"
+        name="password1"
+        id="password1"
+        class="outline-orange-500 border border-orange-500 focus:outline-orange-500"
+    >
+
+    <!-- Confirm Password -->
+    <div class="text-center text-red-500 font-bold">
+        {{ form.password2.errors }}
+    </div>
+    <label for="password2" class="font-bold">Confirm Password</label>
+
+
+    <input
+        type="password"
+        name="password2"
+        id="password2"
+        class="outline-orange-500 border border-orange-500 focus:outline-orange-500"
+    >
+
+    <div>
+        <button
+            class="p-2 rounded text-white font-bold bg-orange-500"
+            type="submit">
+            Sign up
+        </button>
+
+        <a href="{% url 'login' %}" class="text-orange-500 m-3">
+            Login
+        </a>
+    </div>
+
+</form>
+    </div>
+</div>'
+{% endblock %}
