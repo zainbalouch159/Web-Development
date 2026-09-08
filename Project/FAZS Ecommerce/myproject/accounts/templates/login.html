@@ -1,0 +1,29 @@
+{% extends 'main.html'%}
+{% block content %}
+<div class="flex h-[100dvh] bg-orange-300 items-center justify-center">
+
+    <div class="h-[60dvh] w-[60dvw] bg-orange-400 rounded flex flex-col justify-center items-center">
+
+        <div class="text-red-500 font-bold">{{error}}</div>
+
+        <div class="text-orange-500 font-extrabold text-4xl">Login</div>
+
+        <form action="{% url 'login' %}" class="flex flex-col items-center justify-center gap-2 text-orange-500"
+            method="post">
+            {% csrf_token %}
+
+            <label for="Username" class=" font-bold">Username</label>
+            <input type="text" name="username"
+                class="outline-orange-500 border border-orange-500 focus:outline-orange-500">
+            <label for="password" class=" font-bold">Password</label>
+            <input type="password" name="password"
+                class="outline-orange-500 border border-orange-500 focus:outline-orange-500">
+
+            <div>
+            <button class="p-2 rounded text-white font-bold bg-orange-500" type="submit">Login</button>
+            <a href="" class="text-orange-500 m-3">Sign up</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
