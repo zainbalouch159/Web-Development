@@ -6,12 +6,11 @@ from django.http import HttpResponse
 def home(req):
     return render(req,'home.html')
 
-def navbar(req):
-    return render(req,'./components/navbar.html')
 
 def search(req):
     name= req.GET.get('q')
     return HttpResponse(f"Search {name}")
+
 def product(req):
      return HttpResponse("product ")
 
