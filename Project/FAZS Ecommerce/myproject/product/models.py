@@ -9,7 +9,7 @@ class Category(models.Model):
         return self.name
     
     
-class Collection(models.Model):
+class Collections(models.Model):
     title = models.CharField(max_length=100)
     
     def __str__(self):
@@ -24,6 +24,6 @@ class Product(models.Model):
     image = models.ImageField()
     discount = models.IntegerField(default=0)
     category = models.ForeignKey(Category,on_delete=models.SET_DEFAULT,default=1)
-    collection =models.ManyToManyField(Collections)
+    collections =models.ManyToManyField(Collections)
     def __str__(self):
         return self.name
