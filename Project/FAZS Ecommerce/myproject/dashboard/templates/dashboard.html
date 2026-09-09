@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+{% block content %}
+{% include 'components/navbar.html'%}
+<!-- Product -->
+
+{% include 'components/Product-add-modal.html' %}
+<div class="text-center text-orange-500 font-extrabold">Products
+</div>
+
+<div class="h-50 overflow-y-auto  bg-orange-100   m-3 rounded">
+
+    <!-- Header  -->
+    <div class="h-10 bg-orange-300 flex justify-start  items-start font-extrabold">
+        <i class="fa-solid fa-plus text-orange-500 my-auto ml-2"></i>
+    </div>
+
+
+    <!-- Data -->
+    <div class=" h-10 bg-orange-200  p-2 m-2 rounded flex justify-between gap-1">
+
+        <div class="flex gap-2">
+            <img src="https://pngimg.com/uploads/cocacola/cocacola_PNG28.png" alt=""
+                class="h-full object-contains rounded">
+            <span class="text-orange-500">Coca cola</span>
+        </div>
+
+        <div><span class="px-1 text-orange-500">Rs 99</span>
+            <span class="px-1 text-orange-500">Stock 12</span>
+            <span class="px-1 text-orange-500">Sales 23</span>
+            <span class="px-1 text-orange-500">Edit</span>
+            <span class=" text-red-500 px-1">Delete</span>
+        </div>
+    </div>
+
+</div>
+
+<!-- Category -->
+<div class="text-center text-orange-500 font-extrabold">Categories</div>
+
+<div class="h-50 overflow-y-auto flex justify-center items-center gap-1 bg-orange-100 m-3 p-3 rounded"></div>
+
+<!-- Collections -->
+<div class="text-center text-orange-500 font-extrabold">Collections</div>
+
+<div class="h-50 overflow-y-auto flex justify-center items-center gap-1 bg-orange-100 m-3 p-3 rounded"></div>
+
+<!-- Hero Section -->
+<div class="text-center text-orange-500 font-extrabold">Hero Section</div>
+
+<div class="h-30 overflow-y-auto flex justify-center items-center gap-1 bg-orange-100 m-3 p-3 rounded"></div>
+
+{% include 'components/footer.html'%}
+{% endblock %}
