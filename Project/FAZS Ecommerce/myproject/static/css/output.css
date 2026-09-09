@@ -251,12 +251,6 @@
   .h-100 {
     height: calc(var(--spacing) * 100);
   }
-  .h-\[0dvh\] {
-    height: 0dvh;
-  }
-  .h-\[10\] {
-    height: 10;
-  }
   .h-\[50dvh\] {
     height: 50dvh;
   }
@@ -275,11 +269,62 @@
   .max-h-\[60\%\] {
     max-height: 60%;
   }
+  .w-2 {
+    width: calc(var(--spacing) * 2);
+  }
+  .w-3 {
+    width: calc(var(--spacing) * 3);
+  }
+  .w-5 {
+    width: calc(var(--spacing) * 5);
+  }
+  .w-8 {
+    width: calc(var(--spacing) * 8);
+  }
+  .w-10 {
+    width: calc(var(--spacing) * 10);
+  }
+  .w-20 {
+    width: calc(var(--spacing) * 20);
+  }
+  .w-32 {
+    width: calc(var(--spacing) * 32);
+  }
   .w-50 {
     width: calc(var(--spacing) * 50);
   }
   .w-60 {
     width: calc(var(--spacing) * 60);
+  }
+  .w-70 {
+    width: calc(var(--spacing) * 70);
+  }
+  .w-72 {
+    width: calc(var(--spacing) * 72);
+  }
+  .w-75 {
+    width: calc(var(--spacing) * 75);
+  }
+  .w-80 {
+    width: calc(var(--spacing) * 80);
+  }
+  .w-81 {
+    width: calc(var(--spacing) * 81);
+  }
+  .w-82 {
+    width: calc(var(--spacing) * 82);
+  }
+  .w-83 {
+    width: calc(var(--spacing) * 83);
+  }
+  .w-85 {
+    width: calc(var(--spacing) * 85);
+  }
+  .w-90 {
+    width: calc(var(--spacing) * 90);
+  }
+  .w-100 {
+    width: calc(var(--spacing) * 100);
   }
   .w-\[0dvw\] {
     width: 0dvw;
@@ -295,9 +340,6 @@
   }
   .w-\[80dvw\] {
     width: 80dvw;
-  }
-  .w-\[100\] {
-    width: 100;
   }
   .w-\[100dvw\] {
     width: 100dvw;
@@ -342,6 +384,9 @@
   }
   .justify-center {
     justify-content: center;
+  }
+  .justify-end {
+    justify-content: flex-end;
   }
   .justify-start {
     justify-content: flex-start;
@@ -405,9 +450,6 @@
   .object-contain {
     object-fit: contain;
   }
-  .p-1 {
-    padding: var(--spacing);
-  }
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
@@ -445,9 +487,6 @@
   .font-extrabold {
     --tw-font-weight: var(--font-weight-extrabold);
     font-weight: var(--font-weight-extrabold);
-  }
-  .text-orange-50 {
-    color: var(--color-orange-50);
   }
   .text-orange-400 {
     color: var(--color-orange-400);
@@ -494,10 +533,6 @@
   .duration-500 {
     --tw-duration: 500ms;
     transition-duration: 500ms;
-  }
-  .focus\:outline:focus {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
   }
   .focus\:outline-orange-500:focus {
     outline-color: var(--color-orange-500);
