@@ -1,58 +1,79 @@
 {% extends 'main.html' %}
 {% block content%}
-<div class="fixed h-[100dvh] w-[100dvw] flex justify-center items-center bg-black/50 backdrop-blur-md inset-0 text-orange-500">
+{% load static %}
+
+<!-- Background Overlay  -->
+<div id="Overlay"
+    class=" fixed inset-0 hidden justify-center items-center bg-black/50 backdrop-blur-md  text-orange-500">
+
+    <!-- Modal  -->
     <div class="flex flex-col justify-center items-center w-[50dvw] h-[80dvh] bg-orange-100 rounded">
         <div class="font-extrabold text-orange-500 m-5">Product Details</div>
-    <form action="" class="flex flex-col justify-center items-center gap-2">
 
-        <div class="flex items-center w-72 justify-between">
-        <label for="Name" class="text-orange-500 font-bold mx-2">Name</label>
-        <input type="text" id="product-name-add" class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500">
-        </div>
-        
-        <div class="flex  items-center w-72 justify-between">
-        <label for="Description" class="resize-none text-orange-500 font-bold mx-2 ">Description</label>
-        <textarea name="Description" id="product-description-add" rows="2" class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500"></textarea>
-        </div>
+        <!-- Form  -->
+        <form action="{% url 'add_product' %}" method="post" enctype="multipart/form-data"
+            class="flex flex-col justify-center items-center gap-2">
 
-        <div class="flex items-start w-72 justify-start">
-        <label for="Price" class="text-orange-500 font-bold mx-2">Price</label>
-        <input type="number" name="Price" id="product-price-add" class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-10">
-        </div>
-        
-        <div class="flex items-start w-72 justify-start">
-        <label for="stock" class="text-orange-500 font-bold mx-2">Stock</label>
-        <input type="number" name="stock" id="product-stock-add" class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-10">
-        </div>
+            {% csrf_token %}
 
-        <div class="flex items-center w-72 justify-start ">
-        <i class="fa-solid fa-file-image"></i>
-        <input type="file" name="image" id="product-image-add"  class=" rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-full">
-        </div>
+            <div class="flex items-center w-72 justify-between">
+                
+                <label for="Name" class="text-orange-500 font-bold mx-2">Name</label>
+                <input type="text" id="product-name-add"
+                    class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500">
+            </div>
 
-        <div class="flex items-start w-72 justify-start">
-        <label for="discount" class="text-orange-500 font-bold mx-2">Discount</label>
-        <input type="number" name="discount" id="product-discount-add" class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-10">%
-        </div>
+            <div class="flex  items-center w-72 justify-between">
+                <label for="Description" class="resize-none text-orange-500 font-bold mx-2 ">Description</label>
+                <textarea name="Description" id="product-description-add" rows="2"
+                    class="resize-none rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500"></textarea>
+            </div>
 
-        <div class="flex items-center w-72 justify-between">
-        <label for="Info" class="text-orange-500 font-bold mx-2">Info</label>
-        <textarea type="text" name="Info" id="product-Info-add" class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500"></textarea>
-        </div>
+            <div class="flex items-start w-72 justify-start">
+                <label for="Price" class="text-orange-500 font-bold mx-2">Price</label>
+                <span class="p-1">Rs</span><input type="number" name="Price" id="product-price-add"
+                    class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-20 ">
+            </div>
 
-        <div class="flex items-center w-72 justify-between">
-        <label for="Category" class="text-orange-500 font-bold mx-2">Category</label>
-        <input type="" name="Category" id="product-Category-add" class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500">
-        </div>
+            <div class="flex items-start w-72 justify-start">
+                <label for="stock" class="text-orange-500 font-bold mx-2">Stock</label>
+                <input type="number" name="stock" id="product-stock-add"
+                    class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-20">
+            </div>
 
-        <div class="flex items-center w-72 justify-between">
-        <label for="Collections" class="text-orange-500 font-bold mx-2">Collections</label>
-        <input type="text" name="Collections" id="product-Collections-add" class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500">
-        </div>
+            <div class="flex items-center w-72 justify-start ">
+                <i class="fa-solid fa-file-image"></i>
+                <input type="file" name="image" id="product-image-add"
+                    class=" rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-full">
+            </div>
 
-        <button class="p-2 bg-orange-500 text-white font-bold rounded">Save</button>
+            <div class="flex items-start w-72 justify-start">
+                <label for="discount" class="text-orange-500 font-bold mx-2">Discount</label>
+                <input type="number" name="discount" id="product-discount-add"
+                    class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-10">%
+            </div>
 
-    </form>
+            <div class="flex items-center w-72 justify-between">
+                <label for="Info" class="text-orange-500 font-bold mx-2">Info</label>
+                <textarea type="text" name="Info" id="product-Info-add"
+                    class="resize-none rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500"></textarea>
+            </div>
+
+            <div class="flex items-center w-72 justify-between">
+                <label for="Category" class="text-orange-500 font-bold mx-2">Category</label>
+                <input type="" name="Category" id="product-Category-add"
+                    class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500">
+            </div>
+
+            <div class="flex items-center w-72 justify-between">
+                <label for="Collections" class="text-orange-500 font-bold mx-2">Collections</label>
+                <input type="text" name="Collections" id="product-Collections-add"
+                    class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500">
+            </div>
+
+            <button type="submit" class="p-2 bg-orange-500 text-white font-bold rounded">Save</button>
+
+        </form>
     </div>
 </div>
 {% endblock %}

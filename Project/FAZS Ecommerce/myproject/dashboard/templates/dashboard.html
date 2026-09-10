@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load static %}
 {% block content %}
 {% include 'components/navbar.html'%}
 <!-- Product -->
@@ -10,7 +11,7 @@
 <div class="h-50 overflow-y-auto  bg-orange-100   m-3 rounded">
 
     <!-- Header  -->
-    <div class="h-10 bg-orange-300 flex justify-start  items-start font-extrabold">
+    <div id="Product-add" class="h-10 bg-orange-300 flex justify-start  items-start font-extrabold">
         <i class="fa-solid fa-plus text-orange-500 my-auto ml-2"></i>
     </div>
 
@@ -50,4 +51,7 @@
 <div class="h-30 overflow-y-auto flex justify-center items-center gap-1 bg-orange-100 m-3 p-3 rounded"></div>
 
 {% include 'components/footer.html'%}
+{% endblock %}
+{% block script %}
+<script src="{% static '/js/modal.js' %}"></script>
 {% endblock %}
