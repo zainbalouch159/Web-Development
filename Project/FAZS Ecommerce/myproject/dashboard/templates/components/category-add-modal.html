@@ -1,0 +1,28 @@
+
+<!-- category-add-modal  -->
+<!-- Background Overlay  -->
+<div id="Category-add-Overlay"
+    class="z-50 fixed inset-0 hidden justify-center items-center bg-black/50 backdrop-blur-md  text-orange-500">
+
+    <!-- Modal  -->
+    <div class="flex flex-col justify-center items-center w-[50dvw] h-[50dvh] bg-orange-100 rounded">
+        <div class="font-extrabold text-orange-500 m-5">Add Category</div>
+
+        <!-- Form  -->
+        <form action="{% url 'add_category' %}" method="post"
+            class="flex flex-col justify-center items-center gap-2">
+
+            {% csrf_token %}
+
+            <div class="flex items-center w-72 justify-between">
+
+                <label for="Name" class="text-orange-500 font-bold mx-2">Name</label>
+                <input type="text" id="category-name-add" name="category-name"
+                    class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500" placeholder="Enter Category name">
+            </div>
+
+            <button type="submit" id="cagtegory-submit" class="p-2 bg-orange-500 text-white font-bold rounded">Save</button>
+
+        </form>
+    </div>
+</div>

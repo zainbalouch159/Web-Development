@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from product.models import Category,Product
 
 # Create your views here.
 
 def dashboard(req):
-    return render(req,'dashboard.html')
+    category = Category.objects.all()
+    product =Product.objects.all()
+    return render(req,'dashboard.html',{'Products':product,'Categories':category},)
 
 def add_product(req):
     Name = req.POST.get('Name')
@@ -15,3 +18,12 @@ def add_product(req):
     Info = req.POST.get('Info')
     Category = req.POST.get('Category')
     Collections = req.POST.get('Collections')
+    
+def add_category(req):
+    new_category =  req.POST.get('category-name')
+    if new_category:
+        category=Category(
+            name=new_category
+        )
+        category.save()
+       
