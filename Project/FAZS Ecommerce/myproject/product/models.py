@@ -22,6 +22,7 @@ class Product(models.Model):
     description = models.TextField()
     price = models.IntegerField(validators=[MinValueValidator(0)])
     stock = models.IntegerField(validators=[MinValueValidator(0)])
+    sales= models.IntegerField(validators=[MinValueValidator])  
     image = models.ImageField()
     discount = models.IntegerField(validators=[MinValueValidator(0)],default=0,blank=True)
     info = models.TextField(blank=True)
