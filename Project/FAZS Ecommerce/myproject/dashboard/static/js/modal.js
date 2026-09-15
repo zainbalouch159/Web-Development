@@ -108,7 +108,7 @@ Collections_form.addEventListener('submit', async (event) => {
         body: formdata
     })
     data = await response.json()
-
+ 
     new_Collections_option = document.createElement('option')
 
     new_Collections_option.value = data.id
