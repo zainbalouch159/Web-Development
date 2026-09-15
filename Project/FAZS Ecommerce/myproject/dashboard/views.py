@@ -33,7 +33,7 @@ def add_category(req):
             'id':category.id,
             'name':category.name
         })
-        
+         
 def add_Collections(req):
     new_collection =  req.POST.get('collection-name')
     if new_collection:
