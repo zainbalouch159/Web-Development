@@ -10,7 +10,7 @@
             <div class="font-extrabold text-orange-500 m-5">Product Details</div>
 
             <!-- Form  -->
-            <form action="{% url 'add_product' %}" method="post" enctype="multipart/form-data"
+            <form id="product-form" action="{% url 'add_product' %}" method="post" enctype="multipart/form-data"
                 class="flex flex-col justify-center items-center gap-2">
 
                 {% csrf_token %}
@@ -18,57 +18,57 @@
                 <div class="flex items-center w-72 justify-between">
 
                     <!-- Name  -->
-                    <label for="Name" class="text-orange-500 font-bold mx-2">Name</label>
-                    <input type="text" id="product-name-add" name="product-name"
+                    <label for="product-name-add" class="text-orange-500 font-bold mx-2">Name</label>
+                    <input type="text" id="product-name-add" name="name" required
                         class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500">
                 </div>
                 
                 <!-- Description  -->
                 <div class="flex  items-center w-72 justify-between">
-                    <label for="Description" class="resize-none text-orange-500 font-bold mx-2 ">Description</label>
-                    <textarea name="Description" id="product-description-add" rows="2"
+                    <label for="product-description-add" class="resize-none text-orange-500 font-bold mx-2 ">Description</label>
+                    <textarea name="description" id="product-description-add" rows="2"
                         class="resize-none rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500"></textarea>
                 </div>
-
+                    
                 <!-- Price  -->
                 <div class="flex items-start w-72 justify-start">
-                    <label for="Price" class="text-orange-500 font-bold mx-2">Price</label>
-                    <span class="p-1">Rs</span><input type="number" name="Price" id="product-price-add"
+                    <label for="product-price-add" class="text-orange-500 font-bold mx-2">Price</label>
+                    <span class="p-1">Rs</span><input type="number" name="price" id="product-price-add" required
                         class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-20 ">
                 </div>
 
                 <!-- Stock  -->
                 <div class="flex items-start w-72 justify-start">
-                    <label for="stock" class="text-orange-500 font-bold mx-2">Stock</label>
-                    <input type="number" name="stock" id="product-stock-add"
+                    <label for="product-stock-add" class="text-orange-500 font-bold mx-2">Stock</label>
+                    <input type="number" name="stock" id="product-stock-add" required
                         class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-20">
                 </div>
 
                 <!-- Image  -->
                 <div class="flex items-center w-72 justify-start ">
-                    <i class="fa-solid fa-file-image"></i>
-                    <input type="file" name="image" id="product-image-add"
+                    <i class="fa-solid fa-file-image" for="product-image-add"></i>
+                    <input type="file" name="image" id="product-image-add" required
                         class=" rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-full">
                 </div>
 
                 <!-- Discount  -->
                 <div class="flex items-start w-72 justify-start">
-                    <label for="discount" class="text-orange-500 font-bold mx-2">Discount</label>
+                    <label for="product-discount-add" class="text-orange-500 font-bold mx-2">Discount</label>
                     <input type="number" name="discount" id="product-discount-add"
                         class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-10">%
                 </div>
 
                 <!-- Info  -->
                 <div class="flex items-center w-72 justify-between">
-                    <label for="Info" class="text-orange-500 font-bold mx-2">Info</label>
-                    <textarea type="text" name="Info" id="product-Info-add"
+                    <label for="product-Info-add" class="text-orange-500 font-bold mx-2">Info</label>
+                    <textarea type="text" name="info" id="product-Info-add"
                         class="resize-none rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500"></textarea>
                 </div>
 
                 <!-- Category  -->
                 <div class="flex items-center w-72 justify-start">
-                    <label for="Category" class="text-orange-500 font-bold mx-2">Category</label>
-                    <select id="category-menu" name="Category" name="Collections" >
+                    <label for="category-menu" class="text-orange-500 font-bold mx-2">Category</label>
+                    <select id="category-menu" name="category" >
                         <option >Selelct</option>
                         {% for Category in Categories %}
                         <option value="{{ Category.id }}">{{ Category.name }} </option>
@@ -87,7 +87,7 @@
                     <select id="Collections-menu"   >
                         <option >Selelct</option>
                         {% for Collection in Collections %}
-                        <option value="{{ Collection.id }}">{{ Collection.name }} </option>
+                        <option value="{{ Collection.id }}">{{ Collection.title }} </option>
                         {% endfor %}
                     </select>
 

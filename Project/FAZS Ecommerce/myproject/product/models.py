@@ -29,7 +29,7 @@ class Product(models.Model):
     collections =models.ManyToManyField(Collection)
     def __str__(self):
         return self.name
-
+ 
 class Hero(models.Model):
     title = models.CharField(max_length=100,blank=True)
     subtitle = models.CharField(max_length=300,blank=True)

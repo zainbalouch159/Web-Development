@@ -7,4 +7,4 @@ urlpatterns = [
    path('add_category',views.add_category,name='add_category'),
    path('add_Collections',views.add_Collections,name='add_Collections'),
     
-]
+] 

@@ -10,14 +10,14 @@
         <div class="font-extrabold text-orange-500 m-5">Add Collection</div>
 
         <!-- Form  -->
-        <form action="{% url 'add_Collections' %}" id="Collecitons-add-form" method="post"
+        <form action="{% url 'add_Collections' %}" id="Collections-add-form" method="post"
             class="flex flex-col justify-center items-center gap-2">
 
-            {% csrf_token %}
+            {% csrf_token %} 
 
             <div class="flex items-center w-72 justify-between">
 
-                <label for="Name" class="text-orange-500 font-bold mx-2">Name</label>
+                <label for="collection-name-add" class="text-orange-500 font-bold mx-2">Name</label>
                 <input type="text" id="collection-name-add" name="collection-name"
                     class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500" placeholder="Enter Collection name">
             </div>

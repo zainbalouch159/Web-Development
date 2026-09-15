@@ -18,12 +18,15 @@ const overlay = document.getElementById('Overlay');
         });
     }
 
+    // Product Submit 
+
+
+
     // 2. Category add overlay elements
      categoryAddBtn = document.getElementById('add-category-button');
      categoryAddOverlay = document.getElementById('Category-add-Overlay');
 
     if (categoryAddBtn && categoryAddOverlay) {
-        console.log('category')
         categoryAddBtn.addEventListener('click', () => {
             categoryAddOverlay.classList.add('flex');
             categoryAddOverlay.classList.remove('hidden');
@@ -76,11 +79,13 @@ category_form.addEventListener('submit', async (event) => {
 
     if (CollectionsAddBtn && CollectionsAddOverlay) {
         CollectionsAddBtn.addEventListener('click', () => {
+            console.log("Collection add button clicked")
             CollectionsAddOverlay.classList.add('flex');
             CollectionsAddOverlay.classList.remove('hidden');
         });
 
         CollectionsAddOverlay.addEventListener('click', (event) => {
+
             if (event.target === CollectionsAddOverlay) {
                 CollectionsAddOverlay.classList.remove('flex');
                 CollectionsAddOverlay.classList.add('hidden');
@@ -90,9 +95,9 @@ category_form.addEventListener('submit', async (event) => {
 
 
 
-// Collections submit
+// Collections submit   
 
-Collections_form = document.getElementById('Collecitons-add-form')
+Collections_form = document.getElementById('Collections-add-form')
 
 Collections_form.addEventListener('submit', async (event) => {
 
@@ -112,11 +117,12 @@ Collections_form.addEventListener('submit', async (event) => {
     new_Collections_option = document.createElement('option')
 
     new_Collections_option.value = data.id
-    new_Collections_option.textContent = data.name
+    new_Collections_option.textContent = data.title
 
     Collections_menubar = document.getElementById('Collections-menu')
 
     Collections_menubar.appendChild(new_Collections_option)
 
     new_Collections_option.selected = true
+
 })

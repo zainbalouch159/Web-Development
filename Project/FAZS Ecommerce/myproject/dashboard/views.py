@@ -17,7 +17,7 @@ def add_product(req):
     Stock = req.POST.get('Stock')
     image = req.POST.get('image')
     Discount = req.POST.get('Discount')
-    Info = req.POST.get('Info')
+    Info = req.POST.get('Info') 
     Category = req.POST.get('Category')
     Collections = req.POST.get('Collections')
     
@@ -38,12 +38,12 @@ def add_Collections(req):
     new_collection =  req.POST.get('collection-name')
     if new_collection:
         collection=Collection(
-            name=new_collection
+            title=new_collection
         )
         collection.save()
         
         return JsonResponse({
             'id':collection.id,
-            'name':collection.name
+            'title':collection.title
         })
        
