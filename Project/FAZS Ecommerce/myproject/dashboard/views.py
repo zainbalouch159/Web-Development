@@ -43,11 +43,20 @@ def add_product(req):
     Stock = req.POST.get('stock')
     image = req.FILES.get('image')
     Discount = req.POST.get('discount')
+    if not Discount:
+        Discount=0
     Info = req.POST.get('info') 
     Category_id = req.POST.get('category')
     Collections_id = req.POST.get('collections')
-    Category = Category.objects.get(id=Category_id)
-    Collections = Collection.objects.get(id=Collections_id)
+    if Category_id == 'Selelct' or not Category_id:
+        Category1=Category.objects.get(name='other')
+    else:
+        Category1 = Category.objects.get(id=Category_id)
+        
+    if Collections_id == 'Selelct' or not Collections_id:
+        Collections=Collection.objects.get(title = 'other')
+    else:
+        Collections = Collection.objects.get(id=Collections_id)
 
     product =Product(
         name = Name,
@@ -57,15 +66,25 @@ def add_product(req):
         image = image,
         discount = Discount,
         info = Info,
-        category = Category,
+        category = Category1,
     )
     product.save()
     product.collections.add(Collections)
     return JsonResponse({
         'id': product.id,
         'name' : product.name,
-        'Price' : product.price,
+        'price' : product.price,
+        'stock': product.stock,
         'sales' : product.sales,
-        'image' : product.image,
+        'image' : product.image.url,
        
     })
+    
+def product_delete(req,id):
+    product = Product.objects.get(id=id)
+    product.delete()
+    return redirect('dashboard')
+
+def product_edit(req,id):
+    pass
+    
