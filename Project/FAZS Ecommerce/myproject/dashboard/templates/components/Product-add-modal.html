@@ -69,7 +69,7 @@
                 <div class="flex items-center w-72 justify-start">
                     <label for="category-menu" class="text-orange-500 font-bold mx-2">Category</label>
                     <select id="category-menu" name="category" >
-                        <option >Selelct</option>
+                        <option >Select</option>
                         {% for Category in Categories %}
                         <option value="{{ Category.id }}">{{ Category.name }} </option>
                         {% endfor %}
@@ -85,7 +85,7 @@
                 <div class="flex items-center w-72 justify-start">
                     <label for="Collections" class="text-orange-500 font-bold mx-2">Collections</label>
                     <select id="Collections-menu" name="collections"   >
-                        <option >Selelct</option>
+                        <option >Select</option>
                         {% for Collection in Collections %}
                         <option value="{{ Collection.id }}">{{ Collection.title }} </option>
                         {% endfor %}

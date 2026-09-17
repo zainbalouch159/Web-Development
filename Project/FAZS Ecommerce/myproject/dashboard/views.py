@@ -51,13 +51,13 @@ def add_product(req):
     Info = req.POST.get('info') 
     Category_id = req.POST.get('category')
     Collections_id = req.POST.get('collections')
-    if Category_id == 'Selelct' or not Category_id:
-        Category1=Category.objects.get(name='other')
+    if Category_id == 'Select' or not Category_id:
+        Category1, created=Category.objects.get_or_create(name='other')
     else:
         Category1 = Category.objects.get(id=Category_id)
         
-    if Collections_id == 'Selelct' or not Collections_id:
-        Collections=Collection.objects.get(title = 'other')
+    if Collections_id == 'Select' or not Collections_id:
+        Collections, created=Collection.objects.get_or_create(title = 'other')
     else:
         Collections = Collection.objects.get(id=Collections_id)
 

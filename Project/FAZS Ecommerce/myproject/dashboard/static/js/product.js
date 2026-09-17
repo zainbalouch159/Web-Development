@@ -2,6 +2,7 @@ product_add_form = document.getElementById('product-add-form')
 console.log('product.js')
 product_add_form.addEventListener('submit',async (event)=>{
     event.preventDefault()
+    console.log('submit')
     product_add_overlay= document.getElementById('Overlay')
     product_add_overlay.classList.add('hidden')
     product_add_overlay.classList.remove('flex')
@@ -13,7 +14,7 @@ product_add_form.addEventListener('submit',async (event)=>{
         body: formdata
     })
     data = await response.json()
-
+    console.log(data)
     product_show = document.getElementById('product_show')
     product_section = document.createElement('div')
     product_section.classList.add('h-10', 'bg-orange-200', 'p-2', 'm-2', 'rounded', 'flex', 'justify-between')
