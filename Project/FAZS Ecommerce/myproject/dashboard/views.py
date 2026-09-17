@@ -1,9 +1,12 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from product.models import Category,Product,Collection
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 
+@login_required
 def dashboard(req):
     category = Category.objects.all()
     product =Product.objects.all()

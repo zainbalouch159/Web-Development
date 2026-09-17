@@ -1,7 +1,12 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.forms import UserCreationForm
+from django.views.decorators.http import require_POST
+
+@require_POST
+def logout_view(req):
+    logout(req)
+    return redirect('home')
 
 # Create your views here.
 
@@ -27,7 +32,9 @@ def register(req):
         if req.method=='POST':
             form = UserCreationForm(req.POST)
             if form.is_valid():
-                form.save()
+                user=form.save()
+                login(req,user)
+                
                 return redirect('home')
             else:
                 return render(req,'register.html',{'form':form})
@@ -35,7 +42,8 @@ def register(req):
                 return render(req,'register.html')
     else:
         return redirect('home')
-        
+
+@require_POST        
 def logout_view(req):
     logout(req)
     return  redirect('home')
