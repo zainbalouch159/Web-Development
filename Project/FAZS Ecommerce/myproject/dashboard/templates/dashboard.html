@@ -37,7 +37,9 @@
             <span>Stock {{product.stock}}</span>
             <span>Sales {{product.sales}}</span>
             <a href="{% url 'product_edit' product.id}" class="fa-solid fa-pencil"></a>
-            <a href="{% url 'product_delete' product.id %}" class="text-red-500"><i class="fa-solid fa-trash"></i></a>
+            <form method="post" action="{% url 'product_delete' product.id %}"> {%csrf_token%}
+            <button type="submit" href="" class="text-red-500"><i class="fa-solid fa-trash"></i></button>
+            </form>
         </div>
     </div>
     

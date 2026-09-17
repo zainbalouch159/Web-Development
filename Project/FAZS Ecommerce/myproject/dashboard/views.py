@@ -8,32 +8,32 @@ from django.views.decorators.http import require_POST
 
 @login_required
 def dashboard(req):
-    category = Category.objects.all()
-    product =Product.objects.all()
-    collection =Collection.objects.all()
-    return render(req,'dashboard.html',{'Products':product,'Categories':category,'Collections':collection})
+    if req.user.is_staff:
+        category = Category.objects.all()
+        product =Product.objects.all()
+        collection =Collection.objects.all()
+        return render(req,'dashboard.html',{'Products':product,'Categories':category,'Collections':collection})
+    else:
+        return redirect('home')
     
+@require_POST    
 def add_category(req):
     new_category =  req.POST.get('category-name')
     if new_category:
-        category=Category(
-            name=new_category
-        )
-        category.save()
+        category, created=Category.objects.get_or_create(name=new_category)
+
         
         return JsonResponse({
             'id':category.id,
             'name':category.name
         })
-         
+@require_POST         
 def add_Collections(req):
     new_collection =  req.POST.get('collection-name')
     if new_collection:
-        collection=Collection(
+        collection, created=Collection.objects.get_or_create(
             title=new_collection
         )
-        collection.save()
-        
         return JsonResponse({
             'id':collection.id,
             'title':collection.title
@@ -83,6 +83,7 @@ def add_product(req):
        
     })
     
+@require_POST
 def product_delete(req,id):
     product = Product.objects.get(id=id)
     product.delete()
