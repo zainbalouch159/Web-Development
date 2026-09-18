@@ -77,8 +77,9 @@ product_add_form.addEventListener('submit', async (event) => {
     sales.textContent = `Sales ${data.sales}`
     right_div.append(sales)
 
-    edit = document.createElement('a')
-    edit.classList.add('fa-solid', 'fa-pencil')
+    edit = document.createElement('button')
+    edit.dataset.id=data.id
+    edit.classList.add('fa-solid', 'fa-pencil', 'product_edit_button')
     right_div.append(edit)
 
     form = document.createElement('form')
@@ -121,5 +122,4 @@ delete_form = document.querySelectorAll('.delete_product_form')
 delete_form.forEach(form => {
 delete_product(form)
 });
-
 

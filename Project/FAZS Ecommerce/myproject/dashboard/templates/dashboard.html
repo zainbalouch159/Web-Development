@@ -35,7 +35,7 @@
                 <span>Rs {{product.price}}</span>
                 <span>Stock {{product.stock}}</span>
                 <span>Sales {{product.sales}}</span>
-                <a href="{% url 'product_edit' product.id}" class="fa-solid fa-pencil"></a>
+                <button data-id="{{product.id}}" class="fa-solid fa-pencil product_edit_button"></button>
                 <form method="post" class="delete_product_form" action="{% url 'product_delete' product.id %}">
                     {%csrf_token%}
                         <input type="hidden" name="product_id" value="{{product.id}}">

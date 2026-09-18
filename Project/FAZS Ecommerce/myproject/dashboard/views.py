@@ -4,8 +4,9 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
-# Create your views here.
+# Create your views here
 
+# Dashboard
 @login_required
 def dashboard(req):
     if req.user.is_staff:
@@ -15,7 +16,8 @@ def dashboard(req):
         return render(req,'dashboard.html',{'Products':product,'Categories':category,'Collections':collection})
     else:
         return redirect('home')
-    
+
+# Add Category
 @require_POST    
 def add_category(req):
     new_category =  req.POST.get('category-name')
@@ -27,6 +29,8 @@ def add_category(req):
             'id':category.id,
             'name':category.name
         })
+        
+# Add Collections
 @require_POST         
 def add_Collections(req):
     new_collection =  req.POST.get('collection-name')
@@ -38,7 +42,8 @@ def add_Collections(req):
             'id':collection.id,
             'title':collection.title
         })
-       
+
+# Add Product
 def add_product(req):
     Name = req.POST.get('name')
     Description = req.POST.get('description')
@@ -82,12 +87,18 @@ def add_product(req):
         'image' : product.image.url,
        
     })
-    
+
+# Product Delete
 @require_POST
 def product_delete(req,id):
-    product = Product.objects.get(id=id)
-    product.delete()
-    return JsonResponse('success', safe=False)
+    product = get_object_or_404(Product, id=id)
+    if product.image:
+        product.image.delete()
+    if product:  
+        product.delete()
+        return JsonResponse('success', safe=False)
+    else:
+        return JsonResponse('failed', safe=False)
 
 def product_edit(req,id):
     pass
