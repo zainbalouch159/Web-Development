@@ -1,3 +1,4 @@
+// Delete Product Function
 function delete_product(form) {
     form.addEventListener('submit', async (event) => {
         event.preventDefault()
@@ -19,12 +20,14 @@ function delete_product(form) {
     })
 }
 
+// Product Add 
 product_add_form = document.getElementById('product-add-form')
 
 product_add_form.addEventListener('submit', async (event) => {
+
     event.preventDefault()
-    console.log('submit')
-    product_add_overlay= document.getElementById('Overlay')
+
+    product_add_overlay = document.getElementById('Overlay')
     product_add_overlay.classList.add('hidden')
     product_add_overlay.classList.remove('flex')
 
@@ -36,6 +39,7 @@ product_add_form.addEventListener('submit', async (event) => {
     })
     data = await response.json()
 
+    // Showing product in product section 
     product_show = document.getElementById('product_show')
 
     product_section = document.createElement('div')
@@ -107,7 +111,7 @@ product_add_form.addEventListener('submit', async (event) => {
     product_delete = document.createElement('button')
     product_delete.type = 'submit'
     product_delete.classList.add('text-red-500')
-    right_div.append(product_delete)
+    form.append(product_delete)
 
     delelte_symbol = document.createElement('i')
     delelte_symbol.classList.add('fa-solid', 'fa-trash')
@@ -116,10 +120,11 @@ product_add_form.addEventListener('submit', async (event) => {
     delete_product(form)
 })
 
+// Product Delete 
 delete_form = document.querySelectorAll('.delete_product_form')
 
 delete_form.forEach(form => {
-delete_product(form)
+    delete_product(form)
 });
 
 

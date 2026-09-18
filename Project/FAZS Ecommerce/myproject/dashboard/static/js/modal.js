@@ -1,44 +1,39 @@
 const productAddBtn = document.getElementById('Product-add');
 const overlay = document.getElementById('Overlay');
 
+// 1. Product add overlay elements
 
-    // 1. Product add overlay elements
+if (productAddBtn && overlay) {
+    productAddBtn.addEventListener('click', () => {
+        overlay.classList.add('flex');
+        overlay.classList.remove('hidden');
+    });
 
-    if (productAddBtn && overlay) {
-        productAddBtn.addEventListener('click', () => {
-            overlay.classList.add('flex');
-            overlay.classList.remove('hidden');
-        });
+    overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) {
+            overlay.classList.remove('flex');
+            overlay.classList.add('hidden');
+        }
+    });
+}
 
-        overlay.addEventListener('click', (event) => {
-            if (event.target === overlay) {
-                overlay.classList.remove('flex');
-                overlay.classList.add('hidden');
-            }
-        });
-    }
+// 2. Category add overlay elements
+categoryAddBtn = document.getElementById('add-category-button');
+categoryAddOverlay = document.getElementById('Category-add-Overlay');
 
-    // Product Submit 
+if (categoryAddBtn && categoryAddOverlay) {
+    categoryAddBtn.addEventListener('click', () => {
+        categoryAddOverlay.classList.add('flex');
+        categoryAddOverlay.classList.remove('hidden');
+    });
 
-
-
-    // 2. Category add overlay elements
-     categoryAddBtn = document.getElementById('add-category-button');
-     categoryAddOverlay = document.getElementById('Category-add-Overlay');
-
-    if (categoryAddBtn && categoryAddOverlay) {
-        categoryAddBtn.addEventListener('click', () => {
-            categoryAddOverlay.classList.add('flex');
-            categoryAddOverlay.classList.remove('hidden');
-        });
-
-        categoryAddOverlay.addEventListener('click', (event) => {
-            if (event.target === categoryAddOverlay) {
-                categoryAddOverlay.classList.remove('flex');
-                categoryAddOverlay.classList.add('hidden');
-            }
-        });
-    }
+    categoryAddOverlay.addEventListener('click', (event) => {
+        if (event.target === categoryAddOverlay) {
+            categoryAddOverlay.classList.remove('flex');
+            categoryAddOverlay.classList.add('hidden');
+        }
+    });
+}
 
 
 
@@ -55,7 +50,7 @@ category_form.addEventListener('submit', async (event) => {
 
     formdata = new FormData(category_form)
 
-     response = await fetch(category_form.action, {
+    response = await fetch(category_form.action, {
         method: 'POST',
         body: formdata
     })
@@ -73,25 +68,25 @@ category_form.addEventListener('submit', async (event) => {
     new_category_option.selected = true
 })
 
-    // 2. Collections add overlay elements
-     CollectionsAddBtn = document.getElementById('add-Collections-button');
-     CollectionsAddOverlay = document.getElementById('Collections-add-Overlay');
+// 2. Collections add overlay elements
+CollectionsAddBtn = document.getElementById('add-Collections-button');
+CollectionsAddOverlay = document.getElementById('Collections-add-Overlay');
 
-    if (CollectionsAddBtn && CollectionsAddOverlay) {
-        CollectionsAddBtn.addEventListener('click', () => {
-            console.log("Collection add button clicked")
-            CollectionsAddOverlay.classList.add('flex');
-            CollectionsAddOverlay.classList.remove('hidden');
-        });
+if (CollectionsAddBtn && CollectionsAddOverlay) {
+    CollectionsAddBtn.addEventListener('click', () => {
+        console.log("Collection add button clicked")
+        CollectionsAddOverlay.classList.add('flex');
+        CollectionsAddOverlay.classList.remove('hidden');
+    });
 
-        CollectionsAddOverlay.addEventListener('click', (event) => {
+    CollectionsAddOverlay.addEventListener('click', (event) => {
 
-            if (event.target === CollectionsAddOverlay) {
-                CollectionsAddOverlay.classList.remove('flex');
-                CollectionsAddOverlay.classList.add('hidden');
-            }
-        });
-    }
+        if (event.target === CollectionsAddOverlay) {
+            CollectionsAddOverlay.classList.remove('flex');
+            CollectionsAddOverlay.classList.add('hidden');
+        }
+    });
+}
 
 
 
@@ -108,12 +103,12 @@ Collections_form.addEventListener('submit', async (event) => {
 
     formdata = new FormData(Collections_form)
 
-     response = await fetch(Collections_form.action, {
+    response = await fetch(Collections_form.action, {
         method: 'POST',
         body: formdata
     })
     data = await response.json()
- 
+
     new_Collections_option = document.createElement('option')
 
     new_Collections_option.value = data.id
