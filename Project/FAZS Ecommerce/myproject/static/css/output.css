@@ -265,8 +265,14 @@
   .h-\[100dvh\] {
     height: 100dvh;
   }
+  .h-fit {
+    height: fit-content;
+  }
   .h-full {
     height: 100%;
+  }
+  .max-h-50 {
+    max-height: calc(var(--spacing) * 50);
   }
   .max-h-\[60\%\] {
     max-height: 60%;

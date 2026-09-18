@@ -87,7 +87,7 @@ def add_product(req):
 def product_delete(req,id):
     product = Product.objects.get(id=id)
     product.delete()
-    return redirect('dashboard')
+    return JsonResponse('success', safe=False)
 
 def product_edit(req,id):
     pass
