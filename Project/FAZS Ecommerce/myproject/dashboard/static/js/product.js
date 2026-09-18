@@ -23,8 +23,8 @@ product_add_form = document.getElementById('product-add-form')
 
 product_add_form.addEventListener('submit', async (event) => {
     event.preventDefault()
-
-    product_add_overlay = document.getElementById('Overlay')
+    console.log('submit')
+    product_add_overlay= document.getElementById('Overlay')
     product_add_overlay.classList.add('hidden')
     product_add_overlay.classList.remove('flex')
 
@@ -55,6 +55,7 @@ product_add_form.addEventListener('submit', async (event) => {
     product_name = document.createElement('span')
     product_name.classList.add('text-orange-500')
     product_name.textContent = data.name
+    product_name.textContent = data.name
     img_div.append(product_name)
 
     right_div = document.createElement('div')
@@ -63,13 +64,16 @@ product_add_form.addEventListener('submit', async (event) => {
 
     price = document.createElement('span')
     price.textContent = `Rs ${data.price}`
+    price.textContent = `Rs ${data.price}`
     right_div.append(price)
 
     stock = document.createElement('span')
     stock.textContent = `Stock ${data.stock}`
+    stock.textContent = `Stock ${data.stock}`
     right_div.append(stock)
 
     sales = document.createElement('span')
+    sales.textContent = `Sales ${data.sales}`
     sales.textContent = `Sales ${data.sales}`
     right_div.append(sales)
 
@@ -103,7 +107,7 @@ product_add_form.addEventListener('submit', async (event) => {
     product_delete = document.createElement('button')
     product_delete.type = 'submit'
     product_delete.classList.add('text-red-500')
-    form.append(product_delete)
+    right_div.append(product_delete)
 
     delelte_symbol = document.createElement('i')
     delelte_symbol.classList.add('fa-solid', 'fa-trash')
