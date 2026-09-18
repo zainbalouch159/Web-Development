@@ -107,7 +107,6 @@ product_add_form.addEventListener('submit', async (event) => {
     product_delete = document.createElement('button')
     product_delete.type = 'submit'
     product_delete.classList.add('text-red-500')
-    product_delete.href=`product_delete/${data.id}/`
     right_div.append(product_delete)
 
     delelte_symbol = document.createElement('i')
