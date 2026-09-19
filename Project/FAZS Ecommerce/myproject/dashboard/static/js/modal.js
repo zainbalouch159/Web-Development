@@ -2,7 +2,13 @@ const productAddBtn = document.getElementById('Product-add');
 const overlay = document.getElementById('Overlay');
 
 // 1. Product add overlay elements
+// 1. Product add overlay elements
 
+if (productAddBtn && overlay) {
+    productAddBtn.addEventListener('click', () => {
+        overlay.classList.add('flex');
+        overlay.classList.remove('hidden');
+    });
 if (productAddBtn && overlay) {
     productAddBtn.addEventListener('click', () => {
         overlay.classList.add('flex');
@@ -16,7 +22,21 @@ if (productAddBtn && overlay) {
         }
     });
 }
+    overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) {
+            overlay.classList.remove('flex');
+            overlay.classList.add('hidden');
+        }
+    });
+}
 
+// Product Submit 
+
+
+
+// 2. Category add overlay elements
+categoryAddBtn = document.getElementById('add-category-button');
+categoryAddOverlay = document.getElementById('Category-add-Overlay');
 // 2. Category add overlay elements
 categoryAddBtn = document.getElementById('add-category-button');
 categoryAddOverlay = document.getElementById('Category-add-Overlay');
@@ -26,7 +46,19 @@ if (categoryAddBtn && categoryAddOverlay) {
         categoryAddOverlay.classList.add('flex');
         categoryAddOverlay.classList.remove('hidden');
     });
+if (categoryAddBtn && categoryAddOverlay) {
+    categoryAddBtn.addEventListener('click', () => {
+        categoryAddOverlay.classList.add('flex');
+        categoryAddOverlay.classList.remove('hidden');
+    });
 
+    categoryAddOverlay.addEventListener('click', (event) => {
+        if (event.target === categoryAddOverlay) {
+            categoryAddOverlay.classList.remove('flex');
+            categoryAddOverlay.classList.add('hidden');
+        }
+    });
+}
     categoryAddOverlay.addEventListener('click', (event) => {
         if (event.target === categoryAddOverlay) {
             categoryAddOverlay.classList.remove('flex');
@@ -71,7 +103,16 @@ category_form.addEventListener('submit', async (event) => {
 // 2. Collections add overlay elements
 CollectionsAddBtn = document.getElementById('add-Collections-button');
 CollectionsAddOverlay = document.getElementById('Collections-add-Overlay');
+// 2. Collections add overlay elements
+CollectionsAddBtn = document.getElementById('add-Collections-button');
+CollectionsAddOverlay = document.getElementById('Collections-add-Overlay');
 
+if (CollectionsAddBtn && CollectionsAddOverlay) {
+    CollectionsAddBtn.addEventListener('click', () => {
+        console.log("Collection add button clicked")
+        CollectionsAddOverlay.classList.add('flex');
+        CollectionsAddOverlay.classList.remove('hidden');
+    });
 if (CollectionsAddBtn && CollectionsAddOverlay) {
     CollectionsAddBtn.addEventListener('click', () => {
         console.log("Collection add button clicked")
@@ -84,8 +125,8 @@ if (CollectionsAddBtn && CollectionsAddOverlay) {
         if (event.target === CollectionsAddOverlay) {
             CollectionsAddOverlay.classList.remove('flex');
             CollectionsAddOverlay.classList.add('hidden');
-        }
-    });
+    }});
+}
 }
 
 
@@ -109,6 +150,7 @@ Collections_form.addEventListener('submit', async (event) => {
     })
     data = await response.json()
 
+
     new_Collections_option = document.createElement('option')
 
     new_Collections_option.value = data.id
@@ -119,5 +161,19 @@ Collections_form.addEventListener('submit', async (event) => {
     Collections_menubar.appendChild(new_Collections_option)
 
     new_Collections_option.selected = true
+    })
 
-})
+// Product Edit 
+
+product_edit = document.querySelectorAll('.product_edit_button')
+product_edit.forEach(product => {
+    product.document.addEventListener('click', () => {
+        overlay = document.getElementById('Edit_Product_Overlay')
+        overlay.classList.add('flex')
+        overlay.classList.remove('hidden')
+
+        id = product.dataset.id
+
+    })
+
+});
