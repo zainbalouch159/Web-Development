@@ -51,43 +51,49 @@ def add_product(req):
     Stock = req.POST.get('stock')
     image = req.FILES.get('image')
     Discount = req.POST.get('discount')
+    
     if not Discount:
-        Discount=0
-    Info = req.POST.get('info') 
+        Discount = 0
+
+    Info = req.POST.get('info')
+
     Category_id = req.POST.get('category')
-    Collections_id = req.POST.get('collections')
+    Collections_id = req.POST.getlist('collections')
+
+    # Category
     if Category_id == 'Select' or not Category_id:
-        Category1, created=Category.objects.get_or_create(name='other')
+        Category1, created = Category.objects.get_or_create(name='other')
     else:
         Category1 = Category.objects.get(id=Category_id)
-        
-    if Collections_id == 'Select' or not Collections_id:
-        Collections, created=Collection.objects.get_or_create(title = 'other')
+
+    # Collections
+    if not Collections_id or 'Select' in Collections_id:
+        Collections = Collection.objects.filter(title='other')
+        if not Collections.exists():
+            other_collection = Collection.objects.create(title='other')
+            Collections = [other_collection]
     else:
-        Collections = Collection.objects.get(id=Collections_id)
+        Collections = Collection.objects.filter(id__in=Collections_id)
 
-    product =Product(
-        name = Name,
-        description = Description,
-        price = Price,
-        stock = Stock,
-        image = image,
-        discount = Discount,
-        info = Info,
-        category = Category1,
+    # Product
+    product = Product(
+        name=Name,
+        description=Description,
+        price=Price,
+        stock=Stock,
+        image=image,
+        discount=Discount,
+        info=Info,
+        category=Category1,
     )
-    product.save()
-    product.collections.add(Collections)
-    return JsonResponse({
-        'id': product.id,
-        'name' : product.name,
-        'price' : product.price,
-        'stock': product.stock,
-        'sales' : product.sales,
-        'image' : product.image.url,
-       
-    })
 
+    product.save()
+
+    # Multiple collections
+    product.collections.set(Collections)
+
+    return redirect('dashboard')
+    
 # Product Delete
 @require_POST
 def product_delete(req,id):
@@ -101,5 +107,17 @@ def product_delete(req,id):
         return JsonResponse('failed', safe=False)
 
 def product_edit(req,id):
-    pass
-    
+    product = Product.objects.get(id=id)    
+    data ={
+        'name':product.name,
+        'description':product.description,
+        'price':product.price,
+        'sales':product.sales,
+        'stock':product.stock,
+        'discount':product.discount,
+        'info':product.info,
+        'image':product.image.url,
+        'category':product.category.id,
+        'collections':list(product.collections.values_list('id', flat=True)),
+    }
+    return JsonResponse(data)

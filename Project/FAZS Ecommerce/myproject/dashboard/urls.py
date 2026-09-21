@@ -8,4 +8,4 @@ urlpatterns = [
    path('product_delete/<int:id>/',views.product_delete,name='product_delete'),
    path('product_edit/<int:id>/',views.product_edit,name='product_edit'),
      
-]
+]     

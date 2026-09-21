@@ -1,0 +1,50 @@
+{% include 'components/Product-add-modal.html' %}
+{% include 'components/Product_edit_modal.html' %}
+
+<div class="text-center text-orange-500 font-extrabold">Products
+</div>
+
+<div class="   m-3 rounded">
+
+    <!-- Header  -->
+     <!-- Add New Product button  -->
+    <div id="Product-add" class=" shrink-0 h-10 rounded bg-orange-300 flex justify-start  items-start font-extrabold">
+        <i class="fa-solid fa-plus text-orange-500 my-auto ml-2"></i>
+    </div>
+
+
+    <!-- Data -->
+    <div id="product_show" class="h-fit max-h-50 flex-1 overflow-y-auto rounded  bg-orange-200 flex flex-col gap-1 ">
+
+        <!-- products  -->
+        {% for product in Products %}
+        <div id="product_section_{{product.id}}" class="h-10  bg-orange-200  p-2 m-2 rounded flex justify-between ">
+
+            <div class="flex gap-2">
+                <img src="{{product.image.url}}" alt="{{product.name}}" class="h-full object-contain rounded">
+
+                <span class="text-orange-500">{{product.name}}</span>
+            </div>
+
+            <div class="flex gap-1 text-orange-500">
+                <span>Rs {{product.price}}</span>
+
+                <span>Stock {{product.stock}}</span>
+
+                <span>Sales {{product.sales}}</span>
+
+                <button data-id="{{product.id}}" class="fa-solid fa-pencil product_edit_button"></button>
+
+                <form method="post" class="delete_product_form" action="{% url 'product_delete' product.id %}">
+                    {%csrf_token%}
+                        <input type="hidden" name="product_id" value="{{product.id}}">
+                    
+                    <button type="submit" class="text-red-500"><i class="fa-solid fa-trash"></i></button>
+                </form>
+                
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
