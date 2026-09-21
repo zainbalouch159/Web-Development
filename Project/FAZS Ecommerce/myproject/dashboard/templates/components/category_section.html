@@ -1,0 +1,36 @@
+<div class="text-center text-orange-500 font-extrabold">
+    Categories
+</div>
+
+<div class="m-3 rounded">
+
+    <!-- Header -->
+    <div id="Category-add"
+        class="shrink-0 h-10 rounded bg-orange-300 flex justify-between items-start font-extrabold">
+
+        <i id="category_add_btn"
+            class="fa-solid fa-plus text-orange-500 my-auto ml-2"></i>
+
+        <div>
+            <select id="category-options"
+                name="category"
+                class="focus:outline-orange-500 text-orange-500">
+
+                <option value="">Select</option>
+
+                {% for Category in Categories %}
+                    <option value="{{ Category.id }}">
+                        {{ Category.name }}
+                    </option>
+                {% endfor %}
+
+            </select>
+        </div>
+    </div>
+
+    <!-- Data -->
+    <div id="category_show"
+        class="h-fit max-h-50 flex-1 overflow-y-auto rounded bg-orange-200 flex flex-col gap-1">
+    </div>
+
+</div>

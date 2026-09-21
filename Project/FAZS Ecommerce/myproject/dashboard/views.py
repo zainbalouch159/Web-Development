@@ -98,8 +98,7 @@ def add_product(req):
 @require_POST
 def product_delete(req,id):
     product = get_object_or_404(Product, id=id)
-    if product.image:
-        product.image.delete()
+    product.image.delete()
     if product:  
         product.delete()
         return JsonResponse('success', safe=False)
@@ -120,4 +119,78 @@ def product_edit(req,id):
         'category':product.category.id,
         'collections':list(product.collections.values_list('id', flat=True)),
     }
-    return JsonResponse(data)
+    return JsonResponse(data) 
+
+# Update Product 
+def update_product(req):
+    id= req.POST.get('product_id')
+    product = Product.objects.get(id=id)
+
+    product.name = req.POST.get('name')
+    product.description = req.POST.get('description')
+    product.price = req.POST.get('price')
+    product.stock = req.POST.get('stock')
+
+    discount = req.POST.get('discount')
+    product.discount = discount if discount else 0
+
+    product.info = req.POST.get('info')
+
+    # Category
+    category_id = req.POST.get('category')
+
+    if not category_id or category_id == 'Select':
+        category, created = Category.objects.get_or_create(name='other')
+    else:
+        category = Category.objects.get(id=category_id)
+
+    product.category = category
+
+    # Image
+    image = req.FILES.get('image')
+
+    if image:
+        product.image = image
+
+    product.save()
+
+    # Collections
+    collection_ids = req.POST.getlist('collections')
+
+    if not collection_ids or 'Select' in collection_ids:
+        other_collection, created = Collection.objects.get_or_create(
+            title='other'
+        )
+
+        product.collections.set([other_collection])
+
+    else:
+        collections = Collection.objects.filter(
+            id__in=collection_ids
+        )
+
+        product.collections.set(collections)
+
+    return redirect('dashboard')
+
+from django.http import JsonResponse
+
+# Category Products
+def category_products(req, id):
+    products = Product.objects.filter(category_id=id)
+
+    data = []
+
+    for product in products:
+        data.append({
+            'id': product.id,
+            'name': product.name,
+            'price': product.price,
+            'stock': product.stock,
+            'sales': product.sales,
+            'image': product.image.url if product.image else None,
+        })
+
+    return JsonResponse({
+        'products': data
+    })

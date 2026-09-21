@@ -16,7 +16,6 @@ if (productAddBtn && overlay) {
     });
 }
 
-
 // Category Add Overlay
 let categoryAddBtn = document.getElementById('add-category-button');
 let categoryAddOverlay = document.getElementById('Category-add-Overlay');
@@ -34,7 +33,6 @@ if (categoryAddBtn && categoryAddOverlay) {
         }
     });
 }
-
 
 // Category Submit
 let category_form = document.getElementById('category-add-form');
@@ -66,7 +64,6 @@ category_form.addEventListener('submit', async (event) => {
 
     new_category_option.selected = true;
 });
-
 
 // Collections Add Overlay
 let CollectionsAddBtn = document.getElementById('add-Collections-button');
@@ -151,7 +148,11 @@ product_edit.forEach(product => {
         let data = await response.json();
 
         let form = document.getElementById('product-edit-form');
-        form.dataset.id = id;
+        input = document.createElement('input')
+        input.value=id
+        input.name='product_id'
+        input.classList.add('hidden')
+        form.append(input)
 
         let name = document.getElementById('product-name-update');
         name.value = data.name;

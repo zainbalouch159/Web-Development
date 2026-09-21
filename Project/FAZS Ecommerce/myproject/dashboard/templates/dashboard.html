@@ -9,12 +9,10 @@
 <!-- Product  -->
 {% include 'components/product_section.html' %}
 
-<!-- Product Add Modal -->
 
 <!-- Category -->
-<div class="text-center text-orange-500 font-extrabold  ">Categories</div>
+{% include 'components/category_section.html' %}
 
-<div class="h-50 overflow-y-auto flex justify-center items-center gap-1 bg-orange-100 m-3 p-3 rounded"></div>
 
 <!-- Collections -->
 <div class="text-center text-orange-500 font-extrabold">Collections</div>
@@ -33,5 +31,5 @@
 
 {% block script %}
 <script src="{% static 'js/modal.js' %}" defer></script>
-<script src="{% static 'js/product.js' %}" defer></script>
+<script src="{% static 'js/dashboard.js' %}" defer></script>
 {% endblock %}
