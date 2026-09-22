@@ -35,9 +35,8 @@
 
                 <button data-id="{{product.id}}" class="fa-solid fa-pencil product_edit_button"></button>
 
-                <form method="post" class="delete_product_form" action="{% url 'product_delete' product.id %}">
+                <form method="post" data-id="{{product.id}}" class="delete_product_form" action="">
                     {%csrf_token%}
-                    <input type="hidden" name="product_id" value="{{product.id}}">
                     
                     <button type="submit" class="text-red-500"><i class="fa-solid fa-trash"></i></button>
                 </form>

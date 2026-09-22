@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404
 from product.models import Category,Product,Collection
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_GET, require_POST
 
 # Create your views here
 
@@ -17,7 +17,7 @@ def dashboard(req):
     else:
         return redirect('home')
 
-# Add Category
+# Add Category in products add form 
 @require_POST    
 def add_category(req):
     new_category =  req.POST.get('category-name')
@@ -30,6 +30,7 @@ def add_category(req):
             'name':category.name
         })
         
+
 # Add Collections
 @require_POST         
 def add_Collections(req):
@@ -105,6 +106,7 @@ def product_delete(req,id):
     else:
         return JsonResponse('failed', safe=False)
 
+# Edit Product
 def product_edit(req,id):
     product = Product.objects.get(id=id)    
     data ={
@@ -194,3 +196,60 @@ def category_products(req, id):
     return JsonResponse({
         'products': data
     })
+    
+# New Category in categoy section
+@require_POST
+def add_product_to_category(req):
+    new_category = req.POST.get('category-name')
+    product_ids = req.POST.getlist('category-add-products')
+
+    category, created = Category.objects.get_or_create(name=new_category)   
+    if product_ids:
+        for product_id in product_ids:
+            product = Product.objects.get(id=product_id)
+            product.category = category
+            product.save()
+
+    return redirect('dashboard')
+        
+@require_POST
+def delete_category(req):
+    category_id = req.POST.get('category_id')
+    category = get_object_or_404(Category, id=category_id)
+    other = Category.objects.get(name='other')
+
+    Product.objects.filter(category=category).update(category=other)
+
+    category.delete()
+    return redirect('dashboard')
+
+@require_GET
+def collection_products(req, id):
+    collection = Collection.objects.get(id=id)
+
+    products = collection.product_set.all()
+
+    data = []
+
+    for product in products:
+        data.append({
+            'id': product.id,
+            'name': product.name,
+            'price': product.price,
+            'stock': product.stock,
+            'sales': product.sales,
+            'image': product.image.url if product.image else '',
+        })
+
+    return JsonResponse({
+        'products': data
+    })
+    
+@require_POST
+def delete_collection(req):
+    collection_id = req.POST.get('collection_id')
+
+    collection = Collection.objects.get(id=collection_id)
+    collection.delete()
+
+    return redirect('dashboard')

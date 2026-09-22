@@ -4,9 +4,9 @@ function delete_product(form) {
         event.preventDefault()
 
         const formdata = new FormData(form)
-        const id = formdata.get('product_id')
+        const id = form.dataset.id
 
-        const response = await fetch(form.action, {
+        const response = await fetch(`product_delete/${id}/`, {
             method: 'POST',
             body: formdata
         })
@@ -18,7 +18,7 @@ function delete_product(form) {
             product.remove()
         }
     })
-} 
+}
 
 // Product Delete 
 delete_form = document.querySelectorAll('.delete_product_form')
@@ -30,11 +30,24 @@ delete_form.forEach(form => {
 // Category Section
 let category_menu = document.getElementById('category-options');
 let category_show = document.getElementById('category_show');
-console.log(1)
-category_menu.addEventListener('change', async () => {
-    console.log(2)
-    let category_id = category_menu.value;
 
+category_menu.addEventListener('change', async () => {
+    
+    let category_id = category_menu.value;
+    if (category_menu.value !== '' && category_menu.options[category_menu.selectedIndex].text.trim().toLowerCase() !== 'other') {
+
+        input_category_id = document.getElementById('category_id_delete');
+        input_category_id.value = category_id;
+
+        delete_category_form = document.getElementById('delete_category_form');
+        delete_category_form.classList.add('flex');
+        delete_category_form.classList.remove('hidden');
+
+    } else {
+        delete_category_form.classList.add('hidden');
+        delete_category_form.classList.remove('flex');
+        
+    }
     if (!category_id) {
         category_show.innerHTML = '';
         return;
@@ -42,7 +55,7 @@ category_menu.addEventListener('change', async () => {
 
     let response = await fetch(`category_products/${category_id}/`);
     let data = await response.json();
-    console.log(data);
+
     category_show.innerHTML = '';
 
     data.products.forEach(product => {
@@ -69,13 +82,79 @@ category_menu.addEventListener('change', async () => {
                 <span>Stock ${product.stock}</span>
                 <span>Sales ${product.sales}</span>
 
-                <button
-                    data-id="${product.id}"
-                    class="fa-solid fa-pencil product_edit_button">
-                </button>
             </div>
         `;
 
         category_show.append(product_section);
+
+    });
+
+});
+
+// Collection Section
+
+let collection_menu = document.getElementById('collection-options');
+let collection_show = document.getElementById('collection_show');
+
+collection_menu.addEventListener('change', async () => {
+
+    let collection_id = collection_menu.value;
+
+    if (collection_id === '') {
+        collection_show.innerHTML = '';
+        return;
+    }
+
+    let input_collection_id =
+        document.getElementById('collection_id_delete');
+
+    input_collection_id.value = collection_id;
+
+    let delete_collection_form =
+        document.getElementById('delete_collection_form');
+
+    delete_collection_form.classList.add('flex');
+    delete_collection_form.classList.remove('hidden');
+
+    let response =
+        await fetch(`collection_products/${collection_id}/`);
+
+    let data = await response.json();
+
+    collection_show.innerHTML = '';
+
+    data.products.forEach(product => {
+
+        let product_section = document.createElement('div');
+
+        product_section.className =
+            'h-10 bg-orange-200 p-2 m-2 rounded flex justify-between';
+
+        product_section.id =
+            `collection_product_section_${product.id}`;
+
+        product_section.innerHTML = `
+            <div class="flex gap-2">
+
+                <img src="${product.image}"
+                     alt="${product.name}"
+                     class="h-full object-contain rounded">
+
+                <span class="text-orange-500">
+                    ${product.name}
+                </span>
+
+            </div>
+
+            <div class="flex gap-1 text-orange-500">
+
+                <span>Rs ${product.price}</span>
+                <span>Stock ${product.stock}</span>
+                <span>Sales ${product.sales}</span>
+
+            </div>
+        `;
+
+        collection_show.append(product_section);
     });
 });

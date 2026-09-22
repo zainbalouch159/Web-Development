@@ -5,32 +5,39 @@
 <div class="m-3 rounded">
 
     <!-- Header -->
-    <div id="Category-add"
-        class="shrink-0 h-10 rounded bg-orange-300 flex justify-between items-start font-extrabold">
+    <div id="Category-add" class="shrink-0 h-10 rounded bg-orange-300 flex justify-between items-start font-extrabold">
 
-        <i id="category_add_btn"
-            class="fa-solid fa-plus text-orange-500 my-auto ml-2"></i>
+        <i id="category_add_btn" class="fa-solid fa-plus text-orange-500 my-auto ml-2"></i>
 
         <div>
-            <select id="category-options"
-                name="category"
-                class="focus:outline-orange-500 text-orange-500">
+            <div class="flex gap-2 items-center">
 
-                <option value="">Select</option>
+                <form method="post" id="delete_category_form" class="hidden"
+                    action="{% url 'delete_category' %}">
+                    {%csrf_token%}
+                    <input type="text" name="category_id" id="category_id_delete" value="" hidden>
+                    <button type="submit" class="text-red-500"><i class="fa-solid fa-trash"></i></button>
+                </form>
+                <select id="category-options" name="category" class=" text-orange-500 rounded ">
 
-                {% for Category in Categories %}
-                    <option value="{{ Category.id }}">
+                    <option class="bg-orange-200" value="">Select</option>
+
+                    {% for Category in Categories %}
+                    <option class="bg-orange-200" value="{{ Category.id }}">
                         {{ Category.name }}
                     </option>
-                {% endfor %}
+                    {% endfor %}
 
-            </select>
+                </select>
+            </div>
         </div>
     </div>
 
     <!-- Data -->
-    <div id="category_show"
-        class="h-fit max-h-50 flex-1 overflow-y-auto rounded bg-orange-200 flex flex-col gap-1">
+    <div id="category_show" class="h-fit max-h-50 flex-1 overflow-y-auto rounded bg-orange-200 flex flex-col gap-1">
     </div>
 
 </div>
+
+<!-- category add modal in category section -->
+{% include 'components/category-add-overlay-category-section.html' %}

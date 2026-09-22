@@ -9,8 +9,8 @@
         <div class="font-extrabold text-orange-500 m-5">Product Details</div>
 
         <!-- Form  -->
-        <form action="{% url 'update_product' %}" id="product-edit-form" method="post"
-            enctype="multipart/form-data" class="flex flex-col justify-center items-center gap-1">
+        <form action="{% url 'update_product' %}" id="product-edit-form" method="post" enctype="multipart/form-data"
+            class="flex flex-col justify-center items-center gap-1">
 
             {% csrf_token %}
 
@@ -41,7 +41,7 @@
             <!-- Stock  -->
             <div class="flex items-start w-72 justify-start">
                 <label for="product-stock-add" class="text-orange-500 font-bold mx-2">Stock</label>
-                <input type="number" name="stock" id="product-stock-update" 
+                <input type="number" name="stock" id="product-stock-update"
                     class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-20">
             </div>
 
@@ -50,7 +50,7 @@
 
                 <img src="" id="product-image-preview" class="object-cover w-10 h-10" alt="">
 
-                <input type="file" name="image" id="product-image-update" 
+                <input type="file" name="image" id="product-image-update"
                     class=" rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-full">
             </div>
 
@@ -67,7 +67,7 @@
                 <textarea type="text" name="info" id="product-info-update"
                     class="resize-none rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500"></textarea>
             </div>
-
+            
             <!-- Category  -->
             <div class="flex items-center w-72 justify-start">
                 <label for="category-menu" class="text-orange-500 font-bold mx-2">Category</label>

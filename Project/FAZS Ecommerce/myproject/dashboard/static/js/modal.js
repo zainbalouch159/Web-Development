@@ -16,7 +16,7 @@ if (productAddBtn && overlay) {
     });
 }
 
-// Category Add Overlay
+// Category Add Overlay in product add form
 let categoryAddBtn = document.getElementById('add-category-button');
 let categoryAddOverlay = document.getElementById('Category-add-Overlay');
 
@@ -34,7 +34,7 @@ if (categoryAddBtn && categoryAddOverlay) {
     });
 }
 
-// Category Submit
+// Category Submit in product add form
 let category_form = document.getElementById('category-add-form');
 
 category_form.addEventListener('submit', async (event) => {
@@ -64,6 +64,26 @@ category_form.addEventListener('submit', async (event) => {
 
     new_category_option.selected = true;
 });
+
+// Category Add Overlay in category section
+let categoryAddBtn1 = document.getElementById('category_add_btn');
+let categoryAddOverlay1 = document.getElementById('Category-add-Overlay_categorty_section');
+
+if (categoryAddBtn1) {
+    categoryAddBtn1.addEventListener('click', () => {
+        categoryAddOverlay1.classList.add('flex');
+        categoryAddOverlay1.classList.remove('hidden');
+    });
+
+    categoryAddOverlay1.addEventListener('click', (event) => {
+        if (event.target === categoryAddOverlay1) {
+            categoryAddOverlay1.classList.remove('flex');
+            categoryAddOverlay1.classList.add('hidden');
+        }
+    });
+}
+
+
 
 // Collections Add Overlay
 let CollectionsAddBtn = document.getElementById('add-Collections-button');

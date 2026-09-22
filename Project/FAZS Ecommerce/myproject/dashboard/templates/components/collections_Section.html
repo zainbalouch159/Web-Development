@@ -1,0 +1,64 @@
+<div class="text-center text-orange-500 font-extrabold">
+    Collections
+</div>
+
+<div class="m-3 rounded">
+
+    <!-- Header -->
+    <div id="Collection-add"
+        class="shrink-0 h-10 rounded bg-orange-300 flex justify-between items-start font-extrabold">
+
+        <i id="collection_add_btn"
+            class="fa-solid fa-plus text-orange-500 my-auto ml-2"></i>
+
+        <div>
+            <div class="flex gap-2 items-center">
+
+                <form method="post"
+                    id="delete_collection_form"
+                    class="hidden delete_collection_form"
+                    action="{% url 'delete_collection' %}">
+
+                    {% csrf_token %}
+
+                    <input type="text"
+                        name="collection_id"
+                        id="collection_id_delete"
+                        value=""
+                        hidden>
+
+                    <button type="submit" class="text-red-500">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+
+                </form>
+
+                <select id="collection-options"
+                    name="collection"
+                    class="text-orange-500 rounded">
+
+                    <option class="bg-orange-200" value="">
+                        Select
+                    </option>
+
+                    {% for Collection in Collections %}
+                    <option class="bg-orange-200"
+                        value="{{ Collection.id }}">
+                        {{ Collection.title }}
+                    </option>
+                    {% endfor %}
+
+                </select>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Data -->
+    <div id="collection_show"
+        class="h-fit max-h-50 flex-1 overflow-y-auto rounded bg-orange-200 flex flex-col gap-1">
+    </div>
+
+</div>
+
+<!-- Collection add modal -->
