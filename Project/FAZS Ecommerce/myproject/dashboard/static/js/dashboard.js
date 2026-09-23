@@ -1,3 +1,12 @@
+// // New category through product form
+// new_category_btn_product = document.getElementById('add-category-button');
+
+// new_category_btn_product.addEventListener('click', () => {
+//     category_add_overlay_product = document.getElementById('Category-add-Overlay-product');
+//     category_add_overlay_product.classList.remove('hidden');
+//     category_add_overlay_product.classList.add('flex');
+
+// })
 // Delete Product Function
 function delete_product(form) {
     form.addEventListener('submit', async (event) => {
@@ -110,11 +119,13 @@ collection_menu.addEventListener('change', async () => {
 
     input_collection_id.value = collection_id;
 
+    if (collection_menu.options[collection_menu.selectedIndex].text.trim().toLowerCase() !== 'other') {
     let delete_collection_form =
         document.getElementById('delete_collection_form');
 
     delete_collection_form.classList.add('flex');
     delete_collection_form.classList.remove('hidden');
+    }
 
     let response =
         await fetch(`collection_products/${collection_id}/`);

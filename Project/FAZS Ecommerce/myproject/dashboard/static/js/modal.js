@@ -14,14 +14,18 @@ if (productAddBtn && overlay) {
             overlay.classList.add('hidden');
         }
     });
-}
+} 
 
-// Category Add Overlay in product add form
-let categoryAddBtn = document.getElementById('add-category-button');
-let categoryAddOverlay = document.getElementById('Category-add-Overlay');
+// Category Add Overlay in product edit form
+let categoryAddBtn = document.getElementById('add-category-button-product');
+let categoryAddOverlay = document.getElementById('Category-add-Overlay-product');
 
 if (categoryAddBtn && categoryAddOverlay) {
+    console.log(categoryAddBtn);
+    console.log(categoryAddBtn.tagName);
+    console.log("Category add button and overlay found");
     categoryAddBtn.addEventListener('click', () => {
+        console.log("Category add button clicked");
         categoryAddOverlay.classList.add('flex');
         categoryAddOverlay.classList.remove('hidden');
     });

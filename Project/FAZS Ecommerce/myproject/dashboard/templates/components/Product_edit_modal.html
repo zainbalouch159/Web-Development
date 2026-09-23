@@ -46,9 +46,9 @@
             </div>
 
             <!-- Image  -->
-            <div class="flex items-center w-72 justify-start ">
+            <div class="flex gap-1 items-center w-72 justify-start ">
 
-                <img src="" id="product-image-preview" class="object-cover w-10 h-10" alt="">
+                <img src="" id="product-image-preview" class="object-cover rounded w-10 h-10" alt="">
 
                 <input type="file" name="image" id="product-image-update"
                     class=" rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-full">
@@ -67,11 +67,11 @@
                 <textarea type="text" name="info" id="product-info-update"
                     class="resize-none rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500"></textarea>
             </div>
-            
+
             <!-- Category  -->
             <div class="flex items-center w-72 justify-start">
                 <label for="category-menu" class="text-orange-500 font-bold mx-2">Category</label>
-                <select id="product-category-update" name="category"
+                <select class="h-5 overflow-auto" id="product-category-update" name="category"
                     class="focus:outline-orange-500 bg-orange-200 text-orange-500 rounded h-full max-h-full min-h-0">
                     <option>Select</option>
                     {% for Category in Categories %}
@@ -79,20 +79,17 @@
                     {% endfor %}
                 </select>
 
-                <div id="add-category-button">
-                    <i class="fa-solid fa-plus text-orange-500 my-auto ml-2"></i>
-                </div>
+                    <i id="add-category-button-product" class="fa-solid fa-plus text-orange-500  pl-2"></i>
 
             </div>
 
             <!-- Collections  -->
-            <div class="flex items-center w-72 justify-start">
+            <div class="flex items-center  justify-start">
                 <label for="Collections" class="text-orange-500 font-bold mx-2">Collections</label>
                 <select id="product-collections-update" name="collections" multiple
-                    class="text-orange-500 bg-orange-200 rounded focus:outline-orange-500">
-                    <option>Select</option>
+                    class="text-orange-500 bg-orange-200 rounded focus:outline-orange-500 overflow-y-auto h-7">
                     {% for Collection in Collections %}
-                    <option value="{{ Collection.id }}">{{ Collection.title }} </option>
+                    <option class="p-1 text-orange-500" value="{{ Collection.id }}">{{ Collection.title }} </option>
                     {% endfor %}
                 </select>
 
@@ -109,5 +106,5 @@
     </div>
 
 </div>
-{% include 'components/category-add-modal.html' %}
+{% include 'components/category-add-modal-product.html' %}
 {% include 'components/Collections-add-modal.html' %}
