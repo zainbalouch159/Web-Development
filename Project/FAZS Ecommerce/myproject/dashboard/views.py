@@ -1,5 +1,3 @@
-from ast import Delete
-
 from django.shortcuts import render,redirect, get_object_or_404
 from product.models import Category,Product,Collection
 from django.http import HttpResponse, JsonResponse
@@ -19,7 +17,7 @@ def dashboard(req):
     else:
         return redirect('home')
 
-# Add Category in products add form 
+# Add Category in product form 
 @require_POST    
 def add_category(req):
     new_category =  req.POST.get('category-name')

@@ -17,7 +17,7 @@
             <div class="flex items-center w-72 justify-between">
 
                 <!-- Name  -->
-                <label for="product-name-add" class="text-orange-500 font-bold mx-2">Name</label>
+                <label for="product-name-update" class="text-orange-500 font-bold mx-2">Name</label>
                 <input type="text" id="product-name-update" name="name"
                     class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500">
             </div>
@@ -40,7 +40,7 @@
 
             <!-- Stock  -->
             <div class="flex items-start w-72 justify-start">
-                <label for="product-stock-add" class="text-orange-500 font-bold mx-2">Stock</label>
+                <label for="product-stock-update" class="text-orange-500 font-bold mx-2">Stock</label>
                 <input type="number" name="stock" id="product-stock-update"
                     class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-20">
             </div>
@@ -48,7 +48,8 @@
             <!-- Image  -->
             <div class="flex gap-1 items-center w-72 justify-start ">
 
-                <img src="" id="product-image-preview" class="object-cover rounded w-10 h-10" alt="">
+                <img for="product-image-update" id="product-image-preview" class="object-cover rounded w-10 h-10"
+                    alt="">
 
                 <input type="file" name="image" id="product-image-update"
                     class=" rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-full">
@@ -56,21 +57,21 @@
 
             <!-- Discount  -->
             <div class="flex items-start w-72 justify-start">
-                <label for="product-discount-add" class="text-orange-500 font-bold mx-2">Discount</label>
+                <label for="product-discount-update" class="text-orange-500 font-bold mx-2">Discount</label>
                 <input type="number" name="discount" id="product-discount-update"
-                    class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-10">%
+                    class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-5">%
             </div>
 
             <!-- Info  -->
             <div class="flex items-center w-72 justify-between">
-                <label for="Info" class="text-orange-500 font-bold mx-2">Info</label>
+                <label for="product-info-update" class="text-orange-500 font-bold mx-2">Info</label>
                 <textarea type="text" name="info" id="product-info-update"
                     class="resize-none rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500"></textarea>
             </div>
 
             <!-- Category  -->
             <div class="flex items-center w-72 justify-start">
-                <label for="category-menu" class="text-orange-500 font-bold mx-2">Category</label>
+                <label for="product-category-update" class="text-orange-500 font-bold mx-2">Category</label>
                 <select class="h-5 overflow-auto" id="product-category-update" name="category"
                     class="focus:outline-orange-500 bg-orange-200 text-orange-500 rounded h-full max-h-full min-h-0">
                     <option>Select</option>
@@ -79,13 +80,13 @@
                     {% endfor %}
                 </select>
 
-                    <i id="add-category-button-product" class="fa-solid fa-plus text-orange-500  pl-2"></i>
+                <i id="add-category-button-product" class="fa-solid fa-plus text-orange-500  pl-2"></i>
 
             </div>
 
             <!-- Collections  -->
             <div class="flex items-center  justify-start">
-                <label for="Collections" class="text-orange-500 font-bold mx-2">Collections</label>
+                <label for="product-collections-update" class="text-orange-500 font-bold mx-2">Collections</label>
                 <select id="product-collections-update" name="collections" multiple
                     class="text-orange-500 bg-orange-200 rounded focus:outline-orange-500 overflow-y-auto h-7">
                     {% for Collection in Collections %}

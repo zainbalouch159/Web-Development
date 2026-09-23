@@ -105,16 +105,19 @@ Collections_form.addEventListener('submit', async (event) => {
     new_Collections_option.selected = true;
 });
 
-// Category Submit in product add form
-let category_form = document.getElementById('category-add-form');
+// Category Submit in product
+let category_form = document.getElementById('category-add-form-product');
 
 category_form.addEventListener('submit', async (event) => {
 
+    // Prevent the default form submission behavior
     event.preventDefault();
 
+    // Overlay
     categoryAddOverlay.classList.remove('flex');
     categoryAddOverlay.classList.add('hidden');
-
+    
+    // Sending data to the backend using fetch API
     let formdata = new FormData(category_form);
 
     let response = await fetch(category_form.action, {
@@ -124,30 +127,22 @@ category_form.addEventListener('submit', async (event) => {
 
     let data = await response.json();
 
+    // Create a new option element for the newly added category
     let new_category_option = document.createElement('option');
 
     new_category_option.value = data.id;
     new_category_option.textContent = data.name;
 
-    let category_menubar = document.getElementById('category-menu');
-
-    category_menubar.appendChild(new_category_option);
-
-    new_category_option.selected = true;
+    if (category_form.dataset.data === 'edit') {
+        let category_menubar = document.getElementById('product-category-update');
+        
+        category_menubar.appendChild(new_category_option);
+        
+        new_category_option.selected = true;
+    }
 });
 
-// Category Add through product
-category_add_form_product = document.getElementById('category-add-form-product');
-category_add_form_product.addEventListener('submit', async (event) => {
-    event.preventDefault();
 
-    const formdata = new FormData(category_add_form_product);
-    response = await fetch(category_add_form_product.action, {
-        method: 'POST',
-        body: formdata
-    });
-
-})
 
 // Delete Product Function
 function delete_product(form) {
