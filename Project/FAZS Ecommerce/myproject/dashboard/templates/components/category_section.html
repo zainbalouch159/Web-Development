@@ -13,9 +13,8 @@
             <div class="flex gap-2 items-center">
 
                 <form method="post" id="delete_category_form" class="hidden"
-                    action="{% url 'delete_category' %}">
+                    action="">
                     {%csrf_token%}
-                    <input type="text" name="category_id" id="category_id_delete" value="" hidden>
                     <button type="submit" class="text-red-500"><i class="fa-solid fa-trash"></i></button>
                 </form>
                 <select id="category-options" name="category" class=" text-orange-500 rounded ">
@@ -23,7 +22,7 @@
                     <option class="bg-orange-200" value="">Select</option>
 
                     {% for Category in Categories %}
-                    <option class="bg-orange-200" value="{{ Category.id }}">
+                    <option class="bg-orange-200" id="Category_{{Category.id}}" value="{{ Category.id }}">
                         {{ Category.name }}
                     </option>
                     {% endfor %}

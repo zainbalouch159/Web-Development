@@ -33,8 +33,10 @@
 
                 <span>Sales {{product.sales}}</span>
 
+                <!-- Edit Product -->
                 <button data-id="{{product.id}}" class="fa-solid fa-pencil product_edit_button"></button>
 
+                <!-- Delete Product -->
                 <form method="post" data-id="{{product.id}}" class="delete_product_form" action="">
                     {%csrf_token%}
                     

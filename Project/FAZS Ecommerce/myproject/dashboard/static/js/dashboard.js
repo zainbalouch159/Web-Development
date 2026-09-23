@@ -1,12 +1,154 @@
-// // New category through product form
-// new_category_btn_product = document.getElementById('add-category-button');
 
-// new_category_btn_product.addEventListener('click', () => {
-//     category_add_overlay_product = document.getElementById('Category-add-Overlay-product');
-//     category_add_overlay_product.classList.remove('hidden');
-//     category_add_overlay_product.classList.add('flex');
+// Product Edit
+let product_edit = document.querySelectorAll('.product_edit_button');
 
-// })
+product_edit.forEach(product => {
+
+    product.addEventListener('click', async () => {
+
+        // Show the product edit overlay
+        let product_edit_overlay = document.getElementById('Edit_Product_Overlay');
+        product_edit_overlay.classList.add('flex');
+        product_edit_overlay.classList.remove('hidden');
+
+        // Get id of the product to be edited
+        let id = product.dataset.id;
+
+        // Send to backend to get the product details
+        let response = await fetch(`product_edit/${id}/`);
+        let data = await response.json();
+
+        // Populate the product edit form with the data received from backend
+        let form = document.getElementById('product-edit-form');
+        input = document.createElement('input')
+        input.value = id
+        input.name = 'product_id'
+        input.classList.add('hidden')
+        form.append(input)
+
+        // Populate the product edit form with the data received from backend
+        // Name 
+        let name = document.getElementById('product-name-update');
+        name.value = data.name;
+
+        // Description
+        let description = document.getElementById('product-description-update');
+        description.value = data.description;
+
+        // Stock
+        let stock = document.getElementById('product-stock-update');
+        stock.value = data.stock;
+
+        // Discount
+        let discount = document.getElementById('product-discount-update');
+        discount.value = data.discount;
+
+        // Info 
+        let info = document.getElementById('product-info-update');
+        info.value = data.info;
+
+        // Image 
+        let image = document.getElementById('product-image-preview');
+        image.src = data.image;
+
+        // Price 
+        let price = document.getElementById('product-price-update');
+        price.value = data.price;
+
+
+        let category = document.getElementById('product-category-update');
+        category.value = data.category;
+
+        let collections = document.getElementById('product-collections-update');
+
+        let collection_options = collections.options;
+        for (let option of collection_options) {
+            option.selected = false;
+        }
+        for (let option of collection_options) {
+            if (data.collections.includes(Number(option.value))) {
+                option.selected = true;
+            }
+        }
+    });
+});
+
+
+// Collections Submit
+let Collections_form = document.getElementById('Collections-add-form');
+
+Collections_form.addEventListener('submit', async (event) => {
+
+    event.preventDefault();
+
+    CollectionsAddOverlay.classList.remove('flex');
+    CollectionsAddOverlay.classList.add('hidden');
+
+    let formdata = new FormData(Collections_form);
+
+    let response = await fetch(Collections_form.action, {
+        method: 'POST',
+        body: formdata
+    });
+
+    let data = await response.json();
+
+    let new_Collections_option = document.createElement('option');
+
+    new_Collections_option.value = data.id;
+    new_Collections_option.textContent = data.title;
+
+    let Collections_menubar = document.getElementById('Collections-menu');
+
+    Collections_menubar.appendChild(new_Collections_option);
+
+    new_Collections_option.selected = true;
+});
+
+// Category Submit in product add form
+let category_form = document.getElementById('category-add-form');
+
+category_form.addEventListener('submit', async (event) => {
+
+    event.preventDefault();
+
+    categoryAddOverlay.classList.remove('flex');
+    categoryAddOverlay.classList.add('hidden');
+
+    let formdata = new FormData(category_form);
+
+    let response = await fetch(category_form.action, {
+        method: 'POST',
+        body: formdata
+    });
+
+    let data = await response.json();
+
+    let new_category_option = document.createElement('option');
+
+    new_category_option.value = data.id;
+    new_category_option.textContent = data.name;
+
+    let category_menubar = document.getElementById('category-menu');
+
+    category_menubar.appendChild(new_category_option);
+
+    new_category_option.selected = true;
+});
+
+// Category Add through product
+category_add_form_product = document.getElementById('category-add-form-product');
+category_add_form_product.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const formdata = new FormData(category_add_form_product);
+    response = await fetch(category_add_form_product.action, {
+        method: 'POST',
+        body: formdata
+    });
+
+})
+
 // Delete Product Function
 function delete_product(form) {
     form.addEventListener('submit', async (event) => {
@@ -41,12 +183,12 @@ let category_menu = document.getElementById('category-options');
 let category_show = document.getElementById('category_show');
 
 category_menu.addEventListener('change', async () => {
-    
+
     let category_id = category_menu.value;
     if (category_menu.value !== '' && category_menu.options[category_menu.selectedIndex].text.trim().toLowerCase() !== 'other') {
 
-        input_category_id = document.getElementById('category_id_delete');
-        input_category_id.value = category_id;
+        delete_category_form = document.getElementById('delete_category_form');
+        delete_category_form.dataset.id = category_id;
 
         delete_category_form = document.getElementById('delete_category_form');
         delete_category_form.classList.add('flex');
@@ -55,7 +197,7 @@ category_menu.addEventListener('change', async () => {
     } else {
         delete_category_form.classList.add('hidden');
         delete_category_form.classList.remove('flex');
-        
+
     }
     if (!category_id) {
         category_show.innerHTML = '';
@@ -100,6 +242,25 @@ category_menu.addEventListener('change', async () => {
 
 });
 
+// Category Delete
+
+let delete_category_form = document.getElementById('delete_category_form');
+delete_category_form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    category_id = document.getElementById('category-options').value;
+
+
+    response = await fetch(`category_delete/${category_id}/`)
+    if (response.ok) {
+        const category_option = document.getElementById(`Category_${category_id}`);
+        category_option.remove();
+        delete_category_form.classList.add('hidden');
+        delete_category_form.classList.remove('flex');
+        category_show.innerHTML = '';
+    }
+})
+
 // Collection Section
 
 let collection_menu = document.getElementById('collection-options');
@@ -114,17 +275,17 @@ collection_menu.addEventListener('change', async () => {
         return;
     }
 
-    let input_collection_id =
-        document.getElementById('collection_id_delete');
-
-    input_collection_id.value = collection_id;
-
-    if (collection_menu.options[collection_menu.selectedIndex].text.trim().toLowerCase() !== 'other') {
-    let delete_collection_form =
+    let collection_form =
         document.getElementById('delete_collection_form');
 
-    delete_collection_form.classList.add('flex');
-    delete_collection_form.classList.remove('hidden');
+    collection_form.dataset.id = collection_id;
+
+    if (collection_menu.options[collection_menu.selectedIndex].text.trim().toLowerCase() !== 'other') {
+        let delete_collection_form =
+            document.getElementById('delete_collection_form');
+
+        delete_collection_form.classList.add('flex');
+        delete_collection_form.classList.remove('hidden');
     }
 
     let response =
@@ -168,4 +329,23 @@ collection_menu.addEventListener('change', async () => {
 
         collection_show.append(product_section);
     });
+});
+
+// Collection Delete
+
+let delete_collection_form = document.getElementById('delete_collection_form');
+delete_collection_form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    collection_id = delete_collection_form.dataset.id;
+
+    response = await fetch(`delete_collection/${collection_id}/`)
+
+    if (response.ok) {
+        const collection_option = document.getElementById(`Collection_${collection_id}`);
+        collection_option.remove();
+        delete_collection_form.classList.add('hidden');
+        delete_collection_form.classList.remove('flex');
+        collection_show.innerHTML = '';
+    }
 });

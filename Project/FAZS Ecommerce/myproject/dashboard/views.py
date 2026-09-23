@@ -1,6 +1,8 @@
+from ast import Delete
+
 from django.shortcuts import render,redirect, get_object_or_404
 from product.models import Category,Product,Collection
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_GET, require_POST
 
@@ -211,18 +213,18 @@ def add_product_to_category(req):
             product.save()
 
     return redirect('dashboard')
-        
-@require_POST
-def delete_category(req):
-    category_id = req.POST.get('category_id')
-    category = get_object_or_404(Category, id=category_id)
+ 
+#  Delete Category in category section       
+def category_delete(req, id):
+    category = get_object_or_404(Category, id=id)
     other = Category.objects.get(name='other')
 
     Product.objects.filter(category=category).update(category=other)
 
     category.delete()
-    return redirect('dashboard')
+    return HttpResponse(status=204)  # Return a 204 No Content response to indicate success without content
 
+# New Collection Products
 @require_GET
 def collection_products(req, id):
     collection = Collection.objects.get(id=id)
@@ -244,12 +246,10 @@ def collection_products(req, id):
     return JsonResponse({
         'products': data
     })
-    
-@require_POST
-def delete_collection(req):
-    collection_id = req.POST.get('collection_id')
 
-    collection = Collection.objects.get(id=collection_id)
+# Delete Collection    
+def delete_collection(req, id):
+    collection = Collection.objects.get(id=id)
     collection.delete()
 
-    return redirect('dashboard')
+    return HttpResponse(status=204)  # Return a 204 No Content response to indicate success without content

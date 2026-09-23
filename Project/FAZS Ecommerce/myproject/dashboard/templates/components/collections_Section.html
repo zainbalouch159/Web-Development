@@ -16,16 +16,12 @@
 
                 <form method="post"
                     id="delete_collection_form"
-                    class="hidden delete_collection_form"
-                    action="{% url 'delete_collection' %}">
+                    class="hidden delete_collection_form">
+                    
 
                     {% csrf_token %}
 
-                    <input type="text"
-                        name="collection_id"
-                        id="collection_id_delete"
-                        value=""
-                        hidden>
+                    
 
                     <button type="submit" class="text-red-500">
                         <i class="fa-solid fa-trash"></i>
@@ -43,7 +39,7 @@
 
                     {% for Collection in Collections %}
                     <option class="bg-orange-200"
-                        value="{{ Collection.id }}">
+                        value="{{ Collection.id }}" id="Collection_{{ Collection.id }}">
                         {{ Collection.title }}
                     </option>
                     {% endfor %}
