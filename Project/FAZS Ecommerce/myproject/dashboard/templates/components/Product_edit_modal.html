@@ -1,111 +1,185 @@
 <!-- Product-edit-modal  -->
 
 <!-- Background Overlay  -->
-<div id="Edit_Product_Overlay"
-    class=" fixed inset-0 hidden justify-center items-center bg-black/50 backdrop-blur-md  text-orange-500">
+<div
+  id="Edit_Product_Overlay"
+  class="fixed inset-0 hidden justify-center items-center bg-black/50 backdrop-blur-md text-orange-500"
+>
+  <!-- Modal  -->
+  <div
+    class="flex flex-col justify-center items-center w-[50dvw] h-[80dvh] bg-orange-100 rounded"
+  >
+    <div class="font-extrabold text-orange-500 m-5">Product Details</div>
 
-    <!-- Modal  -->
-    <div class="flex flex-col justify-center items-center w-[50dvw] h-[80dvh] bg-orange-100 rounded">
-        <div class="font-extrabold text-orange-500 m-5">Product Details</div>
+    <!-- Form  -->
+    <form
+      action="{% url 'update_product' %}"
+      id="product-edit-form"
+      method="post"
+      enctype="multipart/form-data"
+      class="flex flex-col justify-center items-center gap-1"
+    >
+      {% csrf_token %}
 
-        <!-- Form  -->
-        <form action="{% url 'update_product' %}" id="product-edit-form" method="post" enctype="multipart/form-data"
-            class="flex flex-col justify-center items-center gap-1">
+      <div class="flex items-center w-72 justify-between">
+        <!-- Name  -->
+        <label for="product-name-update" class="text-orange-500 font-bold mx-2"
+          >Name</label
+        >
+        <input
+          type="text"
+          id="product-name-update"
+          name="name"
+          class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500"
+        />
+      </div>
 
-            {% csrf_token %}
+      <!-- Description  -->
+      <div class="flex items-center w-72 justify-between">
+        <label
+          for="product-description-update"
+          class="resize-none text-orange-500 font-bold mx-2"
+          >Description</label
+        >
+        <textarea
+          name="description"
+          id="product-description-update"
+          rows="2"
+          class="resize-none rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500"
+        ></textarea>
+      </div>
 
-            <div class="flex items-center w-72 justify-between">
+      <!-- Price  -->
+      <div class="flex items-start w-72 justify-start">
+        <label for="product-price-update" class="text-orange-500 font-bold mx-2"
+          >Price</label
+        >
+        <span for="product-price-update" class="p-1">Rs</span
+        ><input
+          type="number"
+          name="price"
+          id="product-price-update"
+          class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-10"
+        />
+      </div>
 
-                <!-- Name  -->
-                <label for="product-name-update" class="text-orange-500 font-bold mx-2">Name</label>
-                <input type="text" id="product-name-update" name="name"
-                    class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500">
-            </div>
+      <!-- Stock  -->
+      <div class="flex items-start w-72 justify-start">
+        <label for="product-stock-update" class="text-orange-500 font-bold mx-2"
+          >Stock</label
+        >
+        <input
+          type="number"
+          name="stock"
+          id="product-stock-update"
+          class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-20"
+        />
+      </div>
 
-            <!-- Description  -->
-            <div class="flex  items-center w-72 justify-between">
-                <label for="product-description-update"
-                    class="resize-none text-orange-500 font-bold mx-2 ">Description</label>
-                <textarea name="description" id="product-description-update" rows="2"
-                    class="resize-none rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500"></textarea>
-            </div>
+      <!-- Image  -->
+      <div class="flex gap-1 items-center w-72 justify-start">
+        <img
+          for="product-image-update"
+          id="product-image-preview"
+          class="object-cover rounded w-10 h-10"
+          alt=""
+        />
 
-            <!-- Price  -->
-            <div class="flex items-start w-72 justify-start">
-                <label for="product-price-update" class="text-orange-500 font-bold mx-2">Price</label>
-                <span for="product-price-update" class="p-1">Rs</span><input type="number" name="price"
-                    id="product-price-update"
-                    class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-20 ">
-            </div>
+        <input
+          type="file"
+          name="image"
+          id="product-image-update"
+          class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-full"
+        />
+      </div>
 
-            <!-- Stock  -->
-            <div class="flex items-start w-72 justify-start">
-                <label for="product-stock-update" class="text-orange-500 font-bold mx-2">Stock</label>
-                <input type="number" name="stock" id="product-stock-update"
-                    class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-20">
-            </div>
+      <!-- Discount  -->
+      <div class="flex items-start w-72 justify-start">
+        <label
+          for="product-discount-update"
+          class="text-orange-500 font-bold mx-2"
+          >Discount</label
+        >
+        <input
+          type="number"
+          name="discount"
+          id="product-discount-update"
+          class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-5"
+        />%
+      </div>
 
-            <!-- Image  -->
-            <div class="flex gap-1 items-center w-72 justify-start ">
+      <!-- Info  -->
+      <div class="flex items-center w-72 justify-between">
+        <label for="product-info-update" class="text-orange-500 font-bold mx-2"
+          >Info</label
+        >
+        <textarea
+          type="text"
+          name="info"
+          id="product-info-update"
+          class="resize-none rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500"
+        ></textarea>
+      </div>
 
-                <img for="product-image-update" id="product-image-preview" class="object-cover rounded w-10 h-10"
-                    alt="">
+      <!-- Category  -->
+      <div class="flex items-center w-72 justify-start">
+        <label
+          for="product-category-update"
+          class="text-orange-500 font-bold mx-2"
+          >Category</label
+        >
+        <select
+          class="h-5 overflow-auto"
+          id="product-category-update"
+          name="category"
+          class="focus:outline-orange-500 bg-orange-200 text-orange-500 rounded h-full max-h-full min-h-0"
+        >
+          <option>Select</option>
+          {% for Category in Categories %}
+          <option value="{{ Category.id }}">{{ Category.name }}</option>
+          {% endfor %}
+        </select>
 
-                <input type="file" name="image" id="product-image-update"
-                    class=" rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-full">
-            </div>
+        <i
+          id="add-category-button-product"
+          class="fa-solid fa-plus text-orange-500 pl-2"
+        ></i>
+      </div>
 
-            <!-- Discount  -->
-            <div class="flex items-start w-72 justify-start">
-                <label for="product-discount-update" class="text-orange-500 font-bold mx-2">Discount</label>
-                <input type="number" name="discount" id="product-discount-update"
-                    class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-5">%
-            </div>
+      <!-- Collections  -->
+      <div class="flex items-center justify-start">
+        <label
+          for="product-collections-update"
+          class="text-orange-500 font-bold mx-2"
+          >Collections</label
+        >
+        <select
+          id="product-collections-update"
+          name="collections"
+          multiple
+          class="text-orange-500 bg-orange-200 rounded focus:outline-orange-500 overflow-y-auto h-7"
+        >
+          {% for Collection in Collections %}
+          <option class="p-1 text-orange-500" value="{{ Collection.id }}">
+            {{ Collection.title }}
+          </option>
+          {% endfor %}
+        </select>
 
-            <!-- Info  -->
-            <div class="flex items-center w-72 justify-between">
-                <label for="product-info-update" class="text-orange-500 font-bold mx-2">Info</label>
-                <textarea type="text" name="info" id="product-info-update"
-                    class="resize-none rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500"></textarea>
-            </div>
+        <div id="add-Collections-button">
+          <i class="fa-solid fa-plus text-orange-500 my-auto ml-2"></i>
+        </div>
+      </div>
 
-            <!-- Category  -->
-            <div class="flex items-center w-72 justify-start">
-                <label for="product-category-update" class="text-orange-500 font-bold mx-2">Category</label>
-                <select class="h-5 overflow-auto" id="product-category-update" name="category"
-                    class="focus:outline-orange-500 bg-orange-200 text-orange-500 rounded h-full max-h-full min-h-0">
-                    <option>Select</option>
-                    {% for Category in Categories %}
-                    <option value="{{ Category.id }}">{{ Category.name }} </option>
-                    {% endfor %}
-                </select>
-
-                <i id="add-category-button-product" class="fa-solid fa-plus text-orange-500  pl-2"></i>
-
-            </div>
-
-            <!-- Collections  -->
-            <div class="flex items-center  justify-start">
-                <label for="product-collections-update" class="text-orange-500 font-bold mx-2">Collections</label>
-                <select id="product-collections-update" name="collections" multiple
-                    class="text-orange-500 bg-orange-200 rounded focus:outline-orange-500 overflow-y-auto h-7">
-                    {% for Collection in Collections %}
-                    <option class="p-1 text-orange-500" value="{{ Collection.id }}">{{ Collection.title }} </option>
-                    {% endfor %}
-                </select>
-
-                <div id="add-Collections-button">
-                    <i class="fa-solid fa-plus text-orange-500 my-auto ml-2"></i>
-                </div>
-
-            </div>
-
-            <!-- Submit  -->
-            <button type="submit" class="p-2 bg-orange-500 text-white font-bold rounded">Save</button>
-
-        </form>
-    </div>
-
+      <!-- Submit  -->
+      <button
+        type="submit"
+        class="p-2 bg-orange-500 text-white font-bold rounded"
+      >
+        Save
+      </button>
+    </form>
+  </div>
 </div>
-{% include 'components/category-add-modal-product.html' %}
+{% include 'components/category-add-modal-product.html' %} 
 {% include 'components/Collections-add-modal.html' %}
