@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from product.models import Category,Product,Collection
+from product.models import Category,Product,Collection,Hero
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_GET, require_POST
@@ -13,7 +13,8 @@ def dashboard(req):
         category = Category.objects.all()
         product =Product.objects.all()
         collection =Collection.objects.all()
-        return render(req,'dashboard.html',{'Products':product,'Categories':category,'Collections':collection})
+        hero = Hero.objects.all()
+        return render(req,'dashboard.html',{'Products':product,'Categories':category,'Collections':collection,'Hero':hero})
     else:
         return redirect('home')
 
@@ -31,7 +32,7 @@ def add_category(req):
         })
         
 
-# Add Collections
+# Add Collections in product form
 @require_POST         
 def add_Collections(req):
     new_collection =  req.POST.get('collection-name')
@@ -175,9 +176,9 @@ def update_product(req):
 
     return redirect('dashboard')
 
-from django.http import JsonResponse
 
-# Category Products
+# Show products in category section
+@require_GET
 def category_products(req, id):
     products = Product.objects.filter(category_id=id)
 
@@ -222,7 +223,7 @@ def category_delete(req, id):
     category.delete()
     return HttpResponse(status=204)  # Return a 204 No Content response to indicate success without content
 
-# New Collection Products
+# Show products in collection section
 @require_GET
 def collection_products(req, id):
     collection = Collection.objects.get(id=id)
@@ -251,3 +252,20 @@ def delete_collection(req, id):
     collection.delete()
 
     return HttpResponse(status=204)  # Return a 204 No Content response to indicate success without content
+
+# Creating new collection in collection section
+@require_POST
+def add_product_to_collection(request):
+    collection_name = request.POST.get("collection-name")
+    product_ids = request.POST.getlist("collection-add-products")
+
+    collection, created = Collection.objects.get_or_create(
+        title=collection_name
+    )
+
+    products = Product.objects.filter(id__in=product_ids)
+
+    for product in products:
+        product.collections.add(collection)
+
+    return redirect("dashboard")

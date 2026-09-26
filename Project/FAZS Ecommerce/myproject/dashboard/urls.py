@@ -13,4 +13,5 @@ urlpatterns = [
    path('category_delete/<int:id>/',views.category_delete,name='category_delete'),
    path('collection_products/<int:id>/',views.collection_products,name='collection_products'),
    path('delete_collection/<int:id>/',views.delete_collection,name='delete_collection'),
+   path('add_product_to_collection/',views.add_product_to_collection,name='add_product_to_collection'),
 ]     

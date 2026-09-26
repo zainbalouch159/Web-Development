@@ -1,3 +1,5 @@
+<!-- Collections Section -->
+ 
 <div class="text-center text-orange-500 font-extrabold">
     Collections
 </div>
@@ -8,6 +10,7 @@
     <div id="Collection-add"
         class="shrink-0 h-10 rounded bg-orange-300 flex justify-between items-start font-extrabold">
 
+        <!-- Add Collection -->
         <i id="collection_add_btn"
             class="fa-solid fa-plus text-orange-500 my-auto ml-2"></i>
 
@@ -29,6 +32,7 @@
 
                 </form>
 
+                <!-- Select Collection -->
                 <select id="collection-options"
                     name="collection"
                     class="text-orange-500 rounded">
@@ -57,4 +61,4 @@
 
 </div>
 
-<!-- Collection add modal -->
+ {% include 'components/collection-add-modal-collection.html' %}

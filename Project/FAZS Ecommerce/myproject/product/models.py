@@ -30,9 +30,12 @@ class Product(models.Model):
     collections =models.ManyToManyField(Collection,blank=True)
     def __str__(self):
         return self.name
- 
+    
 class Hero(models.Model):
     title = models.CharField(max_length=100,blank=True)
     subtitle = models.CharField(max_length=300,blank=True)
     image = models.ImageField(blank=True)
+    discount = models.IntegerField(validators=[MinValueValidator(0)],default=0,blank=True,null=True)
     products = models.ForeignKey(Product,on_delete=models.CASCADE)
+    bg_color = models.CharField(max_length=7,default="#FFB86A",blank=True)
+    font_btn_color = models.CharField(max_length=7,default="#FF6900",blank=True)

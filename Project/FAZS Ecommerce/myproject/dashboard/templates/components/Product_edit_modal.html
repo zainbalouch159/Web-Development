@@ -72,7 +72,7 @@
           type="number"
           name="stock"
           id="product-stock-update"
-          class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-20"
+          class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-10"
         />
       </div>
 
@@ -104,7 +104,7 @@
           type="number"
           name="discount"
           id="product-discount-update"
-          class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-5"
+          class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-10"
         />%
       </div>
 
@@ -124,13 +124,15 @@
       <!-- Category  -->
       <div class="flex items-center w-72 justify-start">
         <label
-          for="product-category-update"
+          for="category-menu-product-edit"
           class="text-orange-500 font-bold mx-2"
           >Category</label
         >
+
+        <!-- Select category -->
         <select
           class="h-5 overflow-auto"
-          id="product-category-update"
+          id="category-menu-product-edit"
           name="category"
           class="focus:outline-orange-500 bg-orange-200 text-orange-500 rounded h-full max-h-full min-h-0"
         >
@@ -140,8 +142,9 @@
           {% endfor %}
         </select>
 
+        <!-- Add Category -->
         <i
-          id="add-category-button-product"
+          id="add-category-button-product-edit"
           class="fa-solid fa-plus text-orange-500 pl-2"
         ></i>
       </div>
@@ -153,8 +156,10 @@
           class="text-orange-500 font-bold mx-2"
           >Collections</label
         >
+
+        <!-- Select multiple collections -->
         <select
-          id="product-collections-update"
+          id="Collections-menu-product-edit"
           name="collections"
           multiple
           class="text-orange-500 bg-orange-200 rounded focus:outline-orange-500 overflow-y-auto h-7"
@@ -166,7 +171,8 @@
           {% endfor %}
         </select>
 
-        <div id="add-Collections-button">
+        <!-- Add Collections -->
+        <div id="add-Collections-button-product-edit">
           <i class="fa-solid fa-plus text-orange-500 my-auto ml-2"></i>
         </div>
       </div>
@@ -181,5 +187,3 @@
     </form>
   </div>
 </div>
-{% include 'components/category-add-modal-product.html' %} 
-{% include 'components/Collections-add-modal.html' %}

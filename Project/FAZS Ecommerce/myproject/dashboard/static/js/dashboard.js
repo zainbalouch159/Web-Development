@@ -55,11 +55,12 @@ product_edit.forEach(product => {
         let price = document.getElementById('product-price-update');
         price.value = data.price;
 
-
-        let category = document.getElementById('product-category-update');
+        // Category
+        let category = document.getElementById('category-menu-product-edit');
         category.value = data.category;
 
-        let collections = document.getElementById('product-collections-update');
+        // Collections
+        let collections = document.getElementById('Collections-menu-product-edit');
 
         let collection_options = collections.options;
         for (let option of collection_options) {
@@ -74,16 +75,19 @@ product_edit.forEach(product => {
 });
 
 
-// Collections Submit
-let Collections_form = document.getElementById('Collections-add-form');
+// Collections Submit Product
+let Collections_form = document.getElementById('Collections-add-form-product');
 
 Collections_form.addEventListener('submit', async (event) => {
 
     event.preventDefault();
 
+    // Overlay
+    let CollectionsAddOverlay = document.getElementById('Collections-add-Overlay-product');
     CollectionsAddOverlay.classList.remove('flex');
     CollectionsAddOverlay.classList.add('hidden');
 
+    // Fetching data
     let formdata = new FormData(Collections_form);
 
     let response = await fetch(Collections_form.action, {
@@ -93,16 +97,25 @@ Collections_form.addEventListener('submit', async (event) => {
 
     let data = await response.json();
 
+    // Creating a new option
     let new_Collections_option = document.createElement('option');
 
     new_Collections_option.value = data.id;
     new_Collections_option.textContent = data.title;
 
-    let Collections_menubar = document.getElementById('Collections-menu');
+    if (Collections_form.dataset.data === 'edit') {
+        let Collections_menubar = document.getElementById('Collections-menu-product-edit');
 
     Collections_menubar.appendChild(new_Collections_option);
 
-    new_Collections_option.selected = true;
+        new_Collections_option.selected = true;
+    }
+
+    else if (Collections_form.dataset.data === 'add') {
+        let Collections_menubar = document.getElementById('Collections-menu-product-add');
+        Collections_menubar.appendChild(new_Collections_option);
+        new_Collections_option.selected = true;
+    }
 });
 
 // Category Submit in product
@@ -126,7 +139,6 @@ category_form.addEventListener('submit', async (event) => {
     });
 
     let data = await response.json();
-
     // Create a new option element for the newly added category
     let new_category_option = document.createElement('option');
 
@@ -134,7 +146,15 @@ category_form.addEventListener('submit', async (event) => {
     new_category_option.textContent = data.name;
 
     if (category_form.dataset.data === 'edit') {
-        let category_menubar = document.getElementById('product-category-update');
+        let category_menubar = document.getElementById('category-menu-product-edit');
+        
+        category_menubar.appendChild(new_category_option);
+        
+        new_category_option.selected = true;
+    }
+
+    if (category_form.dataset.data === 'add') {
+        let category_menubar = document.getElementById('category-menu-product-add');
         
         category_menubar.appendChild(new_category_option);
         
