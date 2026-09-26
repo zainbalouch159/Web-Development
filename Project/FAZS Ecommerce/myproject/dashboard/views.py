@@ -13,7 +13,7 @@ def dashboard(req):
         category = Category.objects.all()
         product =Product.objects.all()
         collection =Collection.objects.all()
-        hero = Hero.objects.all()
+        hero = Hero.objects.first()
         return render(req,'dashboard.html',{'Products':product,'Categories':category,'Collections':collection,'Hero':hero})
     else:
         return redirect('home')
