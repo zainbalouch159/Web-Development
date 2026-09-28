@@ -106,7 +106,7 @@ Collections_form.addEventListener('submit', async (event) => {
     if (Collections_form.dataset.data === 'edit') {
         let Collections_menubar = document.getElementById('Collections-menu-product-edit');
 
-    Collections_menubar.appendChild(new_Collections_option);
+        Collections_menubar.appendChild(new_Collections_option);
 
         new_Collections_option.selected = true;
     }
@@ -129,7 +129,7 @@ category_form.addEventListener('submit', async (event) => {
     // Overlay
     categoryAddOverlay.classList.remove('flex');
     categoryAddOverlay.classList.add('hidden');
-    
+
     // Sending data to the backend using fetch API
     let formdata = new FormData(category_form);
 
@@ -147,17 +147,17 @@ category_form.addEventListener('submit', async (event) => {
 
     if (category_form.dataset.data === 'edit') {
         let category_menubar = document.getElementById('category-menu-product-edit');
-        
+
         category_menubar.appendChild(new_category_option);
-        
+
         new_category_option.selected = true;
     }
 
     if (category_form.dataset.data === 'add') {
         let category_menubar = document.getElementById('category-menu-product-add');
-        
+
         category_menubar.appendChild(new_category_option);
-        
+
         new_category_option.selected = true;
     }
 });
@@ -364,3 +364,46 @@ delete_collection_form.addEventListener('submit', async (event) => {
         collection_show.innerHTML = '';
     }
 });
+
+// Hero Section
+
+// Check Hero 
+
+async function check_hero() {
+    response = await fetch('hero_check')
+    data = await response.json()
+    if (data === true) {
+        hero_section = document.getElementById('hero_section')
+        hero_section.classList.add('flex')
+    } else {
+        hero_section = document.getElementById('emtpy_hero')
+        hero_section.classList.add('flex')
+    }
+
+}
+check_hero()
+
+// Overlay
+
+hero_section = document.getElementById('hero_section')
+hero_overlay = document.getElementById('hero_overlay')
+
+hero_section.addEventListener('mouseenter', () => {
+    hero_overlay.classList.add('flex')
+    hero_overlay.classList.remove('hidden')
+
+})
+hero_section.addEventListener('mouseleave', () => {
+    hero_overlay.classList.add('hidden')
+    hero_overlay.classList.remove('flex')
+
+})
+
+// Empty Hero 
+
+empt_hero = document.getElementById('emtpy_hero')
+empt_hero_overlay = document.getElementById('hero_overlay_empty')
+empt_hero.addEventListener('mouseleave', () => {
+    empt_hero_overlay.classList.add('flex')
+    empt_hero_overlay.classList.remove('hidden')
+})

@@ -269,3 +269,18 @@ def add_product_to_collection(request):
         product.collections.add(collection)
 
     return redirect("dashboard")
+
+# Hero Delete 
+def hero_delete(req):
+    hero = Hero.objects.first()
+    if hero:
+        hero.delete()
+    return redirect('dashboard')
+
+# Hero Check 
+def hero_check(req):
+    hero = Hero.objects.first()
+    if hero:
+        return JsonResponse({'Exist':True})
+    else:
+        return JsonResponse({'Exist':False})
