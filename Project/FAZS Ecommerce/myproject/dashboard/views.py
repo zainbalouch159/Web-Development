@@ -281,6 +281,6 @@ def hero_delete(req):
 def hero_check(req):
     hero = Hero.objects.first()
     if hero:
-        return JsonResponse({'Exist':True})
+        return JsonResponse({'exists':True})
     else:
-        return JsonResponse({'Exist':False})
+        return JsonResponse({'exists':False})

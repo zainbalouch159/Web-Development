@@ -370,17 +370,30 @@ delete_collection_form.addEventListener('submit', async (event) => {
 // Check Hero 
 
 async function check_hero() {
-    response = await fetch('hero_check')
-    data = await response.json()
-    if (data === true) {
-        hero_section = document.getElementById('hero_section')
-        hero_section.classList.add('flex')
-    } else {
-        hero_section = document.getElementById('emtpy_hero')
-        hero_section.classList.add('flex')
-    }
 
+    const response = await fetch('hero_check')
+
+    const data = await response.json()
+
+    console.log(data)
+
+    if (data.exists === true) {
+
+        const hero_section = document.getElementById('hero_section')
+
+        hero_section.classList.add('flex')
+        hero_section.classList.remove('hidden')
+
+    } else {
+
+        const empty_hero = document.getElementById('emtpy_hero')
+
+        empty_hero.classList.add('flex')
+        empty_hero.classList.remove('hidden')
+
+    }
 }
+
 check_hero()
 
 // Overlay
@@ -403,7 +416,12 @@ hero_section.addEventListener('mouseleave', () => {
 
 empt_hero = document.getElementById('emtpy_hero')
 empt_hero_overlay = document.getElementById('hero_overlay_empty')
-empt_hero.addEventListener('mouseleave', () => {
+empt_hero.addEventListener('mouseenter', () => {
     empt_hero_overlay.classList.add('flex')
     empt_hero_overlay.classList.remove('hidden')
+})
+
+empt_hero.addEventListener('mouseleave', () => {
+    empt_hero_overlay.classList.add('hidden')
+    empt_hero_overlay.classList.remove('flex')
 })

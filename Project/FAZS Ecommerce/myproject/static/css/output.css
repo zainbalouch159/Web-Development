@@ -206,8 +206,14 @@
   .right-1 {
     right: var(--spacing);
   }
+  .z-0 {
+    z-index: 0;
+  }
   .z-50 {
     z-index: 50;
+  }
+  .z-99 {
+    z-index: 99;
   }
   .m-2 {
     margin: calc(var(--spacing) * 2);

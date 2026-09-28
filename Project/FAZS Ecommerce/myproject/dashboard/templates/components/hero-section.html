@@ -4,7 +4,7 @@
 
 <div
   id="hero_section"
-  class="hidden relative m-3 h-[50dvh] rounded p-2 gap-5 justify-center items-center duration-300"
+  class="z-0 hidden relative m-3 h-[50dvh] rounded p-2 gap-5 justify-center items-center duration-300"
   style="background-color: {{ Hero.bg_color }};"
 >
   <div class="w-[50%] h-full flex items-center justify-center">
@@ -47,7 +47,7 @@
 <!-- Empty Overlay -->
 <div
   id="emtpy_hero"
-  class="hidden relative h-[50dvh] rounded justify-center items-center"
+  class="z-0 hidden relative h-[50dvh] rounded justify-center items-center m-3 p-2"
 >
   {% include 'components/hero_overlay_empty.html' %}
 
@@ -57,4 +57,3 @@
     class="object-contain h-full rounded w-fit"
   />
 </div>
-
