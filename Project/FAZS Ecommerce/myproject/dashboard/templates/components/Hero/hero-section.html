@@ -1,5 +1,6 @@
-<!-- Hero Section -->
 {% load static %}
+
+<!-- Hero Section -->
 <div class="text-center text-orange-500 font-extrabold">Hero Section</div>
 
 <div
@@ -18,13 +19,14 @@
   <div
     class="h-full relative flex flex-col gap-3 items-center justify-center w-[50%]"
   >
+    {% if Hero.discount %}
     <span
       class="absolute top-1 right-1 text-2xl"
       style="font-family: 'Bebas Neue'; color: {{ Hero.font_btn_color }};"
     >
       {{ Hero.discount }}% Off
     </span>
-
+    {% endif %}
     <h1 class="font-extrabold" style="color: {{ Hero.font_btn_color }};">
       {{ Hero.title }}
     </h1>
@@ -41,7 +43,14 @@
       Shop now
     </button>
   </div>
-  {% include 'components/hero_overlay.html' %}
+
+  <!-- Hero Overlay -->
+<div id="hero_overlay" class="rounded z-0 justify-center items-center gap-5 inset-0 bg-black/20 absolute hidden">
+    <form action="{% url 'hero_delete' %}">
+    <button type="submit" class="text-red-500 text-4xl font-extrabold">Delete</button>
+    </form>
+    <button id="hero_edit" class="text-4xl text-white font-extrabold">Edit</button>
+</div>
 </div>
 
 <!-- Empty Overlay -->
@@ -49,7 +58,10 @@
   id="emtpy_hero"
   class="z-0 hidden relative h-[50dvh] rounded justify-center items-center m-3 p-2"
 >
-  {% include 'components/hero_overlay_empty.html' %}
+  <!-- Hero overlay empty  -->
+<div id="hero_overlay_empty" class="rounded z-0 justify-center items-center gap-5 inset-0 bg-black/20 absolute hidden">
+    <button id="create_hero" class="text-green-500 text-4xl font-extrabold">Create</button>
+</div>
 
   <img
     src="{% static 'images/hero_empty.png' %}"
@@ -57,3 +69,6 @@
     class="object-contain h-full rounded w-fit"
   />
 </div>
+
+
+  {% include 'components/Hero/hero_modal.html' %}

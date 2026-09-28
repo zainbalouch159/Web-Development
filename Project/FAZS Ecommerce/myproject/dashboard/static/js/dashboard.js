@@ -425,3 +425,17 @@ empt_hero.addEventListener('mouseleave', () => {
     empt_hero_overlay.classList.add('hidden')
     empt_hero_overlay.classList.remove('flex')
 })
+
+// Create Hero in empty Hero 
+
+create_herobtn = document.getElementById('create_hero')
+create_herobtn.addEventListener('click',(event)=>{
+    if (event.target === create_herobtn){
+        console.log("Create btn clicked")
+    hero_add_form_overlay = document.getElementById('Hero-add-Overlay')
+    console.log(hero_add_form_overlay)
+    hero_add_form_overlay.classList.add('flex')
+    hero_add_form_overlay.classList.remove('hidden')
+    }
+})
+

@@ -6,17 +6,17 @@
  
     <!-- Modal  -->
     <div class="flex flex-col justify-center items-center w-[50dvw] h-[50dvh] bg-orange-100 rounded">
-        <div class="font-extrabold text-orange-500 m-5">Add Category</div>
+        <div class="font-extrabold  text-orange-500 m-5">Add Category</div>
 
         <!-- Form  -->
         <form action="{% url 'add_category' %}" id="category-add-form-product" method="post"
-            class="flex flex-col justify-center items-center gap-2">
+            class="flex flex-col justify-center items-center gap-2 text-orange-500">
 
             {% csrf_token %}
 
             <div class="flex items-center w-72 justify-between">
 
-                <label for="category-name-add-product" class="text-orange-500 font-bold mx-2">Name</label>
+                <label for="category-name-add-product" class=" font-bold mx-2">Name</label>
                 <input type="text"  name="category-name"
                     class="rounded px-1 border border-orange-500 outline-orange-500 focus:outline-orange-500" placeholder="Enter Category name">
             </div>

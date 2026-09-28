@@ -274,6 +274,7 @@ def add_product_to_collection(request):
 def hero_delete(req):
     hero = Hero.objects.first()
     if hero:
+        hero.image.delete()
         hero.delete()
     return redirect('dashboard')
 
@@ -284,3 +285,41 @@ def hero_check(req):
         return JsonResponse({'exists':True})
     else:
         return JsonResponse({'exists':False})
+
+# Adding new hero
+@require_POST
+def add_hero(request):
+
+    title = request.POST.get("title")
+    subtitle = request.POST.get("subtitle")
+    discount = request.POST.get("discount")
+    product_id = request.POST.get("products")
+    bg_color = request.POST.get("bg_color")
+    font_btn_color = request.POST.get("font_btn_color")
+
+    image = request.FILES.get("image")
+
+    # Check discount
+    if discount == "":
+        discount = 0
+
+    # Check colors
+    if bg_color == "":
+        bg_color = "#FFB86A"
+
+    if font_btn_color == "":
+        font_btn_color = "#FF6900"
+
+    product = Product.objects.get(id=product_id)
+
+    Hero.objects.create(
+        title=title,
+        subtitle=subtitle,
+        image=image,
+        discount=discount,
+        products=product,
+        bg_color=bg_color,
+        font_btn_color=font_btn_color,
+    )
+
+    return redirect("dashboard")
