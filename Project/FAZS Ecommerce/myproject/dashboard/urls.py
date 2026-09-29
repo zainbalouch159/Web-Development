@@ -17,4 +17,6 @@ urlpatterns = [
    path('hero_delete/',views.hero_delete,name='hero_delete'),
    path('hero_check/',views.hero_check,name='hero_check'),
    path('add_hero/',views.add_hero,name='add_hero'),
+   path('get_hero/',views.get_hero,name='get_hero'),
+   path('update_hero/',views.update_hero,name='update_hero'),
 ]     

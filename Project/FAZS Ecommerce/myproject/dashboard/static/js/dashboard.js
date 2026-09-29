@@ -399,31 +399,31 @@ check_hero()
 // Overlay
 
 hero_section = document.getElementById('hero_section')
-hero_overlay = document.getElementById('hero_overlay')
+hero_overlay_clk = document.getElementById('hero_overlay')
 
 hero_section.addEventListener('mouseenter', () => {
-    hero_overlay.classList.add('flex')
-    hero_overlay.classList.remove('hidden')
+    hero_overlay_clk.classList.add('flex')
+    hero_overlay_clk.classList.remove('hidden')
 
 })
-hero_section.addEventListener('mouseleave', () => {
-    hero_overlay.classList.add('hidden')
-    hero_overlay.classList.remove('flex')
+hero_section.addEventListener('mouseleave', () => { 
+    hero_overlay_clk.classList.add('hidden')
+    hero_overlay_clk.classList.remove('flex')
 
 })
 
 // Empty Hero 
 
 empt_hero = document.getElementById('emtpy_hero')
-empt_hero_overlay = document.getElementById('hero_overlay_empty')
+empt_hero_overlay_clk = document.getElementById('hero_overlay_empty')
 empt_hero.addEventListener('mouseenter', () => {
-    empt_hero_overlay.classList.add('flex')
-    empt_hero_overlay.classList.remove('hidden')
+    empt_hero_overlay_clk.classList.add('flex')
+    empt_hero_overlay_clk.classList.remove('hidden')
 })
 
 empt_hero.addEventListener('mouseleave', () => {
-    empt_hero_overlay.classList.add('hidden')
-    empt_hero_overlay.classList.remove('flex')
+    empt_hero_overlay_clk.classList.add('hidden')
+    empt_hero_overlay_clk.classList.remove('flex')
 })
 
 // Create Hero in empty Hero 
@@ -431,11 +431,43 @@ empt_hero.addEventListener('mouseleave', () => {
 create_herobtn = document.getElementById('create_hero')
 create_herobtn.addEventListener('click',(event)=>{
     if (event.target === create_herobtn){
-        console.log("Create btn clicked")
     hero_add_form_overlay = document.getElementById('Hero-add-Overlay')
-    console.log(hero_add_form_overlay)
     hero_add_form_overlay.classList.add('flex')
     hero_add_form_overlay.classList.remove('hidden')
     }
 })
 
+// Hero Edit 
+
+hero_edit = document.getElementById('hero_edit')
+hero_edit.addEventListener('click',async ()=>{
+    response = await fetch('get_hero/')
+    data = await response.json()
+
+    form = document.getElementById('hero-add-form')
+    form.action= 'update_hero/'
+    
+    title = document.getElementById('hero-title')
+    title.value=data.title
+
+    subtitle = document.getElementById('hero-subtitle')
+    subtitle.value = data.subtitle
+
+    if (data.discount){
+        discount = document.getElementById('hero-discount')
+        discount.value = data.discount
+    }
+
+    product = document.getElementById('hero-product')
+    product.value = data.product_id
+
+    bg_clr = document.getElementById('hero-bg-color')
+    bg_clr.value = data.bg_clr
+
+    fnt_btn_color = document.getElementById('hero-font-btn-color')
+    fnt_btn_color.value = data.fnt_btn_color
+
+    overlay = document.getElementById('Hero-add-Overlay')
+    overlay.classList.add('flex')
+    overlay.classList.remove('hidden')
+})

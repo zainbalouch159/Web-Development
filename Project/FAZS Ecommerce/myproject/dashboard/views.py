@@ -323,3 +323,42 @@ def add_hero(request):
     )
 
     return redirect("dashboard")
+
+def get_hero(request):
+    hero = Hero.objects.first()
+
+    return JsonResponse({
+        'title': hero.title,
+        'subtitle': hero.subtitle,
+        'discount': hero.discount,
+        'product_id': hero.products.id if hero.products else '',
+        'bg_clr': hero.bg_color,
+        'fnt_btn_color': hero.font_btn_color,
+    })
+
+# Hero Update 
+@require_POST
+def update_hero(request):
+    hero = Hero.objects.first()
+
+    hero.title = request.POST.get('title')
+    hero.subtitle = request.POST.get('subtitle')
+    hero.discount = request.POST.get('discount') or None
+
+    product_id = request.POST.get('products')
+
+    if product_id:
+        hero.products = Product.objects.get(id=product_id)
+    else:
+        hero.products = None
+
+    hero.bg_color = request.POST.get('bg_color')
+    hero.font_btn_color = request.POST.get('font_btn_color')
+
+    # New image only if user selected one
+    if request.FILES.get('image'):
+        hero.image = request.FILES['image']
+
+    hero.save()
+
+    return redirect('dashboard')

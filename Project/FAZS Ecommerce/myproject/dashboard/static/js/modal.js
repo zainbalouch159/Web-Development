@@ -1,18 +1,18 @@
 // Product Add
 let productAddBtn = document.getElementById('Product-add');
-let overlay = document.getElementById('Overlay');
+let overlay_product_add = document.getElementById('product_add_Overlay');
 
 // Product Add Overlay
-if (productAddBtn && overlay) {
+if (productAddBtn && overlay_product_add) {
     productAddBtn.addEventListener('click', () => {
-        overlay.classList.add('flex');
-        overlay.classList.remove('hidden');
+        overlay_product_add.classList.add('flex');
+        overlay_product_add.classList.remove('hidden');
     });
 
-    overlay.addEventListener('click', (event) => {
-        if (event.target === overlay) {
-            overlay.classList.remove('flex');
-            overlay.classList.add('hidden');
+    overlay_product_add.addEventListener('click', (event) => {
+        if (event.target === overlay_product_add) {
+            overlay_product_add.classList.remove('flex');
+            overlay_product_add.classList.add('hidden');
         }
     });
 }
@@ -120,3 +120,15 @@ collectionAddOverlay.addEventListener('click', (event) => {
         collectionAddOverlay.classList.add('hidden');
     }
 });
+
+// Hero Overlay
+const hero_overlay = document.getElementById('Hero-add-Overlay')
+
+hero_overlay.addEventListener('click', (event) => {
+    if (event.target === hero_overlay) {
+        console.log('hero overlay clicked')
+
+        hero_overlay.classList.add('hidden')
+        hero_overlay.classList.remove('flex')
+    }
+})
