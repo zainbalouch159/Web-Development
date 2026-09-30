@@ -17,7 +17,7 @@
       id="product-add-form"
       method="post"
       enctype="multipart/form-data"
-      class="flex flex-col justify-center items-center gap-2"
+      class="flex flex-col justify-center items-center gap-2 outline-none focus:outline-none"
     >
       {% csrf_token %}
 
@@ -64,7 +64,7 @@
           type="number"
           name="price"
           id="product-price-add"
-          class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-10"
+          class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500  min-w-10 max-w-full field-sizing-content"
         />
       </div>
 
@@ -79,7 +79,7 @@
           name="stock"
           id="product-stock-add"
           required
-          class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 w-10"
+          class="rounded pl-1 border border-orange-500 outline-orange-500 focus:outline-orange-500 min-w-10 max-w-full field-sizing-content"
         />
       </div>
 
@@ -186,7 +186,7 @@
       <!-- Submit -->
       <button
         type="submit"
-        class="p-2 bg-orange-500 text-white font-bold rounded"
+        class="p-2 bg-orange-500 text-white font-bold rounded outline-orange-500 "
       >
         Save
       </button>
