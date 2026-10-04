@@ -1,7 +1,8 @@
-{% extends 'main.html' %} 
-{% load static %} 
-{% block content %}
+{% extends 'main.html' %}
+ {% load static %}
+ {% block content %}
  {% include "components/navbar.html" %}
+ 
 <!-- =========================
      HERO SECTION
 ========================= -->
@@ -15,14 +16,13 @@
   <!-- Hero Image -->
   <div class="w-[50%] h-full flex items-center justify-center">
     {% if hero.image %}
-
+    <a href="{% url 'product-detail' hero.product.id %}">
     <img
       src="{{ hero.image.url }}"
       alt="{{ hero.title }}"
-      loading="eager"
       class="object-contain h-full rounded w-fit"
     />
-
+</a>
     {% endif %}
   </div>
 
@@ -81,21 +81,21 @@
     class="left-arrow hidden absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl hover:bg-orange-600"
     onclick="scrollRow(this, -1)"
   >
-    ←
+    <i class="fa-solid fa-chevron-left"></i>
   </button>
 
-  <!-- Categories -->
+  <!-- Categories Names -->
   <div
     class="horizontal-row flex gap-4 overflow-x-auto scroll-smooth px-12 py-3"
   >
     {% for category in Categories %} 
     {% if category.product_set.exists %}
 
-    <div
+    <a href="{% url 'category-products' category.id %}"
       class="flex-shrink-0 px-6 py-3 rounded-lg bg-orange-100 text-orange-500 font-extrabold whitespace-nowrap cursor-pointer hover:bg-orange-500 hover:text-white duration-300"
     >
       {{ category.name }}
-    </div>
+    </a>
 
     {% endif %}
      {% endfor %}
@@ -106,59 +106,18 @@
     class="right-arrow hidden absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl hover:bg-orange-600"
     onclick="scrollRow(this, 1)"
   >
-    →
+    <i class="fa-solid fa-chevron-right"></i>
   </button>
 </div>
 
-<!-- =========================
-     COLLECTIONS
-========================= -->
 
-<div class="text-center m-8 font-extrabold text-3xl text-orange-500">
-  Discover our Collections
-</div>
-
-<div class="carousel-wrapper relative mx-5">
-  <!-- Left Arrow -->
-  <button
-    class="left-arrow hidden absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl"
-    onclick="scrollRow(this, -1)"
-  >
-    ←
-  </button>
-
-  <!-- Collections -->
-  <div
-    class="horizontal-row flex gap-4 overflow-x-auto scroll-smooth px-12 py-3"
-  >
-    {% for collection in Collections %} 
-    {% if collection.product_set.exists %}
-
-    <div
-      class="flex-shrink-0 px-7 py-3 rounded-lg bg-orange-100 text-orange-500 font-extrabold whitespace-nowrap cursor-pointer"
-    >
-      {{ collection.title }}
-    </div>
-
-    {% endif %}
-     {% endfor %}
-  </div>
-
-  <!-- Right Arrow -->
-  <button
-    class="right-arrow hidden absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl"
-    onclick="scrollRow(this, 1)"
-  >
-    →
-  </button>
-</div>
 
 <!-- =========================
      COLLECTION PRODUCTS
 ========================= -->
 
-{% for collection in Collections %} 
-{% if collection.product_set.exists %}
+{% for collection in Collections %}
+ {% if collection.product_set.exists %}
 
 <div class="m-5">
   <h2 class="text-2xl font-extrabold text-orange-500 mb-4">
@@ -171,11 +130,12 @@
       class="left-arrow hidden absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl"
       onclick="scrollRow(this, -1)"
     >
-      ←
+     <i class="fa-solid fa-chevron-left"></i>
     </button>
 
     <!-- Products -->
-    <div
+    <a
+    href="{% url 'product-detail' product.id %}"
       class="horizontal-row flex gap-5 overflow-x-auto scroll-smooth px-12 py-3"
     >
       {% for product in products %} 
@@ -191,8 +151,8 @@
         >
           {{ product.discount }}% Off
         </span>
-        {% endif %}
-         {% if product.image %}
+        {% endif %} 
+        {% if product.image %}
         <img
           src="{{ product.image.url }}"
           alt="{{ product.name }}"
@@ -209,8 +169,7 @@
         <p class="text-sm text-center line-clamp-2 text-orange-500">
           {{ product.description }}
         </p>
-        {% endif %}
-         {% if product.category %}
+        {% endif %} {% if product.category %}
         <span class="text-orange-400 text-xs font-bold">
           {{ product.category.name }}
         </span>
@@ -224,22 +183,23 @@
         </div>
       </div>
 
-      {% endif %} 
-      {% endfor %}
-    </div>
+      {% endif %}
+       {% endfor %}
+    </a
+    >
 
     <!-- Right Arrow -->
     <button
       class="right-arrow hidden absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl"
       onclick="scrollRow(this, 1)"
     >
-      →
+      <i class="fa-solid fa-chevron-right"></i>
     </button>
   </div>
 </div>
 
-{% endif %}
- {% endfor %}
+{% endif %} 
+{% endfor %}
 
 <!-- =========================
      ALL PRODUCTS
@@ -255,7 +215,7 @@
     class="left-arrow hidden absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl"
     onclick="scrollRow(this, -1)"
   >
-    ←
+    <i class="fa-solid fa-chevron-left"></i>
   </button>
 
   <!-- All Products -->
@@ -264,7 +224,8 @@
   >
     {% for product in products %}
 
-    <div
+    <a
+      href="{% url 'product-detail' product.id %}"
       class="flex-shrink-0 relative flex flex-col items-center justify-center gap-2 w-60 min-h-[350px] rounded-xl bg-orange-100 p-3 shadow-md hover:shadow-xl"
     >
       {% if product.discount %}
@@ -292,8 +253,8 @@
       <p class="text-orange-500 text-sm text-center line-clamp-2">
         {{ product.description }}
       </p>
-      {% endif %} 
-      {% if product.category %}
+      {% endif %}
+       {% if product.category %}
       <span class="text-orange-400 text-xs font-bold">
         {{ product.category.name }}
       </span>
@@ -305,7 +266,7 @@
         <span>Add to cart</span>
         <span>Rs {{ product.price }}</span>
       </div>
-    </div>
+    </a>
 
     {% endfor %}
   </div>
@@ -315,22 +276,22 @@
     class="right-arrow hidden absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl"
     onclick="scrollRow(this, 1)"
   >
-    →
+    <i class="fa-solid fa-chevron-right"></i>
   </button>
 </div>
 
 <style>
-.horizontal-row {
+  .horizontal-row {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE/Edge */
-}
+  }
 
-.horizontal-row::-webkit-scrollbar {
+  .horizontal-row::-webkit-scrollbar {
     display: none; /* Chrome, Safari */
-}
+  }
 </style>
 {% include "components/footer.html" %} 
-{% endblock %} 
-{% block script %}
+{% endblock %}
+ {% block script %}
 <script src="{% static 'js/home.js' %}" defer></script>
 {% endblock %}

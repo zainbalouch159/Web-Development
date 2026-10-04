@@ -1,0 +1,63 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% include "components/navbar.html" %}
+
+<div class="text-center m-8">
+    <h1 class="text-3xl font-extrabold text-orange-500">
+        {{ category.name }}
+    </h1>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mx-5">
+
+    {% for product in products %}
+
+    <div
+      class="relative flex flex-col items-center justify-center gap-2 rounded-xl bg-orange-100 p-3 shadow-md hover:shadow-xl"
+    >
+
+        {% if product.discount %}
+        <span class="absolute top-2 right-2 text-orange-500 text-xl">
+            {{ product.discount }}% Off
+        </span>
+        {% endif %}
+
+        {% if product.image %}
+        <img
+          src="{{ product.image.url }}"
+          alt="{{ product.name }}"
+          class="object-contain max-h-[200px] w-full rounded"
+        />
+        {% endif %}
+
+        <h3 class="text-orange-500 font-extrabold text-lg text-center">
+            {{ product.name }}
+        </h3>
+
+        {% if product.description %}
+        <p class="text-sm text-center text-orange-500">
+            {{ product.description }}
+        </p>
+        {% endif %}
+
+        <div class="p-2 rounded bg-orange-500 mt-3 font-extrabold text-white">
+            Rs {{ product.price }}
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <p class="text-center col-span-full">
+        No products found in this category.
+    </p>
+
+    {% endfor %}
+
+</div>
+
+{% include "components/footer.html" %}
+
+{% endblock %}
