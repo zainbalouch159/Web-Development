@@ -8,7 +8,7 @@ from django.utils.text import slugify
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField( blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -21,7 +21,7 @@ class Category(models.Model):
 
 class Collection(models.Model):
     title = models.CharField(max_length=100)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField( blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -35,7 +35,7 @@ class Collection(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField( blank=True)
 
     description = models.TextField(null=True, blank=True)
     price = models.IntegerField(
