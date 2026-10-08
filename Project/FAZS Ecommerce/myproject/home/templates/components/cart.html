@@ -1,0 +1,152 @@
+{% extends 'main.html' %}
+ {% load static %} {% block content %} 
+{% include "components/navbar.html" %}
+
+<div class="m-5">
+  <div class="max-w-5xl mx-auto">
+    <!-- Heading -->
+
+    <h1 class="text-4xl font-extrabold text-orange-500 mb-8">My Cart</h1>
+
+    {% if cart_items %}
+
+    <div class="flex flex-col gap-5">
+      {% for item in cart_items %}
+
+      <!-- Cart Item -->
+
+      <div
+        class="bg-orange-100 rounded-xl p-5 shadow-md flex flex-col md:flex-row items-center gap-5"
+      >
+        <!-- Product Image -->
+
+        <div
+          class="w-32 h-32 flex items-center justify-center bg-white rounded-lg p-3 shrink-0"
+        >
+          {% if item.product.image %}
+
+          <img
+            src="{{ item.product.image.url }}"
+            alt="{{ item.product.name }}"
+            class="w-full h-full object-contain rounded"
+          />
+
+          {% endif %}
+        </div>
+
+        <!-- Product Information -->
+
+        <div class="flex-1 text-center md:text-left">
+          <h2 class="text-2xl font-extrabold text-orange-500">
+            {{ item.product.name }}
+          </h2>
+
+          <p class="text-orange-500 font-bold mt-1">
+            Rs {{ item.product.price }}
+          </p>
+        </div>
+
+        <!-- Quantity -->
+
+        <!-- Quantity -->
+        <div class="flex items-center gap-2">
+          
+          <span class="font-extrabold text-orange-500 mr-2"> Quantity: </span>
+
+          <a
+            href="{% url 'update-cart' item.id 'decrease' %}"
+            class="w-9 h-9 flex items-center justify-center rounded-lg bg-orange-500 text-white font-extrabold text-xl hover:bg-orange-600 duration-300"
+          >
+            −
+          </a>
+
+          <span
+            class="min-w-[45px] text-center bg-white px-3 py-2 rounded-lg font-extrabold text-orange-500"
+          >
+            {{ item.quantity }}
+          </span>
+
+          <a
+            href="{% url 'update-cart' item.id 'increase' %}"
+            class="w-9 h-9 flex items-center justify-center rounded-lg bg-orange-500 text-white font-extrabold text-xl hover:bg-orange-600 duration-300"
+          >
+            +
+          </a>
+        </div>
+
+        <!-- Item Total -->
+
+        <div class="text-center min-w-[120px]">
+          <p class="text-sm font-bold text-orange-500">Total</p>
+
+          <p class="text-xl font-extrabold text-orange-500">
+            Rs {% widthratio item.product.price 1 item.quantity %}
+          </p>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+
+    <!-- Cart Summary -->
+
+    <div
+      class="mt-10 bg-orange-100 rounded-xl p-6 shadow-md flex flex-col md:flex-row justify-between items-center gap-5"
+    >
+      <div>
+        <p class="text-lg font-bold text-orange-500">
+          Total Items: {{ cart_items|length }}
+        </p>
+      </div>
+
+      <div class="flex items-center gap-5">
+        <span class="text-2xl font-extrabold text-orange-500"> Total </span>
+
+        <span class="text-3xl font-extrabold text-orange-500">
+          Rs {{ cart_total}}
+        </span>
+      </div>
+
+      <button
+        type="button"
+        class="px-7 py-3 rounded-lg bg-orange-500 text-white font-extrabold hover:bg-orange-600 duration-300"
+      >
+        Checkout
+      </button>
+    </div>
+
+    {% else %}
+
+    <!-- Empty Cart -->
+
+    <div
+      class="min-h-[400px] flex flex-col items-center justify-center bg-orange-100 rounded-xl shadow-md p-10"
+    >
+      <i class="fa-solid fa-cart-shopping text-6xl text-orange-500 mb-5"></i>
+
+      <h2 class="text-3xl font-extrabold text-orange-500">
+        Your Cart is Empty
+      </h2>
+
+      <p class="text-orange-500 font-bold mt-2">
+        Add some products to your cart.
+      </p>
+
+      <a
+        href="{% url 'home' %}"
+        class="mt-6 px-6 py-3 rounded-lg bg-orange-500 text-white font-extrabold hover:bg-orange-600 duration-300"
+      >
+        Continue Shopping
+      </a>
+    </div>
+
+    {% endif %}
+  </div>
+</div>
+
+{% include "components/footer.html" %}
+ {% endblock %} 
+ {% block script %}
+
+
+{% endblock %}

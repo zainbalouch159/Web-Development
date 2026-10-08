@@ -1,358 +1,291 @@
-{% extends 'main.html' %}
-{% load static %}
+{% extends 'main.html' %} 
+{% load static %} 
 {% block content %}
-
-{% include "components/navbar.html" %}
+ {% include "components/navbar.html" %}
 
 <!-- =========================
      PRODUCT DETAIL
 ========================= -->
 
 <div class="m-5">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <!-- Product Image -->
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div class="bg-orange-100 rounded-xl p-8 flex items-center justify-center">
+      {% if product.image %}
 
-        <!-- Product Image -->
+      <img
+        src="{{ product.image.url }}"
+        alt="{{ product.name }}"
+        class="max-h-[450px] w-full object-contain rounded"
+      />
 
-        <div class="bg-orange-100 rounded-xl p-8 flex items-center justify-center">
+      {% endif %}
+    </div>
 
-            {% if product.image %}
+    <!-- Product Information -->
+
+    <div class="flex flex-col justify-center gap-4">
+      <h1 class="text-4xl font-extrabold text-orange-500">
+        {{ product.name }}
+      </h1>
+
+      {% if product.category %}
+
+      <span class="text-orange-500 font-extrabold text-lg">
+        {{ product.category.name }}
+      </span>
+
+      {% endif %}
+
+      <div class="text-3xl font-extrabold text-orange-500">
+        Rs {{ product.price }}
+      </div>
+
+      {% if product.discount %}
+
+      <span class="text-orange-500 font-extrabold text-xl">
+        {{ product.discount }}% Off
+      </span>
+
+      {% endif %} {% if product.description %}
+
+      <p class="text-orange-500 leading-7 text-lg font-extrabold">
+        {{ product.description }}
+      </p>
+
+      {% endif %} {% if product.info %}
+
+      <p class="text-orange-500 leading-7 text-lg font-extrabold">
+        {{ product.info }}
+      </p>
+
+      {% endif %}
+
+      <p class="font-extrabold text-orange-500">Stock: {{ product.stock }}</p>
+
+      <!-- Quantity -->
+
+      <form method="POST">
+        {% csrf_token %}
+
+        <div class="flex items-center gap-3">
+          <label class="font-extrabold text-orange-500"> Quantity: </label>
+
+          <input
+            type="number"
+            name="quantity"
+            value="1"
+            min="1"
+            max="{{ product.stock }}"
+            class="w-20 border border-orange-300 focus:outline-orange-500 text-orange-500 rounded p-2 text-center"
+          />
+        </div>
+
+        <div class="flex gap-3 mt-4">
+          <button
+            type="submit"
+            formaction="{% url 'add-to-cart' product.id %}"
+            class="px-6 py-3 rounded-lg bg-orange-500 text-white font-extrabold hover:bg-orange-600 duration-300"
+          >
+            Add to Cart
+          </button>
+
+          <button
+            type="submit"
+            formaction="{% url 'buy-now' product.id %}"
+            class="px-6 py-3 rounded-lg bg-black text-white font-extrabold hover:bg-gray-800 duration-300"
+          >
+            Buy Now
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================
+         RELATED PRODUCTS
+    ========================= -->
+
+  <div class="mt-16">
+    <h2 class="text-3xl font-extrabold text-orange-500 mb-6">
+      Related Products
+    </h2>
+
+    <!-- =========================
+             CATEGORY RELATED PRODUCTS
+        ========================= -->
+
+    {% if category_products %}
+
+    <div class="relative mb-10">
+      <!-- Left Arrow -->
+
+      <button
+        class="left-arrow hidden absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl"
+        onclick="scrollRow(this, -1)"
+      >
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <!-- Products Row -->
+
+      <div
+        class="flex w-full gap-6 overflow-x-auto scroll-smooth px-12 py-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {% for item in category_products %}
+
+        <a href="{% url 'product-detail' item.slug %}" class="shrink-0">
+          <div
+            class="relative flex shrink-0 flex-col items-center justify-center gap-2 w-72 h-[350px] rounded-xl bg-orange-100 p-4 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+          >
+            {% if item.discount %}
+
+            <span
+              class="absolute top-2 right-2 text-orange-500 text-xl"
+              style="font-family: &quot;Bebas Neue&quot;"
+            >
+              {{ item.discount }}% Off
+            </span>
+
+            {% endif %} {% if item.image %}
 
             <img
-                src="{{ product.image.url }}"
-                alt="{{ product.name }}"
-                class="max-h-[450px] w-full object-contain rounded"
+              src="{{ item.image.url }}"
+              alt="{{ item.name }}"
+              loading="lazy"
+              class="object-contain max-h-[200px] w-full rounded"
             />
 
             {% endif %}
 
-        </div>
+            <h3 class="text-orange-500 font-extrabold text-lg text-center">
+              {{ item.name }}
+            </h3>
 
+            {% if item.description %}
 
-        <!-- Product Information -->
-
-        <div class="flex flex-col justify-center gap-4">
-
-            <h1 class="text-4xl font-extrabold text-orange-500">
-                {{ product.name }}
-            </h1>
-
-            {% if product.category %}
-
-            <span class="text-orange-400 font-bold">
-                {{ product.category.name }}
-            </span>
-
-            {% endif %}
-
-            <div class="text-3xl font-extrabold text-orange-500">
-                Rs {{ product.price }}
-            </div>
-
-            {% if product.discount %}
-
-            <span class="text-orange-500 font-bold text-xl">
-                {{ product.discount }}% Off
-            </span>
-
-            {% endif %}
-
-            {% if product.description %}
-
-            <p class="text-orange-600 leading-7">
-                {{ product.description }}
-            </p>
-
-            {% endif %}
-
-            {% if product.info %}
-
-            <p class="text-orange-600 leading-7">
-                {{ product.info }}
-            </p>
-
-            {% endif %}
-
-            <p class="font-bold text-orange-500">
-                Stock: {{ product.stock }}
-            </p>
-
-
-            <!-- Quantity -->
-
-            <div class="flex items-center gap-3">
-
-                <label class="font-bold text-orange-500">
-                    Quantity:
-                </label>
-
-                <input
-                    type="number"
-                    name="quantity"
-                    value="1"
-                    min="1"
-                    max="{{ product.stock }}"
-                    class="w-20 border border-orange-300 focus:outline-orange-500 text-orange-500 rounded p-2 text-center"
-                >
-
-            </div>
-
-
-            <!-- Buttons -->
-
-            <div class="flex gap-3 mt-4">
-
-                <button
-                    type="button"
-                    class="px-6 py-3 rounded-lg bg-orange-500 text-white font-extrabold hover:bg-orange-600 duration-300"
-                >
-                    Add to Cart
-                </button>
-
-                <button
-                    type="button"
-                    class="px-6 py-3 rounded-lg bg-black text-white font-extrabold hover:bg-gray-800 duration-300"
-                >
-                    Buy Now
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =========================
-         RELATED PRODUCTS
-    ========================= -->
-
-    <div class="mt-16">
-
-        <h2 class="text-3xl font-extrabold text-orange-500 mb-6">
-            Related Products
-        </h2>
-
-
-        <!-- =========================
-             CATEGORY RELATED PRODUCTS
-        ========================= -->
-
-        {% if category_products %}
-
-        <div class="carousel-wrapper relative mb-10">
-
-            <button
-                class="left-arrow hidden absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl"
-                onclick="scrollRow(this, -1)"
+            <p
+              class="text-sm text-center line-clamp-2 font-extrabold text-orange-500"
             >
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
+              {{ item.description }}
+            </p>
 
+            {% endif %}
 
             <div
-                class="horizontal-row flex gap-5 overflow-x-auto scroll-smooth px-12 py-3"
+              class="p-2 rounded bg-orange-500 mt-3 font-extrabold text-white flex flex-col items-center min-w-[110px]"
             >
-
-                {% for item in category_products %}
-
-                <a
-                    href="{% url 'product-detail' item.slug %}"
-                    class="flex-shrink-0"
-                >
-
-                    <div
-                        class="relative flex flex-col items-center justify-center gap-2 w-60 min-h-[350px] rounded-xl bg-orange-100 p-3 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-                    >
-
-                        {% if item.discount %}
-
-                        <span
-                            class="absolute top-2 right-2 text-orange-500 text-xl"
-                            style="font-family: 'Bebas Neue';"
-                        >
-                            {{ item.discount }}% Off
-                        </span>
-
-                        {% endif %}
-
-
-                        {% if item.image %}
-
-                        <img
-                            src="{{ item.image.url }}"
-                            alt="{{ item.name }}"
-                            loading="lazy"
-                            class="object-contain max-h-[200px] w-full rounded"
-                        />
-
-                        {% endif %}
-
-
-                        <h3 class="text-orange-500 font-extrabold text-lg text-center">
-                            {{ item.name }}
-                        </h3>
-
-
-                        {% if item.description %}
-
-                        <p class="text-sm text-center line-clamp-2 text-orange-500">
-                            {{ item.description }}
-                        </p>
-
-                        {% endif %}
-
-
-                        <div
-                            class="p-2 rounded bg-orange-500 mt-3 font-extrabold text-white flex flex-col items-center min-w-[110px]"
-                        >
-                            <span>View Product</span>
-                            <span>Rs {{ item.price }}</span>
-                        </div>
-
-                    </div>
-
-                </a>
-
-                {% endfor %}
-
+              <span>View Product</span>
+              <span>Rs {{ item.price }}</span>
             </div>
+          </div>
+        </a>
 
+        {% endfor %}
+      </div>
 
-            <button
-                class="right-arrow hidden absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl"
-                onclick="scrollRow(this, 1)"
-            >
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
+      <!-- Right Arrow -->
 
-        </div>
+      <button
+        class="right-arrow hidden absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl"
+        onclick="scrollRow(this, 1)"
+      >
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
 
-        {% endif %}
+    {% endif %}
 
-
-        <!-- =========================
+    <!-- =========================
              COLLECTION RELATED PRODUCTS
         ========================= -->
 
-        {% if collection_products %}
+    {% if collection_products %}
 
-        <div class="carousel-wrapper relative">
+    <div class="relative">
+      <!-- Left Arrow -->
 
-            <button
-                class="left-arrow hidden absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl"
-                onclick="scrollRow(this, -1)"
+      <button
+        class="left-arrow hidden absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl"
+        onclick="scrollRow(this, -1)"
+      >
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <!-- Products Row -->
+
+      <div
+        class="flex w-full gap-6 overflow-x-auto scroll-smooth px-12 py-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {% for item in collection_products %}
+
+        <a href="{% url 'product-detail' item.slug %}" class="shrink-0">
+          <div
+            class="relative flex shrink-0 flex-col items-center justify-center gap-2 w-72 h-[350px] rounded-xl bg-orange-100 p-4 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+          >
+            {% if item.discount %}
+
+            <span
+              class="absolute top-2 right-2 text-orange-500 text-xl"
+              style="font-family: &quot;Bebas Neue&quot;"
             >
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
+              {{ item.discount }}% Off
+            </span>
 
+            {% endif %} {% if item.image %}
+
+            <img
+              src="{{ item.image.url }}"
+              alt="{{ item.name }}"
+              loading="lazy"
+              class="object-contain max-h-[200px] w-full rounded"
+            />
+
+            {% endif %}
+
+            <h3 class="text-orange-500 font-extrabold text-lg text-center">
+              {{ item.name }}
+            </h3>
+
+            {% if item.description %}
+
+            <p
+              class="text-sm text-center line-clamp-2 font-extrabold text-orange-500"
+            >
+              {{ item.description }}
+            </p>
+
+            {% endif %}
 
             <div
-                class="horizontal-row flex gap-5 overflow-x-auto scroll-smooth px-12 py-3"
+              class="p-2 rounded bg-orange-500 mt-3 font-extrabold text-white flex flex-col items-center min-w-[110px]"
             >
-
-                {% for item in collection_products %}
-
-                <a
-                    href="{% url 'product-detail' item.slug %}"
-                    class="flex-shrink-0"
-                >
-
-                    <div
-                        class="relative flex flex-col items-center justify-center gap-2 w-60 min-h-[350px] rounded-xl bg-orange-100 p-3 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-                    >
-
-                        {% if item.discount %}
-
-                        <span
-                            class="absolute top-2 right-2 text-orange-500 text-xl"
-                            style="font-family: 'Bebas Neue';"
-                        >
-                            {{ item.discount }}% Off
-                        </span>
-
-                        {% endif %}
-
-
-                        {% if item.image %}
-
-                        <img
-                            src="{{ item.image.url }}"
-                            alt="{{ item.name }}"
-                            loading="lazy"
-                            class="object-contain max-h-[200px] w-full rounded"
-                        />
-
-                        {% endif %}
-
-
-                        <h3 class="text-orange-500 font-extrabold text-lg text-center">
-                            {{ item.name }}
-                        </h3>
-
-
-                        {% if item.description %}
-
-                        <p class="text-sm text-center line-clamp-2 text-orange-500">
-                            {{ item.description }}
-                        </p>
-
-                        {% endif %}
-
-
-                        <div
-                            class="p-2 rounded bg-orange-500 mt-3 font-extrabold text-white flex flex-col items-center min-w-[110px]"
-                        >
-                            <span>View Product</span>
-                            <span>Rs {{ item.price }}</span>
-                        </div>
-
-                    </div>
-
-                </a>
-
-                {% endfor %}
-
+              <span>View Product</span>
+              <span>Rs {{ item.price }}</span>
             </div>
+          </div>
+        </a>
 
+        {% endfor %}
+      </div>
 
-            <button
-                class="right-arrow hidden absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl"
-                onclick="scrollRow(this, 1)"
-            >
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
+      <!-- Right Arrow -->
 
-        </div>
-
-        {% endif %}
-
+      <button
+        class="right-arrow hidden absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-orange-500 text-white font-bold text-xl"
+        onclick="scrollRow(this, 1)"
+      >
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
     </div>
 
+    {% endif %}
+  </div>
 </div>
 
-
-<style>
-
-.horizontal-row {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.horizontal-row::-webkit-scrollbar {
-    display: none;
-}
-
-</style>
-
-
 {% include "components/footer.html" %}
+ {% endblock %} {% block script %}
 
-{% endblock %}
-
-
-{% block script %}
-
-<script src="{% static 'js/home.js' %}" defer></script>
 
 {% endblock %}

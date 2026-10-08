@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from product.models import Product, Category, Collection, Hero
-from django.db.models import Count, Case, When, IntegerField
+from product.models import Product, Category, Collection, Hero, Cart, CartItem, Product, Order,OrderItem
+from django.db.models import Case, When, IntegerField
+from django.contrib.auth.decorators import login_required
 
 
 # =========================
@@ -87,14 +88,12 @@ def product_detail(req, product_slug):
         slug=product_slug
     )
 
-    # Current product ki category ke products
     category_products = Product.objects.filter(
         category=product.category
     ).exclude(
         id=product.id
     )
 
-    # Current product ki collections ke products
     collection_products = Product.objects.filter(
         collections__in=product.collections.all()
     ).exclude(
@@ -110,3 +109,208 @@ def product_detail(req, product_slug):
             'collection_products': collection_products,
         }
     )
+
+
+# =========================
+# ADD TO CART
+# =========================
+
+@login_required
+def add_to_cart(request, product_id):
+
+    if request.method != "POST":
+        return redirect("home")
+
+    product = get_object_or_404(
+        Product,
+        id=product_id
+    )
+
+    quantity = int(
+        request.POST.get("quantity", 1)
+    )
+
+    # Quantity valid honi chahiye
+    if quantity < 1:
+        return redirect(
+            "product-detail",
+            product.slug
+        )
+
+    # Requested quantity stock se zyada na ho
+    if quantity > product.stock:
+        return redirect(
+            "product-detail",
+            product.slug
+        )
+
+    # User ka cart lo, agar nahi hai to create karo
+    cart, created = Cart.objects.get_or_create(
+        user=request.user
+    )
+
+    # Check karo product pehle se cart mein hai ya nahi
+    cart_item, created = CartItem.objects.get_or_create(
+        cart=cart,
+        product=product
+    )
+
+    if created:
+
+        # Product pehli dafa cart mein add ho raha hai
+        cart_item.quantity = quantity
+
+    else:
+
+        # Product already cart mein hai
+        new_quantity = cart_item.quantity + quantity
+
+        # Existing + new quantity stock se zyada nahi honi chahiye
+        if new_quantity > product.stock:
+            return redirect(
+                "product-detail",
+                product.slug
+            )
+
+        cart_item.quantity = new_quantity
+
+    cart_item.save()
+
+    return redirect(
+        "product-detail",
+        product.slug
+    )
+    
+# =========================
+# CART VIEW
+@login_required
+def cart(request):
+
+    cart, created = Cart.objects.get_or_create(
+        user=request.user
+    )
+
+    cart_items = cart.items.all()
+
+    cart_total = sum(
+        item.product.price * item.quantity
+        for item in cart_items
+    )
+
+    return render(
+        request,
+        'components/cart.html',
+        {
+            'cart_items': cart_items,
+            'cart_total': cart_total
+        }
+    )
+    
+@login_required
+def update_cart(request, item_id, action):
+
+    cart_item = get_object_or_404(
+    CartItem,
+    id=item_id,
+    cart__user=request.user
+    )
+
+    product = cart_item.product
+
+    if action == "increase":
+
+        if cart_item.quantity < product.stock:
+            cart_item.quantity += 1
+            cart_item.save()
+
+    elif action == "decrease":
+
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+            cart_item.save()
+        else:
+            cart_item.delete()
+    return redirect("cart")
+
+# =========================
+# BUY NOW
+# =========================
+
+@login_required
+def buy_now(request, product_id):
+
+    if request.method != "POST":
+        return redirect("home")
+
+    product = get_object_or_404(
+        Product,
+        id=product_id
+    )
+
+    quantity = int(
+        request.POST.get("quantity", 1)
+    )
+
+    if quantity < 1:
+        return redirect(
+            "product-detail",
+            product.slug
+        )
+
+    if quantity > product.stock:
+        return redirect(
+            "product-detail",
+            product.slug
+        )
+
+    total = product.price * quantity
+
+    return render(
+        request,
+        "components/checkout.html",
+        {
+            "product": product,
+            "quantity": quantity,
+            "total": total,
+        }
+    )
+
+@login_required
+def place_order(request, product_id):
+
+    if request.method != "POST":
+        return redirect("home")
+
+    product = get_object_or_404(Product, id=product_id)
+
+    quantity = int(request.POST.get("quantity", 1))
+
+    if quantity < 1:
+        return redirect("product-detail", product.slug)
+
+    if quantity > product.stock:
+        return redirect("product-detail", product.slug)
+
+    total = product.price * quantity
+
+    with transaction.atomic():
+
+        order = Order.objects.create(
+            user=request.user,
+            total_amount=total
+        )
+
+        OrderItem.objects.create(
+            order=order,
+            product=product,
+            quantity=quantity,
+            price=product.price
+        )
+
+        product.stock -= quantity
+        product.sales += quantity
+        product.save()
+
+    return render(request, "components/order_success.html", {
+        "order": order
+    })

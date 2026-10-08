@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include "components/navbar.html" %}
+
+<div class="m-5">
+
+    <div class="max-w-3xl mx-auto">
+
+        <div class="bg-orange-100 rounded-xl shadow-md p-10 text-center">
+
+            <i class="fa-solid fa-circle-check text-6xl text-orange-500 mb-5"></i>
+
+            <h1 class="text-4xl font-extrabold text-orange-500">
+                Order Placed Successfully!
+            </h1>
+
+            <p class="text-orange-500 font-bold mt-3">
+                Thank you for your order.
+            </p>
+
+            <div class="bg-white rounded-xl p-5 mt-8 text-left">
+
+                <div class="flex justify-between mb-4">
+                    <span class="font-bold text-orange-500">
+                        Order ID
+                    </span>
+
+                    <span class="font-extrabold text-orange-500">
+                        #{{ order.id }}
+                    </span>
+                </div>
+
+                <div class="flex justify-between">
+                    <span class="font-bold text-orange-500">
+                        Total
+                    </span>
+
+                    <span class="font-extrabold text-orange-500">
+                        Rs {{ order.total_amount }}
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="flex justify-center gap-4 mt-8">
+
+                <a
+                    href="{% url 'home' %}"
+                    class="px-6 py-3 rounded-lg bg-orange-500 text-white font-extrabold hover:bg-orange-600 duration-300"
+                >
+                    Continue Shopping
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% include "components/footer.html" %}
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

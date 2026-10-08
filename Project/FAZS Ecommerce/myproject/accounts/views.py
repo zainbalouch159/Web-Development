@@ -20,7 +20,7 @@ def login_view(req):
                 login(req,user)
                 return redirect('home')
             else:
-                return render(req,'login.html',{'error':'Username or password is not correct'})
+                return render(req,'login.html',{'error':'User with that name and password does not exist'})
         else:
             return render(req,'login.html')
     else:

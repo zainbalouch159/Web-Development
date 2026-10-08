@@ -26,7 +26,7 @@
         <!-- Cart and Login -->
         <div class="h-full mx-2 flex gap-2 items-center w-fit overflow-hidden">
 
-            <i class="fa-solid fa-cart-shopping"></i>
+            <a href="{% url 'cart' %}" class="fa-solid fa-cart-shopping"></a>
 
             {% if user.is_authenticated %}
             <form method="post" action="{% url 'logout' %}"> {% csrf_token %}
