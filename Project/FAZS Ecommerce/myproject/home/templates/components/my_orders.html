@@ -1,0 +1,160 @@
+
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+{% include "components/navbar.html" %}
+
+<div class="m-5">
+    <div class="max-w-5xl mx-auto">
+
+        <h1 class="text-4xl font-extrabold text-orange-500 mb-8">
+            My Orders
+        </h1>
+
+        {% if orders %}
+            <div class="flex flex-col gap-5">
+
+                {% for order in orders %}
+                    <div class="bg-orange-100 rounded-xl p-6 shadow-md">
+
+                        <!-- Order Header -->
+                        <div class="flex flex-wrap justify-between items-center gap-3">
+
+                            <h2 class="text-2xl font-extrabold text-orange-500">
+                                Order #{{ order.id }}
+                            </h2>
+
+                            <span class="px-4 py-2 rounded-lg bg-white text-orange-500 font-bold">
+                                {{ order.get_status_display }}
+                            </span>
+
+                        </div>
+
+                        <!-- Order Details -->
+                        <div class="mt-4 text-orange-500 font-bold space-y-2">
+                            <p>
+                                Order Date:
+                                {{ order.created_at|date:"d M Y, h:i A" }}
+                            </p>
+
+                            <p>
+                                Total Amount: Rs {{ order.total_amount }}
+                            </p>
+                        </div>
+
+                        <!-- Ordered Products -->
+                        <div class="border-t border-orange-300 mt-5 pt-5">
+
+                            <h3 class="text-xl font-extrabold text-orange-500 mb-4">
+                                Products
+                            </h3>
+
+                            <div class="flex flex-col gap-4">
+
+                                {% for item in order.items.all %}
+                                    <div class="bg-white rounded-lg p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+
+                                        <!-- Product Image and Name -->
+                                        <div class="flex items-center gap-4">
+
+                                            {% if item.product.image %}
+                                                <img
+                                                    src="{{ item.product.image.url }}"
+                                                    alt="{{ item.product.name }}"
+                                                    class="w-24 h-24 object-contain rounded-lg shrink-0"
+                                                >
+                                            {% else %}
+                                                <div class="w-24 h-24 bg-orange-100 rounded-lg flex items-center justify-center shrink-0">
+                                                    <i class="fa-regular fa-image text-3xl text-orange-400"></i>
+                                                </div>
+                                            {% endif %}
+
+                                            <div>
+                                                <p class="font-extrabold text-orange-500">
+                                                    {{ item.product.name }}
+                                                </p>
+
+                                                <p class="text-orange-500 mt-1">
+                                                    Price: Rs {{ item.price }}
+                                                </p>
+
+                                                <p class="text-orange-500 mt-1">
+                                                    Quantity: {{ item.quantity }}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Item Total -->
+                                        <p class="font-extrabold text-orange-500 sm:text-right">
+                                            Total: Rs {% widthratio item.price 1 item.quantity %}
+                                        </p>
+
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                        <!-- Cancel Order -->
+                        {% if order.status == "pending" %}
+                            <div class="mt-5 border-t border-orange-300 pt-5">
+
+                                <form
+                                    method="POST"
+                                    action="{% url 'cancel-order' order.id %}"
+                                    onsubmit="return confirm('Are you sure you want to cancel this order?');"
+                                >
+                                    {% csrf_token %}
+
+                                    <button
+                                        type="submit"
+                                        class="px-5 py-3 bg-red-500 text-white font-extrabold rounded-lg hover:bg-red-600 transition duration-300"
+                                    >
+                                        <i class="fa-solid fa-xmark mr-1"></i>
+                                        Cancel Order
+                                    </button>
+                                </form>
+
+                            </div>
+                        {% elif order.status == "cancelled" %}
+                            <p class="mt-5 font-bold text-red-600">
+                                <i class="fa-solid fa-circle-xmark mr-1"></i>
+                                This order has been cancelled.
+                            </p>
+                        {% endif %}
+
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+            <div class="min-h-[350px] flex flex-col items-center justify-center bg-orange-100 rounded-xl shadow-md p-10">
+
+                <i class="fa-solid fa-box-open text-6xl text-orange-500 mb-5"></i>
+
+                <h2 class="text-3xl font-extrabold text-orange-500 text-center">
+                    No Orders Yet
+                </h2>
+
+                <p class="text-orange-500 font-bold mt-3 text-center">
+                    Your orders will appear here after placing an order.
+                </p>
+
+                <a
+                    href="{% url 'home' %}"
+                    class="mt-6 px-6 py-3 rounded-lg bg-orange-500 text-white font-extrabold hover:bg-orange-600 transition duration-300"
+                >
+                    Continue Shopping
+                </a>
+
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+
+{% include "components/footer.html" %}
+{% endblock %}
+

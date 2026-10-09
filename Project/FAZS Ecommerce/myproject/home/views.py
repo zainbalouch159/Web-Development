@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.db import transaction
+from django.views.decorators.http import require_POST
 from django.db.models import Case, When, IntegerField
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
 from product.models import (
     Product,
     Category,
@@ -402,3 +403,54 @@ def place_cart_order(request):
         cart.items.all().delete()
 
     return redirect("order-success", order_id=order.id)
+
+@login_required
+def my_orders(request):
+    orders = Order.objects.filter(
+        user=request.user
+    ).order_by("-created_at")
+
+    return render(
+        request,
+        "components/my_orders.html",
+        {"orders": orders}
+    )
+
+@login_required
+@require_POST
+def cancel_order(request, order_id):
+
+    with transaction.atomic():
+
+        order = get_object_or_404(
+            Order.objects.select_for_update(),
+            id=order_id,
+            user=request.user
+        )
+
+        # Sirf pending order cancel hoga
+        if order.status != "pending":
+            messages.error(
+                request,
+                "Only pending orders can be cancelled."
+            )
+            return redirect("my-orders")
+
+        # Cancel hone par stock wapas add karo
+        for item in order.items.all():
+
+            product = Product.objects.select_for_update().get(
+                id=item.product_id
+            )
+
+            product.stock += item.quantity
+            product.sales = max(
+                0, (product.sales or 0) - item.quantity
+            )
+            product.save(update_fields=["stock", "sales"])
+
+        order.status = "cancelled"
+        order.save(update_fields=["status"])
+
+    messages.success(request, "Your order has been cancelled successfully.")
+    return redirect("my-orders")

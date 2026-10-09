@@ -26,8 +26,12 @@
         <!-- Cart and Login -->
         <div class="h-full mx-2 flex gap-2 items-center w-fit overflow-hidden">
 
+            <!-- Cart  -->
             <a href="{% url 'cart' %}" class="fa-solid fa-cart-shopping"></a>
 
+            <a href="{% url 'my-orders' %}" class="fa-solid fa-truck-ramp-box"></a>
+
+            <!-- Login/Logout -->
             {% if user.is_authenticated %}
             <form method="post" action="{% url 'logout' %}"> {% csrf_token %}
             <button type="submit" class="p-2 mx-2 inline-block rounded bg-orange-500 text-white font-bold">
@@ -55,6 +59,8 @@
             </a>
 
             {% endif %}
+
+
         </div>
 
     </div>

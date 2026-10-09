@@ -3,7 +3,10 @@ from product.models import Category,Product,Collection,Hero
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_GET, require_POST
-
+from django.contrib import messages
+from django.contrib.auth.decorators import user_passes_test
+from django.db import transaction
+from product.models import Order
 # Create your views here
 
 # Dashboard
@@ -11,12 +14,25 @@ from django.views.decorators.http import require_GET, require_POST
 def dashboard(req):
     if req.user.is_staff:
         category = Category.objects.all()
-        product =Product.objects.all()
-        collection =Collection.objects.all()
+        product = Product.objects.all()
+        collection = Collection.objects.all()
         hero = Hero.objects.first()
-        return render(req,'dashboard.html',{'Products':product,'Categories':category,'Collections':collection,'Hero':hero})
-    else:
-        return redirect('home')
+
+        orders = Order.objects.select_related(
+            "user"
+        ).prefetch_related(
+            "items__product"
+        ).order_by("-created_at")
+
+        return render(req, "dashboard.html", {
+            "Products": product,
+            "Categories": category,
+            "Collections": collection,
+            "Hero": hero,
+            "orders": orders,
+        })
+
+    return redirect("home")
 
 # Add Category in product form 
 @require_POST    
@@ -362,3 +378,75 @@ def update_hero(request):
     hero.save()
 
     return redirect('dashboard')
+
+def is_admin(user):
+    return user.is_authenticated and user.is_staff
+
+
+@login_required
+@user_passes_test(is_admin)
+@require_POST
+def update_order_status(request, order_id):
+
+    with transaction.atomic():
+        order = get_object_or_404(
+            Order.objects.select_for_update(),
+            id=order_id
+        )
+
+        new_status = request.POST.get("status")
+        valid_statuses = dict(Order.STATUS_CHOICES)
+
+        if new_status not in valid_statuses:
+            messages.error(request, "Invalid order status.")
+            return redirect("dashboard")
+
+        if order.status in ["cancelled", "delivered"]:
+            messages.error(
+                request,
+                "Cancelled or delivered orders cannot be changed."
+            )
+            return redirect("dashboard")
+
+        order.status = new_status
+        order.save(update_fields=["status"])
+
+    messages.success(
+        request,
+        f"Order #{order.id} status updated successfully."
+    )
+
+    return redirect("dashboard")
+
+@login_required
+@user_passes_test(is_admin)
+@require_POST
+def delete_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+
+    # Stock restore sirf un orders ka karo
+    # jinka stock pehle deduct hua tha.
+    if order.status == "pending":
+        with transaction.atomic():
+            order = get_object_or_404(
+                Order.objects.select_for_update(),
+                id=order_id
+            )
+
+            for item in order.items.all():
+                product = Product.objects.select_for_update().get(
+                    id=item.product_id
+                )
+                product.stock += item.quantity
+                product.sales = max(
+                    0, (product.sales or 0) - item.quantity
+                )
+                product.save(update_fields=["stock", "sales"])
+
+            order.delete()
+
+    else:
+        order.delete()
+
+    messages.success(request, f"Order #{order_id} deleted.")
+    return redirect("dashboard")

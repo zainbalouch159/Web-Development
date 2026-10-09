@@ -1,18 +1,19 @@
+
 {% extends 'main.html' %}
 {% load static %}
+
 {% block content %}
-<!-- Dashboard -->
 
-<!-- Navbar  -->
-{% include 'components/navbar.html'%}
+{% include 'components/navbar.html' %}
 
-<!-- Product  -->
+<!-- Product -->
 {% include 'components/Product/product_section.html' %}
 
+<!-- Orders -->
+{% include 'components/Order/order_section.html' %}
 
 <!-- Category -->
 {% include 'components/Category/category_section.html' %}
-
 
 <!-- Collections -->
 {% include 'components/Collection/collections_Section.html' %}
@@ -20,12 +21,11 @@
 <!-- Hero Section -->
 {% include 'components/Hero/hero-section.html' %}
 
+<!-- Footer -->
+{% include 'components/footer.html' %}
 
-<!-- Footer  -->
-{% include 'components/footer.html'%}
 {% endblock %}
 
-<!-- Scripts  -->
 {% block script %}
 <script src="{% static 'js/modal.js' %}" defer></script>
 <script src="{% static 'js/dashboard.js' %}" defer></script>
