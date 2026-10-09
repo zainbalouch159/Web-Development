@@ -1,0 +1,167 @@
+
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include "components/navbar.html" %}
+
+<div class="m-5">
+    <div class="max-w-5xl mx-auto">
+
+        <!-- Heading -->
+        <h1 class="text-4xl font-extrabold text-orange-500 mb-8">
+            Checkout
+        </h1>
+
+        {% if cart_items %}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Products Section -->
+            <div class="bg-orange-100 rounded-xl p-6 shadow-md">
+
+                <h2 class="text-2xl font-extrabold text-orange-500 mb-5">
+                    Your Products
+                </h2>
+
+                <div class="flex flex-col gap-5">
+
+                    {% for item in cart_items %}
+
+                    <div class="bg-white rounded-xl p-4">
+
+                        <!-- Product Image -->
+                        {% if item.product.image %}
+                        <div class="h-40 flex justify-center items-center mb-4">
+                            <img
+                                src="{{ item.product.image.url }}"
+                                alt="{{ item.product.name }}"
+                                class="w-full h-full object-contain"
+                            >
+                        </div>
+                        {% endif %}
+
+                        <!-- Product Details -->
+                        <h3 class="text-xl font-extrabold text-orange-500">
+                            {{ item.product.name }}
+                        </h3>
+
+                        <div class="flex justify-between gap-3 mt-3 text-orange-500 font-bold">
+                            <span>Price</span>
+                            <span>Rs {{ item.product.price }}</span>
+                        </div>
+
+                        <div class="flex justify-between gap-3 mt-2 text-orange-500 font-bold">
+                            <span>Quantity</span>
+                            <span>{{ item.quantity }}</span>
+                        </div>
+
+                        <div class="flex justify-between gap-3 mt-3 pt-3 border-t border-orange-200 text-orange-500 font-extrabold">
+                            <span>Item Total</span>
+                            <span>
+                                Rs {% widthratio item.product.price 1 item.quantity %}
+                            </span>
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="bg-orange-100 rounded-xl p-6 shadow-md">
+
+                <h2 class="text-2xl font-extrabold text-orange-500 mb-6">
+                    Order Summary
+                </h2>
+
+                <div class="flex justify-between items-center mb-4 text-orange-500 font-bold">
+                    <span>Total Products</span>
+                    <span>{{ cart_items|length }}</span>
+                </div>
+
+                <div class="flex justify-between items-center mb-4 text-orange-500 font-bold">
+                    <span>Total Quantity</span>
+                    <span>
+                        {% for item in cart_items %}
+                            {{ item.quantity }}{% if not forloop.last %} + {% endif %}
+                        {% endfor %}
+                    </span>
+                </div>
+
+                <div class="border-t border-orange-300 pt-5 mt-5">
+
+                    <div class="flex justify-between items-center gap-3">
+                        <span class="text-2xl font-extrabold text-orange-500">
+                            Grand Total
+                        </span>
+
+                        <span class="text-3xl font-extrabold text-orange-500">
+                            Rs {{ cart_total }}
+                        </span>
+                    </div>
+
+                </div>
+
+                <!-- Place Order -->
+                <form
+                    method="POST"
+                    action="{% url 'place-cart-order' %}"
+                >
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="w-full mt-8 px-6 py-4 rounded-xl bg-orange-500 text-white font-extrabold hover:bg-orange-600 duration-300"
+                    >
+                        Place Order
+                    </button>
+                </form>
+
+                <!-- Back to Cart -->
+                <a
+                    href="{% url 'cart' %}"
+                    class="block text-center mt-4 px-6 py-3 rounded-xl border-2 border-orange-500 text-orange-500 font-extrabold hover:bg-orange-200 duration-300"
+                >
+                    Back to Cart
+                </a>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <!-- Empty Cart -->
+        <div class="min-h-[350px] flex flex-col items-center justify-center bg-orange-100 rounded-xl shadow-md p-10">
+
+            <i class="fa-solid fa-cart-shopping text-6xl text-orange-500 mb-5"></i>
+
+            <h2 class="text-3xl font-extrabold text-orange-500 text-center">
+                Your Cart is Empty
+            </h2>
+
+            <p class="text-orange-500 font-bold mt-3 text-center">
+                Add products to your cart before checkout.
+            </p>
+
+            <a
+                href="{% url 'home' %}"
+                class="mt-6 px-6 py-3 rounded-lg bg-orange-500 text-white font-extrabold hover:bg-orange-600 duration-300"
+            >
+                Continue Shopping
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+</div>
+
+{% include "components/footer.html" %}
+
+{% endblock %}

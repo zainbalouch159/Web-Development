@@ -1,3 +1,4 @@
+
 {% extends 'main.html' %}
 {% load static %}
 
@@ -6,17 +7,15 @@
 {% include "components/navbar.html" %}
 
 <div class="m-5">
-
     <div class="max-w-5xl mx-auto">
 
         <h1 class="text-4xl font-extrabold text-orange-500 mb-8">
             Checkout
         </h1>
 
-
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            <!-- Product -->
+            <!-- Product Details -->
 
             <div class="bg-orange-100 rounded-xl p-6 shadow-md">
 
@@ -25,15 +24,13 @@
                 </h2>
 
                 {% if product.image %}
-
-                <div class="bg-white rounded-xl p-5 flex justify-center items-center">
-                    <img
-                        src="{{ product.image.url }}"
-                        alt="{{ product.name }}"
-                        class="w-full max-h-[300px] object-contain"
-                    >
-                </div>
-
+                    <div class="bg-white rounded-xl p-5 flex justify-center items-center">
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                            class="w-full max-h-[300px] object-contain"
+                        >
+                    </div>
                 {% endif %}
 
                 <h3 class="text-2xl font-extrabold text-orange-500 mt-5">
@@ -45,7 +42,7 @@
                 </p>
 
                 <p class="text-orange-500 font-bold mt-2">
-                    Quantity: {{ quantity }}
+                    Available Stock: {{ product.stock }}
                 </p>
 
             </div>
@@ -69,53 +66,85 @@
                     <span>Rs {{ product.price }}</span>
                 </div>
 
-                <div class="flex justify-between text-orange-500 font-bold mb-4">
-                    <span>Quantity</span>
-                    <span>{{ quantity }}</span>
-                </div>
+                <!-- Quantity and Order Form -->
+<form method="POST">
+    {% csrf_token %}
 
-                <div class="border-t border-orange-300 pt-4 mt-5">
+    <!-- Quantity Controls -->
+    <div class="flex justify-between items-center mb-4">
+        <span class="text-orange-500 font-bold">
+            Quantity
+        </span>
 
-                    <div class="flex justify-between items-center">
+        <div class="flex items-center gap-2">
 
-                        <span class="text-2xl font-extrabold text-orange-500">
-                            Total
-                        </span>
+            <!-- Minus Button -->
+            <button
+                type="submit"
+                name="quantity"
+                value="{{ quantity|add:'-1' }}"
+                formaction="{% url 'buy-now' product.id %}"
+                {% if quantity <= 1 %}disabled{% endif %}
+                class="w-9 h-9 rounded-lg bg-orange-500 text-white font-extrabold hover:bg-orange-600 duration-300 disabled:opacity-40"
+            >
+                −
+            </button>
 
-                        <span class="text-3xl font-extrabold text-orange-500">
-                            Rs {{ total }}
-                        </span>
+            <!-- Current Quantity -->
+            <span class="min-w-[45px] text-center bg-white px-3 py-2 rounded-lg font-extrabold text-orange-500">
+                {{ quantity }}
+            </span>
 
-                    </div>
+            <!-- Plus Button -->
+            <button
+                type="submit"
+                name="quantity"
+                value="{{ quantity|add:'1' }}"
+                formaction="{% url 'buy-now' product.id %}"
+                {% if quantity >= product.stock %}disabled{% endif %}
+                class="w-9 h-9 rounded-lg bg-orange-500 text-white font-extrabold hover:bg-orange-600 duration-300 disabled:opacity-40"
+            >
+                +
+            </button>
 
-                </div>
+        </div>
+    </div>
+
+    <!-- Total -->
+    <div class="border-t border-orange-300 pt-4 mt-5">
+        <div class="flex justify-between items-center">
+            <span class="text-2xl font-extrabold text-orange-500">
+                Total
+            </span>
+
+            <span class="text-3xl font-extrabold text-orange-500">
+                Rs {{ total }}
+            </span>
+        </div>
+    </div>
+
+    <!-- Place Order -->
+    <button
+        type="submit"
+        name="quantity"
+        value="{{ quantity }}"
+        formaction="{% url 'place-order' product.id %}"
+        class="w-full mt-8 px-6 py-3 rounded-lg bg-orange-500 text-white font-extrabold hover:bg-orange-600 duration-300"
+    >
+        Place Order
+    </button>
+
+</form>
 
 
-                <!-- Place Order -->
-
-                <button
-    type="submit"
-    formaction="{% url 'place-order' product.id %}"
-    class="w-full mt-8 px-6 py-3 rounded-lg bg-orange-500 text-white font-extrabold hover:bg-orange-600 duration-300"
->
-    Place Order
-</button>
 
             </div>
 
         </div>
 
     </div>
-
 </div>
 
 {% include "components/footer.html" %}
-
-{% endblock %}
-
-
-{% block script %}
-
-<script src="{% static 'js/home.js' %}" defer></script>
 
 {% endblock %}
