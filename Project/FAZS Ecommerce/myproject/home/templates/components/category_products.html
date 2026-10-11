@@ -1,62 +1,65 @@
 {% extends 'main.html' %}
+{% load static %}
 
 {% block content %}
 
 {% include "components/navbar.html" %}
 
-<div class="text-center m-8">
-    <h1 class="text-3xl font-extrabold text-orange-500">
-        {{ category.name }}
-    </h1>
-</div>
+<main class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
 
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mx-5">
+    <nav class="flex items-center gap-2 text-xs text-slate-500" aria-label="Breadcrumb">
+        <a href="{% url 'home' %}" class="transition hover:text-orange-600">Home</a>
+        <i class="fa-solid fa-chevron-right text-[9px] text-slate-300"></i>
+        <span class="font-medium text-slate-800">{{ category.name }}</span>
+    </nav>
 
-    {% for product in products %}
+    <div class="mt-3 flex flex-wrap items-end justify-between gap-3">
 
-    <div
-      class="relative flex flex-col items-center justify-center gap-2 rounded-xl bg-orange-100 p-3 shadow-md hover:shadow-xl"
-    >
+        <h1 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+            {{ category.name }}
+        </h1>
 
-        {% if product.discount %}
-        <span class="absolute top-2 right-2 text-orange-500 text-xl">
-            {{ product.discount }}% Off
-        </span>
-        {% endif %}
-
-        {% if product.image %}
-        <img
-          src="{{ product.image.url }}"
-          alt="{{ product.name }}"
-          class="object-contain max-h-[200px] w-full rounded"
-        />
-        {% endif %}
-
-        <h3 class="text-orange-500 font-extrabold text-lg text-center">
-            {{ product.name }}
-        </h3>
-
-        {% if product.description %}
-        <p class="text-sm text-center text-orange-500">
-            {{ product.description }}
+        {% if products %}
+        <p class="text-sm text-slate-600">
+            <span class="font-semibold text-slate-900">{{ products|length }}</span>
+            product{{ products|length|pluralize }}
         </p>
         {% endif %}
 
-        <div class="p-2 rounded bg-orange-500 mt-3 font-extrabold text-white">
-            Rs {{ product.price }}
+    </div>
+
+    {% if products %}
+
+    <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 [&>a]:w-full">
+        {% for product in products %}
+            {% include "components/product_card.html" %}
+        {% endfor %}
+    </div>
+
+    {% else %}
+
+    <div class="mx-auto max-w-lg py-16 text-center">
+
+        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-400">
+            <i class="fa-solid fa-box-open text-2xl"></i>
         </div>
+
+        <h2 class="mt-5 text-xl font-bold text-slate-900">No products found</h2>
+
+        <p class="mt-2 text-sm leading-6 text-slate-500">
+            There are no products in this category yet.
+        </p>
+
+        <a href="{% url 'home' %}"
+           class="mt-6 inline-flex items-center gap-2 rounded-lg bg-orange-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-700">
+            Back to Store
+        </a>
 
     </div>
 
-    {% empty %}
+    {% endif %}
 
-    <p class="text-center col-span-full">
-        No products found in this category.
-    </p>
-
-    {% endfor %}
-
-</div>
+</main>
 
 {% include "components/footer.html" %}
 

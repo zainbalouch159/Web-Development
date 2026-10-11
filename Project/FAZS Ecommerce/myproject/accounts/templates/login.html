@@ -1,29 +1,72 @@
-{% extends 'main.html'%}
+{% extends 'main.html' %}
+{% load static %}
+
 {% block content %}
-<div class="flex h-[100dvh] bg-orange-300 items-center justify-center">
+<main class="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10">
 
-    <div class="h-[60dvh] w-[60dvw] bg-orange-400 rounded flex flex-col justify-center items-center">
+    <div class="w-full max-w-sm">
 
-        <div class="text-red-500 font-bold">{{error}}</div>
+        <a href="{% url 'home' %}" class="mb-6 flex justify-center">
+            <img src="{% static 'images/logo.png' %}" alt="FAZS" class="h-12 w-auto object-contain">
+        </a>
 
-        <div class="text-orange-500 font-extrabold text-4xl">Login</div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
 
-        <form action="{% url 'login' %}" class="flex flex-col items-center justify-center gap-2 text-orange-500"
-            method="post">
-            {% csrf_token %}
+            <h1 class="text-2xl font-bold tracking-tight text-slate-900">Welcome back</h1>
+            <p class="mt-1 text-sm text-slate-500">Login to continue shopping.</p>
 
-            <label for="Username" class=" font-bold">Username</label>
-            <input type="text" name="username"
-                class="px-1 rounded outline-orange-500 border border-orange-500 focus:outline-orange-500">
-            <label for="password" class=" font-bold">Password</label>
-            <input type="password" name="password"
-                class="px-1 rounded outline-orange-500 border border-orange-500 focus:outline-orange-500">
-
-            <div>
-            <button class="p-2 rounded text-white font-bold bg-orange-500" type="submit">Login</button>
-            <a href="{% url 'register' %}" class="text-orange-500 m-3">Sign up</a>
+            {% if error %}
+            <div class="mt-5 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700" role="alert">
+                {{ error }}
             </div>
-        </form>
+            {% endif %}
+
+            <form action="" method="post" class="mt-6 space-y-4">
+                {% csrf_token %}
+
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+
+                <div>
+                    <label for="username" class="block text-sm font-semibold text-slate-800">Username</label>
+                    <input
+                        id="username"
+                        type="text"
+                        name="username"
+                        required
+                        autofocus
+                        autocomplete="username"
+                        class="mt-1.5 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition focus:border-orange-500 focus:ring-4 focus:ring-orange-100"
+                    >
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-semibold text-slate-800">Password</label>
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        required
+                        autocomplete="current-password"
+                        class="mt-1.5 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition focus:border-orange-500 focus:ring-4 focus:ring-orange-100"
+                    >
+                </div>
+
+                <button
+                    type="submit"
+                    class="w-full rounded-lg bg-orange-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-700"
+                >
+                    Login
+                </button>
+            </form>
+
+            <p class="mt-6 text-center text-sm text-slate-500">
+                Don't have an account?
+                <a href="{% url 'register' %}" class="font-semibold text-orange-600 hover:text-orange-700 hover:underline">Sign up</a>
+            </p>
+
+        </div>
+
     </div>
-</div>
+
+</main>
 {% endblock %}

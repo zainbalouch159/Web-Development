@@ -1,0 +1,53 @@
+<a href="{% url 'product-detail' product.slug %}"
+   class="group flex h-[340px] w-56 flex-shrink-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white transition hover:border-slate-300 hover:shadow-lg sm:w-60">
+
+    <div class="relative flex h-44 items-center justify-center bg-slate-50 p-4">
+
+        {% if product.image %}
+        <img
+            src="{{ product.image.url }}"
+            alt="{{ product.name }}"
+            loading="lazy"
+            class="h-full w-full object-contain transition duration-300 group-hover:scale-105 {% if product.stock <= 0 %}opacity-50 grayscale{% endif %}"
+        >
+        {% endif %}
+
+        {% if product.stock <= 0 %}
+        <span class="absolute left-3 top-3 rounded-md bg-red-100 px-2 py-1 text-[11px] font-semibold text-red-700">
+            Sold Out
+        </span>
+        {% endif %}
+
+        {% if product.discount %}
+        <span class="absolute right-3 top-3 rounded-md bg-orange-600 px-2 py-1 text-[11px] font-bold text-white">
+            {{ product.discount }}% Off
+        </span>
+        {% endif %}
+
+    </div>
+
+    <div class="flex flex-1 flex-col p-4">
+
+        {% if product.category %}
+        <span class="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+            {{ product.category.name }}
+        </span>
+        {% endif %}
+
+        <h3 class="mt-1 truncate text-base font-semibold text-slate-900 transition group-hover:text-orange-600">
+            {{ product.name }}
+        </h3>
+
+        {% if product.description %}
+        <p class="mt-1 line-clamp-2 text-xs leading-5 text-slate-500">
+            {{ product.description }}
+        </p>
+        {% endif %}
+
+        <p class="mt-auto text-lg font-bold text-slate-900">
+            <span class="text-sm font-semibold text-slate-500">Rs.</span> {{ product.price }}
+        </p>
+
+    </div>
+
+</a>

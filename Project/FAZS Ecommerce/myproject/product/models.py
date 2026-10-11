@@ -1,32 +1,40 @@
 from django.db import models
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.text import slugify
 from django.conf import settings
 
-# Create your models here.
+
+def make_unique_slug(instance, source):
+    base = slugify(source) or "item"
+    model = instance.__class__
+    slug = base
+    n = 2
+    while model.objects.filter(slug=slug).exclude(pk=instance.pk).exists():
+        slug = f"{base}-{n}"
+        n += 1
+    return slug
 
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    slug = models.SlugField( blank=True)
+    slug = models.SlugField(unique=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
-
+            self.slug = make_unique_slug(self, self.name)
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
 
+
 class Collection(models.Model):
     title = models.CharField(max_length=100)
-    slug = models.SlugField( blank=True)
+    slug = models.SlugField(unique=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
-
+            self.slug = make_unique_slug(self, self.title)
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -35,7 +43,7 @@ class Collection(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    slug = models.SlugField( blank=True)
+    slug = models.SlugField(unique=True, blank=True)
 
     description = models.TextField(null=True, blank=True)
     price = models.IntegerField(
@@ -49,9 +57,9 @@ class Product(models.Model):
         default=0,
         null=True
     )
-    image = models.ImageField(blank=True)
+    image = models.ImageField(upload_to="products/", blank=True)
     discount = models.IntegerField(
-        validators=[MinValueValidator(0)],
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
         default=0,
         blank=True,
         null=True
@@ -60,8 +68,8 @@ class Product(models.Model):
 
     category = models.ForeignKey(
         Category,
-        on_delete=models.SET_DEFAULT,
-        default=1,
+        on_delete=models.SET_NULL,
+        null=True,
         blank=True
     )
 
@@ -70,10 +78,20 @@ class Product(models.Model):
         blank=True
     )
 
+    @property
+    def final_price(self):
+        percent = min(self.discount or 0, 100)
+        if percent <= 0:
+            return self.price
+        return self.price * (100 - percent) // 100
+
+    @property
+    def has_discount(self):
+        return bool(self.discount) and self.discount > 0
+
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
-
+            self.slug = make_unique_slug(self, self.name)
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -83,7 +101,7 @@ class Product(models.Model):
 class Hero(models.Model):
     title = models.CharField(max_length=100, blank=True)
     subtitle = models.CharField(max_length=300, blank=True)
-    image = models.ImageField(blank=True)
+    image = models.ImageField(upload_to="hero/", blank=True)
     discount = models.IntegerField(
         validators=[MinValueValidator(0)],
         default=0,
@@ -104,14 +122,21 @@ class Hero(models.Model):
         default="#FF6900",
         blank=True
     )
-    
+
+    def __str__(self):
+        return self.title or f"Hero {self.pk}"
+
+
 class Cart(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE
     )
+
     def __str__(self):
         return f"{self.user.username}'s Cart"
+
+
 class CartItem(models.Model):
     cart = models.ForeignKey(
         Cart,
@@ -123,9 +148,19 @@ class CartItem(models.Model):
         on_delete=models.CASCADE
     )
     quantity = models.PositiveIntegerField(default=1)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["cart", "product"],
+                name="unique_product_per_cart",
+            )
+        ]
+
     def __str__(self):
         return f"{self.product.name} × {self.quantity}"
-    
+
+
 class Order(models.Model):
     STATUS_CHOICES = [
         ("pending", "Pending"),
@@ -165,8 +200,12 @@ class OrderItem(models.Model):
 
     product = models.ForeignKey(
         Product,
-        on_delete=models.CASCADE
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
     )
+
+    product_name = models.CharField(max_length=100, blank=True)
 
     quantity = models.PositiveIntegerField()
 
@@ -174,5 +213,10 @@ class OrderItem(models.Model):
         validators=[MinValueValidator(0)]
     )
 
+    def save(self, *args, **kwargs):
+        if not self.product_name and self.product:
+            self.product_name = self.product.name
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return f"{self.product.name} × {self.quantity}"
+        return f"{self.product_name or 'Deleted product'} × {self.quantity}"

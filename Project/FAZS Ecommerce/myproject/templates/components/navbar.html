@@ -1,71 +1,93 @@
 {% load static %}
-<div class="h-12 px-2 flex justify-between items-center w-full">
+<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <nav class="mx-auto flex h-14 max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8" aria-label="Main navigation">
 
-    <!-- Logo -->
-    <a href="{% url 'home' %}" class="h-full">
-        <img src="{% static 'images/logo.png' %}" alt="logo" class="object-contain h-full w-auto" loading="eager">
-    </a>
+        <!-- Logo -->
+        <a href="{% url 'home' %}" class="h-9 shrink-0">
+            <img src="{% static 'images/logo.png' %}" alt="FAZS" class="h-full w-auto object-contain" loading="eager">
+        </a>
 
-    <div class="right flex h-full items-center gap-2">
+        <div class="flex items-center gap-1 sm:gap-2">
 
-        <!-- Search -->
-        <form action="{% url 'search' %}" method="get" class="flex overflow-hidden w-fit">
+            <!-- Search -->
+            <form action="{% url 'search' %}" method="get" role="search" class="flex items-center overflow-hidden">
 
-            <input type="text" name="q" id="search_input" class="px-1 w-50 rounded border-2 border-orange-500
-                       outline-orange-500 focus:outline-orange-500
-                       translate-x-full opacity-0 pointer-events-none
-                       duration-500 transition-all">
+                <input
+                    type="text"
+                    name="q"
+                    id="search_input"
+                    aria-label="Search products"
+                    placeholder="Search products..."
+                    class="w-40 rounded-lg border border-orange-500 px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-orange-200 sm:w-48
+                           translate-x-full opacity-0 pointer-events-none transition-all duration-500"
+                >
 
-            <div class="px-2">
-                <button id="search" type="button" class="fa-solid fa-magnifying-glass">
+                <button
+                    id="search"
+                    type="button"
+                    aria-label="Search"
+                    title="Search"
+                    class="flex h-9 w-9 items-center justify-center rounded-lg text-slate-700 transition hover:bg-slate-100 hover:text-orange-600"
+                >
+                    <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
-            </div>
 
-        </form>
+            </form>
 
-        <!-- Cart and Login -->
-        <div class="h-full mx-2 flex gap-2 items-center w-fit overflow-hidden">
+            <!-- Cart -->
+            <a href="{% url 'cart' %}"
+               aria-label="Cart"
+               title="Cart"
+               class="flex h-9 w-9 items-center justify-center rounded-lg text-slate-700 transition hover:bg-slate-100 hover:text-orange-600">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
 
-            <!-- Cart  -->
-            <a href="{% url 'cart' %}" class="fa-solid fa-cart-shopping"></a>
+            <!-- Orders -->
+            <a href="{% url 'my-orders' %}"
+               aria-label="My orders"
+               title="My orders"
+               class="flex h-9 w-9 items-center justify-center rounded-lg text-slate-700 transition hover:bg-slate-100 hover:text-orange-600">
+                <i class="fa-solid fa-truck-ramp-box"></i>
+            </a>
 
-            <a href="{% url 'my-orders' %}" class="fa-solid fa-truck-ramp-box"></a>
+            <!-- Staff links -->
+            {% if user.is_staff and request.resolver_match.url_name != 'dashboard' %}
+            <a href="{% url 'dashboard' %}"
+               title="Dashboard"
+               class="flex h-9 items-center justify-center gap-2 rounded-lg border border-slate-300 px-2.5 text-sm font-semibold text-slate-800 transition hover:border-orange-600 hover:text-orange-600">
+                <i class="fa-solid fa-gauge"></i>
+                <span class="hidden sm:inline">Dashboard</span>
+            </a>
+            {% endif %}
 
-            <!-- Login/Logout -->
+            {% if user.is_superuser %}
+            <a href="{% url 'admin:index' %}"
+               title="Admin"
+               class="flex h-9 items-center justify-center gap-2 rounded-lg border border-slate-300 px-2.5 text-sm font-semibold text-slate-800 transition hover:border-orange-600 hover:text-orange-600">
+                <i class="fa-solid fa-user-shield"></i>
+                <span class="hidden sm:inline">Admin</span>
+            </a>
+            {% endif %}
+
+            <!-- Login / Logout -->
             {% if user.is_authenticated %}
-            <form method="post" action="{% url 'logout' %}"> {% csrf_token %}
-            <button type="submit" class="p-2 mx-2 inline-block rounded bg-orange-500 text-white font-bold">
-                Logout
-            </button>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit"
+                        class="h-9 rounded-lg bg-orange-600 px-4 text-sm font-semibold text-white transition hover:bg-orange-700">
+                    Logout
+                </button>
             </form>
             {% else %}
-            <form method="post" action="{% url 'login' %}"> {% csrf_token %}
-            <button type="submit" class="p-2 mx-2 inline-block rounded bg-orange-500 text-white font-bold">
+            <a href="{% url 'login' %}"
+               class="flex h-9 items-center rounded-lg bg-orange-600 px-4 text-sm font-semibold text-white transition hover:bg-orange-700">
                 Login
-            </button>
-            </form>
-            {% endif %}
-
-            {% if user.is_staff and request.path != '/dashboard/' %}
-            <a href="{% url 'dashboard' %}" class="p-2 mx-2 inline-block rounded bg-orange-500 text-white font-bold">
-                Dashboard
             </a>
-
             {% endif %}
-            {% if user.is_superuser %}
-            
-            <a href="admin/" type="submit" class="p-2 mx-2 inline-block rounded bg-orange-500 text-white font-bold">
-                Admin
-            </a>
-
-            {% endif %}
-
 
         </div>
 
-    </div>
-</div>
+    </nav>
+</header>
 
-{% block script %}
-<script src="{% static 'js/search_animation.js' %}"></script>
-{% endblock %}
+<script src="{% static 'js/search_animation.js' %}" defer></script>

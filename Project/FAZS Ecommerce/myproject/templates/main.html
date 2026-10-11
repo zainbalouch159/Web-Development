@@ -1,12 +1,11 @@
-{% load static %}
-
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAZS</title>
+    <title>{% block title %}FAZS{% endblock %}</title>
     <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
 
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
@@ -23,13 +22,26 @@
 
     <style>
         body {
-            margin: 0;
-            padding: 0;
+            font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
         }
     </style>
 </head>
 
-<body >
+<body class="flex min-h-screen flex-col bg-white text-slate-900">
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="mx-auto mt-3 w-full max-w-7xl space-y-2 px-4 sm:px-6 lg:px-8" role="status">
+        {% for message in messages %}
+        <div class="rounded-lg border px-4 py-3 text-sm font-medium
+            {% if message.tags == 'error' %}border-red-200 bg-red-50 text-red-700
+            {% elif message.tags == 'success' %}border-green-200 bg-green-50 text-green-700
+            {% else %}border-slate-200 bg-slate-50 text-slate-700{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     <!-- Main Content Block -->
     {% block content %}

@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 from django.db import transaction
 from django.views.decorators.http import require_POST
-from django.db.models import Case, When, IntegerField
+from django.db.models import Case, When, IntegerField, Prefetch
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from product.models import (
@@ -23,33 +22,32 @@ from product.models import (
 
 def home(req):
 
-    products = Product.objects.all()
+    products = Product.objects.select_related("category")
 
-    categories = Category.objects.annotate(
+    categories = Category.objects.prefetch_related("product_set").annotate(
         other_last=Case(
-            When(
-                name__iexact="other",
-                then=1
-            ),
+            When(name__iexact="other", then=1),
             default=0,
             output_field=IntegerField(),
         )
-    ).order_by(
-        "other_last",
-        "name"
-    )
+    ).order_by("other_last", "name")
 
     collections = Collection.objects.exclude(
         title__iexact="other"
+    ).prefetch_related(
+        Prefetch(
+            "product_set",
+            queryset=Product.objects.select_related("category"),
+        )
     ).order_by("title")
 
-    hero = Hero.objects.first()
+    hero = Hero.objects.select_related("products").first()
 
-    return render(req, 'home.html', {
-        'products': products,
-        'Categories': categories,
-        'Collections': collections,
-        'hero': hero
+    return render(req, "home.html", {
+        "products": products,
+        "Categories": categories,
+        "Collections": collections,
+        "hero": hero,
     })
 
 
@@ -58,10 +56,18 @@ def home(req):
 # =========================
 
 def search(req):
+    name = req.GET.get("q", "").strip()
 
-    name = req.GET.get('q')
+    products = (
+        Product.objects.filter(name__icontains=name)
+        if name
+        else Product.objects.none()
+    )
 
-    return HttpResponse(f"Search {name}")
+    return render(req, "components/search_results.html", {
+        "products": products,
+        "query": name,
+    })
 
 
 # =========================
@@ -70,23 +76,14 @@ def search(req):
 
 def category_products(req, category_slug):
 
-    category = get_object_or_404(
-        Category,
-        slug=category_slug
-    )
+    category = get_object_or_404(Category, slug=category_slug)
 
-    products = Product.objects.filter(
-        category=category
-    )
+    products = Product.objects.filter(category=category)
 
-    return render(
-        req,
-        'components/category_products.html',
-        {
-            'category': category,
-            'products': products
-        }
-    )
+    return render(req, "components/category_products.html", {
+        "category": category,
+        "products": products,
+    })
 
 
 # =========================
@@ -96,31 +93,25 @@ def category_products(req, category_slug):
 def product_detail(req, product_slug):
 
     product = get_object_or_404(
-        Product,
-        slug=product_slug
+        Product.objects.select_related("category"),
+        slug=product_slug,
     )
 
-    category_products = Product.objects.filter(
-        category=product.category
-    ).exclude(
-        id=product.id
-    )
+    category_products = Product.objects.none()
+    if product.category:
+        category_products = Product.objects.filter(
+            category=product.category
+        ).exclude(id=product.id)
 
     collection_products = Product.objects.filter(
         collections__in=product.collections.all()
-    ).exclude(
-        id=product.id
-    ).distinct()
+    ).exclude(id=product.id).distinct()
 
-    return render(
-        req,
-        'components/product_detail.html',
-        {
-            'product': product,
-            'category_products': category_products,
-            'collection_products': collection_products,
-        }
-    )
+    return render(req, "components/product_detail.html", {
+        "product": product,
+        "category_products": category_products,
+        "collection_products": collection_products,
+    })
 
 
 # =========================
@@ -133,71 +124,51 @@ def add_to_cart(request, product_id):
     if request.method != "POST":
         return redirect("home")
 
-    product = get_object_or_404(
-        Product,
-        id=product_id
-    )
+    product = get_object_or_404(Product, id=product_id)
 
-    quantity = int(
-        request.POST.get("quantity", 1)
-    )
+    try:
+        quantity = int(request.POST.get("quantity", 1))
+    except (ValueError, TypeError):
+        messages.error(request, "Invalid quantity.")
+        return redirect("product-detail", product.slug)
 
-    # Quantity valid honi chahiye
-    if quantity < 1:
-        return redirect(
-            "product-detail",
-            product.slug
-        )
+    if quantity < 1 or quantity > product.stock:
+        messages.error(request, "Requested quantity is not available.")
+        return redirect("product-detail", product.slug)
 
-    # Requested quantity stock se zyada na ho
-    if quantity > product.stock:
-        return redirect(
-            "product-detail",
-            product.slug
-        )
+    cart, _ = Cart.objects.get_or_create(user=request.user)
 
-    # User ka cart lo, agar nahi hai to create karo
-    cart, created = Cart.objects.get_or_create(
-        user=request.user
-    )
-
-    # Check karo product pehle se cart mein hai ya nahi
     cart_item, created = CartItem.objects.get_or_create(
         cart=cart,
-        product=product
+        product=product,
+        defaults={"quantity": quantity},
     )
 
-    if created:
-
-        # Product pehli dafa cart mein add ho raha hai
-        cart_item.quantity = quantity
-
-    else:
-
-        # Product already cart mein hai
+    if not created:
         new_quantity = cart_item.quantity + quantity
 
-        # Existing + new quantity stock se zyada nahi honi chahiye
         if new_quantity > product.stock:
-            return redirect(
-                "product-detail",
-                product.slug
+            messages.error(
+                request,
+                "You already have the maximum available quantity in your cart.",
             )
+            return redirect("product-detail", product.slug)
 
         cart_item.quantity = new_quantity
+        cart_item.save(update_fields=["quantity"])
 
-    cart_item.save()
+    messages.success(request, f"{product.name} added to cart.")
+    return redirect("product-detail", product.slug)
 
-    return redirect(
-        "product-detail",
-        product.slug
-    )
-    
+
 # =========================
 # CART VIEW
+# =========================
+
 @login_required
 def cart(request):
-    cart, created = Cart.objects.get_or_create(user=request.user)
+
+    cart, _ = Cart.objects.get_or_create(user=request.user)
     cart_items = cart.items.select_related("product")
 
     cart_total = sum(
@@ -209,31 +180,43 @@ def cart(request):
         "cart_items": cart_items,
         "cart_total": cart_total,
     })
+
+
+# =========================
+# UPDATE CART
+# =========================
+
 @login_required
+@require_POST
 def update_cart(request, item_id, action):
 
     cart_item = get_object_or_404(
-    CartItem,
-    id=item_id,
-    cart__user=request.user
+        CartItem.objects.select_related("product"),
+        id=item_id,
+        cart__user=request.user,
     )
 
     product = cart_item.product
 
     if action == "increase":
-
         if cart_item.quantity < product.stock:
             cart_item.quantity += 1
-            cart_item.save()
+            cart_item.save(update_fields=["quantity"])
+        else:
+            messages.error(request, f"Only {product.stock} in stock.")
 
     elif action == "decrease":
-
         if cart_item.quantity > 1:
             cart_item.quantity -= 1
-            cart_item.save()
+            cart_item.save(update_fields=["quantity"])
         else:
             cart_item.delete()
+
+    elif action == "remove":
+        cart_item.delete()
+
     return redirect("cart")
+
 
 # =========================
 # BUY NOW
@@ -250,9 +233,11 @@ def buy_now(request, product_id):
     try:
         quantity = int(request.POST.get("quantity", 1))
     except (ValueError, TypeError):
+        messages.error(request, "Invalid quantity.")
         return redirect("product-detail", product.slug)
 
     if quantity < 1 or quantity > product.stock:
+        messages.error(request, "Requested quantity is not available.")
         return redirect("product-detail", product.slug)
 
     total = product.price * quantity
@@ -262,8 +247,12 @@ def buy_now(request, product_id):
         "quantity": quantity,
         "total": total,
     })
-    
-    
+
+
+# =========================
+# PLACE ORDER (BUY NOW)
+# =========================
+
 @login_required
 def place_order(request, product_id):
 
@@ -273,42 +262,48 @@ def place_order(request, product_id):
     try:
         quantity = int(request.POST.get("quantity", 1))
     except (ValueError, TypeError):
+        messages.error(request, "Invalid quantity.")
         return redirect("home")
 
     if quantity < 1:
+        messages.error(request, "Invalid quantity.")
         return redirect("home")
 
     with transaction.atomic():
 
         product = get_object_or_404(
             Product.objects.select_for_update(),
-            id=product_id
+            id=product_id,
         )
 
         if quantity > product.stock:
+            messages.error(request, f"Not enough stock for {product.name}.")
             return redirect("product-detail", product.slug)
 
         total = product.price * quantity
 
         order = Order.objects.create(
             user=request.user,
-            total_amount=total
+            total_amount=total,
         )
 
         OrderItem.objects.create(
             order=order,
             product=product,
             quantity=quantity,
-            price=product.price
+            price=product.price,
         )
 
         product.stock -= quantity
         product.sales = (product.sales or 0) + quantity
-        product.save()
+        product.save(update_fields=["stock", "sales"])
 
-        quantity = request.POST.get("quantity", "1")
-        print("Received quantity:", quantity)
     return redirect("order-success", order_id=order.id)
+
+
+# =========================
+# ORDER SUCCESS
+# =========================
 
 @login_required
 def order_success(request, order_id):
@@ -316,19 +311,27 @@ def order_success(request, order_id):
     order = get_object_or_404(
         Order,
         id=order_id,
-        user=request.user
+        user=request.user,
     )
 
-    return render(
-        request,
-        "components/order_success.html",
-        {"order": order}
-    )
-    
+    return render(request, "components/order_success.html", {
+        "order": order,
+    })
+
+
+# =========================
+# CART CHECKOUT
+# =========================
+
 @login_required
 def cart_checkout(request):
-    cart = get_object_or_404(Cart, user=request.user)
-    cart_items = cart.items.select_related("product")
+
+    cart, _ = Cart.objects.get_or_create(user=request.user)
+    cart_items = list(cart.items.select_related("product"))
+
+    if not cart_items:
+        messages.error(request, "Your cart is empty.")
+        return redirect("cart")
 
     cart_total = sum(
         item.product.price * item.quantity
@@ -339,82 +342,92 @@ def cart_checkout(request):
         "cart_items": cart_items,
         "cart_total": cart_total,
     })
-    
+
+
+# =========================
+# PLACE CART ORDER
+# =========================
 
 @login_required
+@require_POST
 def place_cart_order(request):
-
-    if request.method != "POST":
-        return redirect("cart")
 
     with transaction.atomic():
 
         cart = get_object_or_404(
             Cart.objects.select_for_update(),
-            user=request.user
+            user=request.user,
         )
 
-        cart_items = list(
-            cart.items.select_related("product")
-        )
+        cart_items = list(cart.items.all())
 
         if not cart_items:
             return redirect("cart")
 
-        # Har product ka stock check karo
-        for item in cart_items:
-            product = Product.objects.select_for_update().get(
-                id=item.product_id
+        products = {
+            p.id: p
+            for p in Product.objects.select_for_update().filter(
+                id__in=[item.product_id for item in cart_items]
             )
+        }
+
+        total = 0
+
+        for item in cart_items:
+            product = products[item.product_id]
 
             if item.quantity < 1 or item.quantity > product.stock:
+                messages.error(request, f"Not enough stock for {product.name}.")
                 return redirect("cart")
 
-        # Grand total calculate karo
-        total = sum(
-            item.product.price * item.quantity
-            for item in cart_items
-        )
+            total += product.price * item.quantity
 
-        # Order create karo
         order = Order.objects.create(
             user=request.user,
-            total_amount=total
+            total_amount=total,
         )
 
-        # Har cart item ko order item banao
         for item in cart_items:
-            product = Product.objects.select_for_update().get(
-                id=item.product_id
-            )
+            product = products[item.product_id]
 
             OrderItem.objects.create(
                 order=order,
                 product=product,
                 quantity=item.quantity,
-                price=product.price
+                price=product.price,
             )
 
             product.stock -= item.quantity
             product.sales = (product.sales or 0) + item.quantity
-            product.save()
+            product.save(update_fields=["stock", "sales"])
 
-        # Order place hone ke baad cart empty karo
         cart.items.all().delete()
 
     return redirect("order-success", order_id=order.id)
 
+
+# =========================
+# MY ORDERS
+# =========================
+
 @login_required
 def my_orders(request):
-    orders = Order.objects.filter(
-        user=request.user
-    ).order_by("-created_at")
 
-    return render(
-        request,
-        "components/my_orders.html",
-        {"orders": orders}
+    orders = (
+        Order.objects
+        .filter(user=request.user)
+        .prefetch_related("items__product")
+        .order_by("-created_at")
     )
+
+    return render(request, "components/my_orders.html", {
+        "orders": orders,
+    })
+
+
+# =========================
+# CANCEL ORDER
+# =========================
 
 @login_required
 @require_POST
@@ -425,28 +438,24 @@ def cancel_order(request, order_id):
         order = get_object_or_404(
             Order.objects.select_for_update(),
             id=order_id,
-            user=request.user
+            user=request.user,
         )
 
-        # Sirf pending order cancel hoga
         if order.status != "pending":
-            messages.error(
-                request,
-                "Only pending orders can be cancelled."
-            )
+            messages.error(request, "Only pending orders can be cancelled.")
             return redirect("my-orders")
 
-        # Cancel hone par stock wapas add karo
         for item in order.items.all():
+
+            if item.product_id is None:
+                continue
 
             product = Product.objects.select_for_update().get(
                 id=item.product_id
             )
 
             product.stock += item.quantity
-            product.sales = max(
-                0, (product.sales or 0) - item.quantity
-            )
+            product.sales = max(0, (product.sales or 0) - item.quantity)
             product.save(update_fields=["stock", "sales"])
 
         order.status = "cancelled"
