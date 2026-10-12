@@ -5,8 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}FAZS online store. Order your favourite drinks and products with easy checkout and fast delivery.{% endblock %}">
+    <meta name="theme-color" content="#ea580c">
     <title>{% block title %}FAZS{% endblock %}</title>
+
     <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/logo.png' %}">
 
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
 
@@ -21,15 +25,34 @@
         rel="stylesheet">
 
     <style>
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
         body {
             font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+            overflow-x: clip;
+        }
+
+        /* Overflow fix: flex column body ke andar koi bhi child screen se bahar na jaye */
+        body > * {
+            min-width: 0;
+            max-width: 100%;
+        }
+
+        main {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .horizontal-row {
+            max-width: 100%;
         }
     </style>
 </head>
 
 <body class="flex min-h-screen flex-col bg-white text-slate-900">
 
-    <!-- Messages -->
     {% if messages %}
     <div class="mx-auto mt-3 w-full max-w-7xl space-y-2 px-4 sm:px-6 lg:px-8" role="status">
         {% for message in messages %}
@@ -43,7 +66,6 @@
     </div>
     {% endif %}
 
-    <!-- Main Content Block -->
     {% block content %}
     {% endblock %}
 

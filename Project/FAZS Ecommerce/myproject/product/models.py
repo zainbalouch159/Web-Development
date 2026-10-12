@@ -2,7 +2,22 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.text import slugify
 from django.conf import settings
+import os
+from io import BytesIO
+from PIL import Image
+from django.core.files.base import ContentFile
 
+
+def compress_image(image_field, max_size=1000, quality=80):
+    img = Image.open(image_field)
+    img.load()
+    if img.mode not in ("RGB", "RGBA"):
+        img = img.convert("RGBA")
+    img.thumbnail((max_size, max_size))
+    buffer = BytesIO()
+    img.save(buffer, format="WEBP", quality=quality)
+    name = os.path.splitext(os.path.basename(image_field.name))[0] + ".webp"
+    return name, ContentFile(buffer.getvalue())
 
 def make_unique_slug(instance, source):
     base = slugify(source) or "item"
@@ -122,6 +137,12 @@ class Hero(models.Model):
         default="#FF6900",
         blank=True
     )
+    
+    def save(self, *args, **kwargs):
+        if self.image and not self.image._committed:
+            name, content = compress_image(self.image, max_size=1400)
+            self.image.save(name, content, save=False)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title or f"Hero {self.pk}"
@@ -214,9 +235,16 @@ class OrderItem(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        if not self.product_name and self.product:
-            self.product_name = self.product.name
+        if not self.slug:
+            self.slug = make_unique_slug(self, self.name)
+
+        if self.image and not self.image._committed:
+            name, content = compress_image(self.image)
+            self.image.save(name, content, save=False)
+
         super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.product_name or 'Deleted product'} × {self.quantity}"
+    
+    

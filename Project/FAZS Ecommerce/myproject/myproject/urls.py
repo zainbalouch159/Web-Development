@@ -29,3 +29,11 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
+from django.conf import settings
+from django.views.generic import TemplateView
+
+if settings.DEBUG:
+    urlpatterns += [
+        path("404-preview/", TemplateView.as_view(template_name="404.html")),
+    ]
