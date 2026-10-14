@@ -7,7 +7,6 @@ from io import BytesIO
 from PIL import Image
 from django.core.files.base import ContentFile
 
-
 def compress_image(image_field, max_size=1000, quality=80):
     img = Image.open(image_field)
     img.load()
@@ -235,16 +234,9 @@ class OrderItem(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = make_unique_slug(self, self.name)
-
-        if self.image and not self.image._committed:
-            name, content = compress_image(self.image)
-            self.image.save(name, content, save=False)
-
+        if not self.product_name and self.product:
+            self.product_name = self.product.name
         super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.product_name or 'Deleted product'} × {self.quantity}"
-    
-    

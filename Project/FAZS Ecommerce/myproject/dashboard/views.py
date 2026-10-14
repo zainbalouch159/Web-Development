@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.db import transaction
 from product.models import Order
+from django.core.exceptions import ValidationError
 # Create your views here
 
 # Dashboard
@@ -104,6 +105,13 @@ def add_product(req):
         info=Info,
         category=Category1,
     )
+
+    try:
+        product.full_clean()
+    except ValidationError as e:
+        for error in e.messages:
+            messages.error(req, error)
+        return redirect("dashboard")
 
     product.save()
 
