@@ -1,5 +1,5 @@
-from django.shortcuts import render,redirect, get_object_or_404
-from product.models import Category,Product,Collection,Hero
+from django.shortcuts import render, redirect, get_object_or_404
+from product.models import Category, Product, Collection, Hero
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_GET, require_POST
@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.db import transaction
 from product.models import Order
 from django.core.exceptions import ValidationError
-# Create your views here
+
 
 def is_admin(user):
     return user.is_authenticated and user.is_staff
@@ -39,32 +39,37 @@ def dashboard(req):
 
     return redirect("home")
 
-# Add Category in product form 
-@require_POST    
-def add_category(req):
-    new_category =  req.POST.get('category-name')
-    if new_category:
-        category, created=Category.objects.get_or_create(name=new_category)
 
-        
+# Add Category in product form
+@login_required
+@user_passes_test(is_admin)
+@require_POST
+def add_category(req):
+    new_category = req.POST.get('category-name')
+    if new_category:
+        category, created = Category.objects.get_or_create(name=new_category)
+
         return JsonResponse({
-            'id':category.id,
-            'name':category.name
+            'id': category.id,
+            'name': category.name
         })
-        
+
 
 # Add Collections in product form
-@require_POST         
+@login_required
+@user_passes_test(is_admin)
+@require_POST
 def add_Collections(req):
-    new_collection =  req.POST.get('collection-name')
+    new_collection = req.POST.get('collection-name')
     if new_collection:
-        collection, created=Collection.objects.get_or_create(
+        collection, created = Collection.objects.get_or_create(
             title=new_collection
         )
         return JsonResponse({
-            'id':collection.id,
-            'title':collection.title
+            'id': collection.id,
+            'title': collection.title
         })
+
 
 # Add Product
 @login_required
@@ -77,7 +82,7 @@ def add_product(req):
     Stock = req.POST.get('stock')
     image = req.FILES.get('image')
     Discount = req.POST.get('discount')
-    
+
     if not Discount:
         Discount = 0
 
@@ -126,37 +131,41 @@ def add_product(req):
     product.collections.set(Collections)
 
     return redirect('dashboard')
-    
+
+
 # Product Delete
+@login_required
+@user_passes_test(is_admin)
 @require_POST
-def product_delete(req,id):
+def product_delete(req, id):
     product = get_object_or_404(Product, id=id)
     product.image.delete()
-    if product:  
-        product.delete()
-        return JsonResponse('success', safe=False)
-    else:
-        return JsonResponse('failed', safe=False)
+    product.delete()
+    return JsonResponse('success', safe=False)
 
-# Edit Product
-def product_edit(req,id):
-    product = Product.objects.get(id=id)    
-    data ={
-        'name':product.name,
-        'description':product.description,
-        'price':product.price,
-        'sales':product.sales,
-        'stock':product.stock,
-        'discount':product.discount,
-        'info':product.info,
-        'image':product.image.url,
-        'category':product.category.id,
-        'collections':list(product.collections.values_list('id', flat=True)),
+
+# Edit Product (data fetch)
+@login_required
+@user_passes_test(is_admin)
+@require_GET
+def product_edit(req, id):
+    product = Product.objects.get(id=id)
+    data = {
+        'name': product.name,
+        'description': product.description,
+        'price': product.price,
+        'sales': product.sales,
+        'stock': product.stock,
+        'discount': product.discount,
+        'info': product.info,
+        'image': product.image.url,
+        'category': product.category.id,
+        'collections': list(product.collections.values_list('id', flat=True)),
     }
-    return JsonResponse(data) 
+    return JsonResponse(data)
 
-# Update Product 
 
+# Update Product
 @login_required
 @user_passes_test(is_admin)
 @require_POST
@@ -213,8 +222,9 @@ def update_product(request):
     return redirect("dashboard")
 
 
-
 # Show products in category section
+@login_required
+@user_passes_test(is_admin)
 @require_GET
 def category_products(req, id):
     products = Product.objects.filter(category_id=id)
@@ -234,14 +244,17 @@ def category_products(req, id):
     return JsonResponse({
         'products': data
     })
-    
-# New Category in categoy section
+
+
+# New Category in category section
+@login_required
+@user_passes_test(is_admin)
 @require_POST
 def add_product_to_category(req):
     new_category = req.POST.get('category-name')
     product_ids = req.POST.getlist('category-add-products')
 
-    category, created = Category.objects.get_or_create(name=new_category)   
+    category, created = Category.objects.get_or_create(name=new_category)
     if product_ids:
         for product_id in product_ids:
             product = Product.objects.get(id=product_id)
@@ -249,8 +262,12 @@ def add_product_to_category(req):
             product.save()
 
     return redirect('dashboard')
- 
-#  Delete Category in category section       
+
+
+# Delete Category in category section
+@login_required
+@user_passes_test(is_admin)
+@require_POST
 def category_delete(req, id):
     category = get_object_or_404(Category, id=id)
     other = Category.objects.get(name='other')
@@ -258,9 +275,12 @@ def category_delete(req, id):
     Product.objects.filter(category=category).update(category=other)
 
     category.delete()
-    return HttpResponse(status=204)  # Return a 204 No Content response to indicate success without content
+    return HttpResponse(status=204)
+
 
 # Show products in collection section
+@login_required
+@user_passes_test(is_admin)
 @require_GET
 def collection_products(req, id):
     collection = Collection.objects.get(id=id)
@@ -283,14 +303,21 @@ def collection_products(req, id):
         'products': data
     })
 
-# Delete Collection    
+
+# Delete Collection
+@login_required
+@user_passes_test(is_admin)
+@require_POST
 def delete_collection(req, id):
-    collection = Collection.objects.get(id=id)
+    collection = get_object_or_404(Collection, id=id)
     collection.delete()
 
-    return HttpResponse(status=204)  # Return a 204 No Content response to indicate success without content
+    return HttpResponse(status=204)
+
 
 # Creating new collection in collection section
+@login_required
+@user_passes_test(is_admin)
 @require_POST
 def add_product_to_collection(request):
     collection_name = request.POST.get("collection-name")
@@ -307,7 +334,11 @@ def add_product_to_collection(request):
 
     return redirect("dashboard")
 
-# Hero Delete 
+
+# Hero Delete
+@login_required
+@user_passes_test(is_admin)
+@require_POST
 def hero_delete(req):
     hero = Hero.objects.first()
     if hero:
@@ -315,15 +346,22 @@ def hero_delete(req):
         hero.delete()
     return redirect('dashboard')
 
-# Hero Check 
+
+# Hero Check
+@login_required
+@user_passes_test(is_admin)
+@require_GET
 def hero_check(req):
     hero = Hero.objects.first()
     if hero:
-        return JsonResponse({'exists':True})
+        return JsonResponse({'exists': True})
     else:
-        return JsonResponse({'exists':False})
+        return JsonResponse({'exists': False})
+
 
 # Adding new hero
+@login_required
+@user_passes_test(is_admin)
 @require_POST
 def add_hero(request):
 
@@ -361,6 +399,10 @@ def add_hero(request):
 
     return redirect("dashboard")
 
+
+@login_required
+@user_passes_test(is_admin)
+@require_GET
 def get_hero(request):
     hero = Hero.objects.first()
 
@@ -373,7 +415,10 @@ def get_hero(request):
         'fnt_btn_color': hero.font_btn_color,
     })
 
-# Hero Update 
+
+# Hero Update
+@login_required
+@user_passes_test(is_admin)
 @require_POST
 def update_hero(request):
     hero = Hero.objects.first()
@@ -399,9 +444,6 @@ def update_hero(request):
     hero.save()
 
     return redirect('dashboard')
-
-def is_admin(user):
-    return user.is_authenticated and user.is_staff
 
 
 @login_required
@@ -455,6 +497,10 @@ def delete_order(request, order_id):
             )
 
             for item in order.items.all():
+                # Product delete ho chuka ho to skip karo
+                if item.product_id is None:
+                    continue
+
                 product = Product.objects.select_for_update().get(
                     id=item.product_id
                 )

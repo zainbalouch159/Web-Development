@@ -67,7 +67,7 @@
                             {{ item.product.name }}
                         </a>
                         {% else %}
-                        <p class="text-sm font-semibold text-slate-500">Product no longer available</p>
+                        <p class="text-sm font-semibold text-slate-500">{{ item.product_name|default:"Product no longer available" }}</p>
                         {% endif %}
                         <p class="mt-0.5 text-xs text-slate-500">
                             Rs. {{ item.price }} x {{ item.quantity }}
