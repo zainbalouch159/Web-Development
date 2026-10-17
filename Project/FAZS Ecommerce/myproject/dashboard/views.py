@@ -10,6 +10,10 @@ from product.models import Order
 from django.core.exceptions import ValidationError
 # Create your views here
 
+def is_admin(user):
+    return user.is_authenticated and user.is_staff
+
+
 # Dashboard
 @login_required
 def dashboard(req):
@@ -63,6 +67,9 @@ def add_Collections(req):
         })
 
 # Add Product
+@login_required
+@user_passes_test(is_admin)
+@require_POST
 def add_product(req):
     Name = req.POST.get('name')
     Description = req.POST.get('description')
@@ -149,56 +156,62 @@ def product_edit(req,id):
     return JsonResponse(data) 
 
 # Update Product 
-def update_product(req):
-    id= req.POST.get('product_id')
-    product = Product.objects.get(id=id)
 
-    product.name = req.POST.get('name')
-    product.description = req.POST.get('description')
-    product.price = req.POST.get('price')
-    product.stock = req.POST.get('stock')
+@login_required
+@user_passes_test(is_admin)
+@require_POST
+def update_product(request):
+    product_id = request.POST.get("product_id")
 
-    discount = req.POST.get('discount')
-    product.discount = discount if discount else 0
+    product = get_object_or_404(Product, id=product_id)
 
-    product.info = req.POST.get('info')
+    product.name = request.POST.get("name")
+    product.description = request.POST.get("description")
+    product.price = request.POST.get("price")
+    product.stock = request.POST.get("stock")
+    product.discount = request.POST.get("discount") or 0
+    product.info = request.POST.get("info")
 
-    # Category
-    category_id = req.POST.get('category')
+    category_id = request.POST.get("category")
 
-    if not category_id or category_id == 'Select':
-        category, created = Category.objects.get_or_create(name='other')
+    if not category_id or category_id == "Select":
+        category, _ = Category.objects.get_or_create(name="other")
     else:
-        category = Category.objects.get(id=category_id)
+        category = get_object_or_404(Category, id=category_id)
 
     product.category = category
 
-    # Image
-    image = req.FILES.get('image')
-
+    image = request.FILES.get("image")
     if image:
         product.image = image
 
+    # Save se pehle tamam model validations
+    try:
+        product.full_clean()
+    except ValidationError as e:
+        for error in e.messages:
+            messages.error(request, error)
+        return redirect("dashboard")
+
+    # Validation pass hone ke baad hi save hoga
     product.save()
 
-    # Collections
-    collection_ids = req.POST.getlist('collections')
+    collection_ids = request.POST.getlist("collections")
 
-    if not collection_ids or 'Select' in collection_ids:
-        other_collection, created = Collection.objects.get_or_create(
-            title='other'
+    if not collection_ids or "Select" in collection_ids:
+        other_collection, _ = Collection.objects.get_or_create(
+            title="other"
         )
-
         product.collections.set([other_collection])
-
     else:
         collections = Collection.objects.filter(
             id__in=collection_ids
         )
-
         product.collections.set(collections)
 
-    return redirect('dashboard')
+    messages.success(request, "Product updated successfully.")
+    return redirect("dashboard")
+
 
 
 # Show products in category section
